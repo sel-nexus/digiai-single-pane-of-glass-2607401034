@@ -18,7 +18,7 @@ export function ScenarioLauncher({ scenarios }) {
             <Link to={`${scenario.destination}${location.search}`}
               state={{ origin: `${location.pathname}${location.search}` }}>
               {scenario.destination.startsWith('/journeys/')
-                ? 'View journey context →' : 'View scenario context · Module unavailable →'}
+                ? 'View journey context →' : 'View scenario context →'}
             </Link>
           </article>
         ))}

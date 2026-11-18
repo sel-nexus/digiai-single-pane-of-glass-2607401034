@@ -151,3 +151,11 @@ input { font: inherit; color: var(--foreground); background: var(--surface); bor
 .upload-feedback[role='alert'] { color: var(--error); }
 .upload-page input[aria-invalid='true'] { border-color: var(--error); }
 .upload-feedback summary { cursor: pointer; padding: 12px 0; }
+
+.admin-page > a { display: inline-block; margin-top: 24px; }
+.admin-page fieldset { border: 0; padding: 0; margin: 24px 0; display: grid; gap: 20px; max-width: 640px; }
+.admin-page fieldset input:not([type='checkbox']) { width: 100%; }
+.admin-page select { min-height: 44px; }
+.admin-page [role='alert'] { color: var(--error); }
+.admin-page [aria-invalid='true'] { border-color: var(--error); }
+.admin-page .section-stack > button { margin: 16px 12px 0 0; }

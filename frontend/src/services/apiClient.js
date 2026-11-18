@@ -66,3 +66,8 @@ export function postUpload(file, datasetClass, mapping, actor) {
   body.append('actor', JSON.stringify(actor));
   return request('/admin/uploads', { method: 'POST', body });
 }
+
+/** Submit one explicit persona-widget override without automatic retry. */
+export function putJson(path, body, signal) {
+  return request(path, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal });
+}

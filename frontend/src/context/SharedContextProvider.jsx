@@ -15,6 +15,7 @@ function parseScope(search) {
 
 /** Reduce only explicitly supplied persona and scope actions. */
 export function contextReducer(state, action) {
+  if (action.type === 'config') return { ...state, configRevision: (state.configRevision || 0) + 1 };
   if (action.type === 'persona') return { ...state, personaId: action.id };
   if (action.type === 'scope') return { ...state, ...action.scope };
   return state;
@@ -34,7 +35,7 @@ export function SharedContextProvider({ children }) {
     navigate({ pathname: location.pathname, search: serializeContext(scope, extras) }, { state: location.state });
   };
   return (
-    <SharedContext.Provider value={{ context, setPersona: (id) => dispatch({ type: 'persona', id }), setScope }}>
+    <SharedContext.Provider value={{ context, invalidateConfig: () => dispatch({ type: 'config' }), setPersona: (id) => dispatch({ type: 'persona', id }), setScope }}>
       {children}
     </SharedContext.Provider>
   );

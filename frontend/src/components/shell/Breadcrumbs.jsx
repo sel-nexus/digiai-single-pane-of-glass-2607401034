@@ -14,8 +14,9 @@ export function Breadcrumbs() {
       {location.pathname === '/operations/reliability' && <span aria-current="page"> / Reliability</span>}
       {location.pathname.startsWith('/readiness') && <span aria-current="page"> / Readiness</span>}
       {location.pathname.startsWith('/insights') && <span aria-current="page"> / Insights</span>}
+      {location.pathname === '/admin' && <span aria-current="page"> / Administration</span>}
       {location.pathname === '/admin/uploads' && <span aria-current="page"> / Uploads</span>}
-      {!['/dashboard', '/portfolio', '/operations', '/operations/reliability', '/admin/uploads'].includes(location.pathname) && !location.pathname.startsWith('/insights') && !location.pathname.startsWith('/readiness') && !location.pathname.startsWith('/journeys') && !location.pathname.startsWith('/applications/') && (
+      {!['/dashboard', '/portfolio', '/operations', '/operations/reliability', '/admin/uploads', '/admin'].includes(location.pathname) && !location.pathname.startsWith('/insights') && !location.pathname.startsWith('/readiness') && !location.pathname.startsWith('/journeys') && !location.pathname.startsWith('/applications/') && (
         <span> / Module unavailable</span>
       )}
     </nav>

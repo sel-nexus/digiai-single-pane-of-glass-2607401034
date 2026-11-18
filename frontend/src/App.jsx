@@ -18,6 +18,7 @@ import SecurityPosture from './pages/readiness/SecurityPosture';
 import RecommendationList from './pages/insights/RecommendationList';
 import TransformationBoard from './pages/insights/TransformationBoard';
 import UploadForm from './pages/admin/UploadForm';
+import AdminPage from './pages/admin/AdminPage';
 
 /** Disclose destinations not yet registered without fetching future domain APIs. */
 function UnavailableModule() {
@@ -56,6 +57,7 @@ export default function App() {
             <Route path="/readiness/security" element={<SecurityPosture />} />
             <Route path="/insights" element={<RecommendationList />} />
             <Route path="/insights/transformation" element={<TransformationBoard />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/admin/uploads" element={<UploadForm />} />
             <Route path="*" element={<UnavailableModule />} />
           </Route>
