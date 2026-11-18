@@ -6,6 +6,7 @@ import { serializeContext } from '../../services/apiClient';
 import { DataState } from '../../components/shared/DataState';
 import { PersonaSelector } from '../../components/shell/PersonaSelector';
 import EvidencePanel from '../portfolio/EvidencePanel';
+import { ContextualRecommendations } from '../insights/RecommendationList';
 
 /** Render real readiness destinations while retaining application, release and filter context. */
 export function ReadinessNavigation() {
@@ -64,6 +65,7 @@ export default function ReleaseEvidence() {
                   <EvidencePanel key={key} title={`${key[0].toUpperCase()}${key.slice(1)} evidence`} category={release.categories[key]} />
                 ))}
               </div>
+              {releaseId === release.id && <ContextualRecommendations applicationId={release.application.id} />}
             </li>
           ))}
         </ul>

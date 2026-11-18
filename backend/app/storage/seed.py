@@ -1,5 +1,6 @@
 """Seed coherent synthetic evidence once without overwriting later configuration."""
 import json
+import sqlite3
 from datetime import datetime, timezone
 from app.storage.sqlite_repository import SqliteRepository
 
@@ -24,6 +25,7 @@ def seed_database(repository: SqliteRepository) -> None:
     now = datetime.now(timezone.utc).isoformat()
     with repository.transaction() as db:
         if db.execute('SELECT id FROM dataset_version WHERE id=?', ('sample-v1',)).fetchone():
+            seed_insights(db, now)
             return
         db.execute('INSERT INTO dataset_version (id,dataset_class,source_kind,accepted_at,accepted_by,outcome,reflection_status) VALUES (?,?,?,?,?,?,?)', ('sample-v1', 'master', 'sample', now, 'sample-generator', 'success', 'confirmed'))
         records = [
@@ -87,3 +89,38 @@ def seed_database(repository: SqliteRepository) -> None:
         ]
         for scenario_id, label, description, destination in scenarios:
             db.execute('INSERT INTO app_config VALUES (?,?,?,?,?,?)', (f'scenario-{scenario_id}', 'scenario', None, json.dumps({'id': scenario_id, 'label': label, 'description': description, 'destination': destination}), now, 'sample-generator'))
+        seed_insights(db, now)
+
+
+def seed_insights(db: sqlite3.Connection, now: str) -> None:
+    """Add coherent sample insights once, including on existing sample databases."""
+    if db.execute('SELECT id FROM dataset_version WHERE id=?', ('sample-insights-v1',)).fetchone():
+        return
+    db.execute('INSERT INTO dataset_version (id,dataset_class,source_kind,accepted_at,accepted_by,outcome,reflection_status) VALUES (?,?,?,?,?,?,?)',
+        ('sample-insights-v1', 'transformation_maturity', 'sample', now, 'sample-generator', 'success', 'confirmed'))
+    measures = {key: {'value': value, 'unit': unit, 'period': '2025-02', 'sourceRef': f'sample-transformation-{key}'}
+        for key, value, unit in [('adoption', 65.4321, '%'), ('maturity', 'Developing', None),
+                                 ('value', 125000.25, 'USD'), ('effort', 420.5, 'hours')]}
+    records = [
+        ('recommendation-1', 'recommendation', 'Review enrollment automation opportunities',
+         {'reason': 'Sample enrollment evidence identifies repeated manual validation steps.', 'confidence': 'Moderate (sample)'}),
+        ('recommendation-2', 'recommendation', 'Review observability coverage',
+         {'reason': 'Sample coverage evidence identifies an unrepresented monitoring area.', 'confidence': 'Low (sample)'}),
+        ('recommendation-3', 'recommendation', 'Incomplete sample recommendation', {'confidence': 'Unqualified (sample)'}),
+        ('transformation-1', 'transformation', 'Enrollment transformation evidence', {'measures': measures,
+         'series': [{'label': 'Adoption', 'points': [
+             {'value': 58.25, 'unit': '%', 'period': '2025-01', 'sourceRef': 'sample-adoption-jan'},
+             {'value': 65.4321, 'unit': '%', 'period': '2025-02', 'sourceRef': 'sample-adoption-feb'}]}]}),
+        ('transformation-2', 'transformation', 'Single-period transformation evidence', {'measures': {},
+         'series': [{'label': 'Effort saved', 'points': [
+             {'value': 12, 'unit': 'hours', 'period': '2025-02', 'sourceRef': 'sample-effort-feb'}]}]}),
+    ]
+    for identity, kind, label, attrs in records:
+        db.execute('INSERT INTO entity VALUES (?,?,?,?,?,?,?,?,?)',
+            (identity, kind, label, None, None, json.dumps(attrs), 'sample-insights-v1', 'sample', f'sample-{identity}'))
+        targets = ('app-0001', 'journey-enrollment', 'portfolio-digital') if identity in ('recommendation-1', 'transformation-1') else ('app-0001',)
+        for number, target in enumerate(targets):
+            if db.execute('SELECT id FROM entity WHERE id=?', (target,)).fetchone():
+                db.execute('INSERT INTO relationship VALUES (?,?,?,?,?,?,?,?)',
+                    (f'{identity}-context-{number}', identity, target, 'context', 'Explicit sample context; not inferred',
+                     'sample-insights-v1', 'sample', f'sample-{identity}-context-{number}'))

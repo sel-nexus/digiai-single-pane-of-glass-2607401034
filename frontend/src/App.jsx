@@ -15,6 +15,8 @@ import ReleaseEvidence from './pages/readiness/ReleaseEvidence';
 import DevSecOpsMetrics from './pages/readiness/DevSecOpsMetrics';
 import QeEnvironmentMetrics from './pages/readiness/QeEnvironmentMetrics';
 import SecurityPosture from './pages/readiness/SecurityPosture';
+import RecommendationList from './pages/insights/RecommendationList';
+import TransformationBoard from './pages/insights/TransformationBoard';
 
 /** Disclose destinations not yet registered without fetching future domain APIs. */
 function UnavailableModule() {
@@ -51,6 +53,8 @@ export default function App() {
             <Route path="/readiness/release" element={<DevSecOpsMetrics />} />
             <Route path="/readiness/qe" element={<QeEnvironmentMetrics />} />
             <Route path="/readiness/security" element={<SecurityPosture />} />
+            <Route path="/insights" element={<RecommendationList />} />
+            <Route path="/insights/transformation" element={<TransformationBoard />} />
             <Route path="*" element={<UnavailableModule />} />
           </Route>
         </Routes>

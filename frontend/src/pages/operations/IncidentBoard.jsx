@@ -7,6 +7,7 @@ import { DataState } from '../../components/shared/DataState';
 import { PersonaSelector } from '../../components/shell/PersonaSelector';
 import EvidencePanel from '../portfolio/EvidencePanel';
 import CorrelationView from './CorrelationView';
+import { ContextualRecommendations } from '../insights/RecommendationList';
 
 /** Keep selection, type and pagination shareable while retaining all shared filters. */
 export default function IncidentBoard() {
@@ -85,6 +86,9 @@ export default function IncidentBoard() {
                 </Link>
               ))}
               <CorrelationView key={incidentId} incidentId={incidentId} context={context} />
+              {targets.filter((target) => target.type === 'application').map((target) => (
+                <ContextualRecommendations key={target.id} applicationId={target.id} />
+              ))}
             </section>
           ) : <p role="status">Selected record unavailable in this scope.</p>}
         </DataState>

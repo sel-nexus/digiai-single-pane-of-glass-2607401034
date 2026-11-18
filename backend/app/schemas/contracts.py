@@ -276,3 +276,58 @@ class ReadinessEvidencePage(Envelope[list[ReleaseEvidenceRecord]]):
 class ReadinessMetricsPage(Envelope[list[MetricValue]]):
     """Bound named measures for one exact readiness family."""
     page: Page
+
+
+class InsightAssociation(BaseModel):
+    """Identify an existing destination from its own directed source relationship."""
+    id: str
+    entityType: Literal['journey', 'portfolio', 'application']
+    entityId: str
+    label: str
+    destination: str
+    source: Source
+    sourceRef: str
+
+
+class Recommendation(BaseModel):
+    """Keep explanation completeness local to one mock record."""
+    id: str
+    label: str
+    reason: str | None
+    confidence: str | float | None
+    complete: bool
+    availability: Availability
+    source: Source
+    sourceRef: str | None
+    associations: list[InsightAssociation]
+
+
+class TransformationSeries(BaseModel):
+    """Preserve supplied series order; never interpolate or invent reporting periods."""
+    label: str
+    points: list[MetricValue]
+    availability: Availability
+
+
+class Transformation(BaseModel):
+    """Qualify each supplied transformation measure independently."""
+    id: str
+    label: str
+    source: Source
+    sourceRef: str | None
+    availability: Availability
+    measures: list[MetricValue]
+    series: list[TransformationSeries]
+    associations: list[InsightAssociation]
+
+
+class RecommendationsPage(Envelope[list[Recommendation]]):
+    """Return bounded mock records and the unchanged selected shared scope."""
+    page: Page
+    context: QueryContext
+
+
+class TransformationPage(Envelope[list[Transformation]]):
+    """Return bounded supplied evidence and the unchanged selected shared scope."""
+    page: Page
+    context: QueryContext

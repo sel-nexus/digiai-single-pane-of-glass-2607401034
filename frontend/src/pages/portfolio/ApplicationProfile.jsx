@@ -6,6 +6,7 @@ import { useApi } from '../../hooks/useApi';
 import { DataState } from '../../components/shared/DataState';
 import { PersonaSelector } from '../../components/shell/PersonaSelector';
 import EvidencePanel from './EvidencePanel';
+import { ContextualRecommendations } from '../insights/RecommendationList';
 
 export const APPLICATION_CATEGORIES = {
   ownership: 'Ownership', domainPortfolio: 'Domain / portfolio', criticality: 'Criticality',
@@ -53,6 +54,7 @@ export default function ApplicationProfile() {
                 <EvidencePanel key={key} title={title} category={profile.categories?.[key]} />
               ))}
             </div>
+            <ContextualRecommendations applicationId={profile.id} />
           </>
         ) : (
           <section className="data-state">

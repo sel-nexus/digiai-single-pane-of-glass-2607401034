@@ -16,6 +16,8 @@ from app.api.journeys import router as journeys_router
 from app.api.applications import router as applications_router
 from app.api.operations import router as operations_router
 from app.api.readiness import router as readiness_router
+from app.api.insights import router as insights_router
+from app.domain.insights_service import InsightsService
 from app.domain.readiness_service import ReadinessService
 from app.core.config import Settings
 from app.domain.kpi_service import KpiService
@@ -48,6 +50,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         application.state.application_service = ApplicationService(repository, application.state.entity_service)
         application.state.operations_service = OperationsService(repository, application.state.entity_service, application.state.kpi_service)
         application.state.readiness_service = ReadinessService(repository, application.state.entity_service, application.state.kpi_service)
+        application.state.insights_service = InsightsService(repository, application.state.entity_service, application.state.kpi_service)
         yield
 
     application = FastAPI(title='DigiAI Single Pane of Glass', version='1.0.0', description='Synthetic prototype evidence. Mock personas are not authentication.', lifespan=lifespan)
@@ -59,6 +62,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(applications_router)
     application.include_router(operations_router)
     application.include_router(readiness_router)
+    application.include_router(insights_router)
 
     @application.middleware('http')
     async def no_dynamic_cache(request: Request, call_next) -> object:
