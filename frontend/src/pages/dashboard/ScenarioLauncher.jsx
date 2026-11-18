@@ -15,7 +15,11 @@ export function ScenarioLauncher({ scenarios }) {
           <article key={scenario.id}>
             <h3>{scenario.label}</h3>
             <p className="muted">{scenario.description}</p>
-            <Link to={`${scenario.destination}${location.search}`}>View scenario context · Module unavailable →</Link>
+            <Link to={`${scenario.destination}${location.search}`}
+              state={{ origin: `${location.pathname}${location.search}` }}>
+              {scenario.destination.startsWith('/journeys/')
+                ? 'View journey context →' : 'View scenario context · Module unavailable →'}
+            </Link>
           </article>
         ))}
       </div>

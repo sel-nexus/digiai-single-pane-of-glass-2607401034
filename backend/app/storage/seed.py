@@ -32,6 +32,8 @@ def seed_database(repository: SqliteRepository) -> None:
             ('service-enrollment', 'service', 'Enrollment Services', 'portfolio-digital', {}),
             ('owner-digital', 'owner', 'Digital Platform Team', None, {}),
             ('journey-enrollment', 'journey', 'Member Enrollment', None, {'description': 'Synthetic enrollment journey'}),
+            ('journey-renewal', 'journey', 'Member Renewal', None, {'description': 'Synthetic journey; relationship evidence not supplied'}),
+            ('api-enrollment', 'api', 'Enrollment API asset', None, {'applicationId': 'app-0001', 'description': 'Represented asset only; no live API connection'}),
             ('ticket-1', 'ticket', 'Sample enrollment incident', None, {'recordType': 'incident', 'severity': 'Sev1', 'applicationId': 'app-0001', 'toolSource': 'sample-monitor', 'dateRange': '2025-01/2025-02'}),
             ('problem-1', 'ticket', 'Sample recurring latency problem', None, {'recordType': 'problem', 'applicationId': 'app-0001'}),
             ('rca-1', 'ticket', 'Sample latency analysis', None, {'recordType': 'rca', 'applicationId': 'app-0001', 'reason': 'Supplied synthetic capacity observation'}),
@@ -48,6 +50,8 @@ def seed_database(repository: SqliteRepository) -> None:
             ('ticket-1', 'app-0001', 'affects'), ('problem-1', 'ticket-1', 'correlates_with'),
             ('rca-1', 'problem-1', 'analyzes'), ('release-1', 'app-0001', 'releases'),
             ('owner-digital', 'app-0001', 'owns'),
+            ('app-0001', 'api-enrollment', 'depends_on'),
+            ('journey-enrollment', 'api-enrollment', 'impact'),
         ]):
             db.execute('INSERT INTO relationship VALUES (?,?,?,?,?,?,?,?)', (f'rel-{index}', source, target, kind, 'Explicit synthetic association; not causal', 'sample-v1', 'sample', 'sample-v1'))
         for family, metrics in METRICS.items():

@@ -123,3 +123,49 @@ class FilterOption(BaseModel):
     """Name an exact source filter value."""
     id: str
     label: str
+
+
+class JourneyTarget(BaseModel):
+    """Identify an explicitly represented application or API asset."""
+    entityType: Literal['application', 'api']
+    entityId: str
+    label: str
+    source: Source
+    sourceRef: str | None
+
+
+class JourneyRelationship(BaseModel):
+    """Preserve one directed source row without claiming causality."""
+    id: str
+    type: Literal['depends_on', 'impact']
+    sourceEntityId: str
+    sourceLabel: str
+    target: JourneyTarget
+    source: Source
+    sourceRef: str | None
+    representedContext: str | None
+
+
+class JourneyOverlay(BaseModel):
+    """Qualify a represented overlay independently of other overlays."""
+    availability: Availability
+    value: list[JourneyRelationship] | None
+
+
+class JourneyImpact(BaseModel):
+    """Expose supplied business-impact prose only."""
+    availability: Availability
+    value: str | None
+
+
+class JourneyDetail(BaseModel):
+    """Compose exact identity, supplied fields and separate overlays."""
+    id: str
+    label: str
+    description: str | None
+    source: Source
+    sourceRef: str | None
+    relationships: list[JourneyRelationship]
+    dependency: JourneyOverlay
+    impactOverlay: JourneyOverlay
+    impact: JourneyImpact

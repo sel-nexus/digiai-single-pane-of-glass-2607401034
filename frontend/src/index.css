@@ -122,3 +122,9 @@ input { font: inherit; color: var(--foreground); background: var(--surface); bor
 .ancestor-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0; }
 .ancestor-links [aria-current] { font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { * { transition-duration: 0ms !important; } }
+.journey-page > a { display: inline-block; margin-top: 16px; }
+.journey-impact { margin-top: 32px; }
+.journey-impact p,.relationship-overlay > p { margin-top: 12px; }
+.relationship-overlay li > p { margin-bottom: 8px; }
+.relationship-overlay summary { cursor: pointer; padding: 12px 0; color: var(--primary); }
+.relationship-overlay details p { margin-top: 8px; overflow-wrap: anywhere; }

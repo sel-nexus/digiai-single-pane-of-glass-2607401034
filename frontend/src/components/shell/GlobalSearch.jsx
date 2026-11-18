@@ -39,7 +39,9 @@ export function GlobalSearch() {
             <ul className="entity-list">
               {(state.data || []).map((entity) => (
                 <li key={entity.id}>
-                  <Link to={`/portfolio?${serializeContext(context, { entityId: entity.id, q: entity.id })}`}
+                  <Link to={entity.type === 'journey'
+                    ? `/journeys/${encodeURIComponent(entity.id)}?${serializeContext(context)}`
+                    : `/portfolio?${serializeContext(context, { entityId: entity.id, q: entity.id })}`}
                     state={{ origin: `${location.pathname}${location.search}` }}>
                     {entity.label}
                   </Link>

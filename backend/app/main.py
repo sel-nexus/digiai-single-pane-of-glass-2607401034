@@ -12,9 +12,11 @@ from starlette.concurrency import run_in_threadpool
 from app.api.dashboard import router as dashboard_router
 from app.api.domains import router as domains_router
 from app.api.health import router as health_router
+from app.api.journeys import router as journeys_router
 from app.core.config import Settings
 from app.domain.kpi_service import KpiService
 from app.domain.entity_service import EntityService
+from app.domain.journey_service import JourneyService
 from app.storage.seed import seed_database
 from app.storage.sqlite_repository import SqliteRepository
 
@@ -36,6 +38,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         application.state.repository = repository
         application.state.kpi_service = KpiService(repository)
         application.state.entity_service = EntityService(repository)
+        application.state.journey_service = JourneyService(repository, application.state.entity_service)
         yield
 
     application = FastAPI(title='DigiAI Single Pane of Glass', version='1.0.0', description='Synthetic prototype evidence. Mock personas are not authentication.', lifespan=lifespan)
@@ -43,6 +46,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(health_router)
     application.include_router(dashboard_router)
     application.include_router(domains_router)
+    application.include_router(journeys_router)
 
     @application.middleware('http')
     async def no_dynamic_cache(request: Request, call_next) -> object:

@@ -36,7 +36,9 @@ export function AppShell() {
             <Link to={`/dashboard${location.search}`} aria-current={location.pathname === '/dashboard' ? 'page' : undefined}>Dashboard</Link>
             <Link to={`/portfolio${location.search}`} onClick={() => setExpanded(false)}
               aria-current={location.pathname === '/portfolio' ? 'page' : undefined}>Portfolio</Link>
-            {['Journeys', 'Operations', 'Readiness', 'Insights', 'Administration'].map((label) => (
+            <Link to={`/journeys${location.search}`} onClick={() => setExpanded(false)}
+              aria-current={location.pathname.startsWith('/journeys') ? 'page' : undefined}>Journeys</Link>
+            {['Operations', 'Readiness', 'Insights', 'Administration'].map((label) => (
               <Link key={label} to={`/${label.toLowerCase()}${location.search}`} onClick={() => setExpanded(false)}>
                 {label}
                 <small>Unavailable</small>
