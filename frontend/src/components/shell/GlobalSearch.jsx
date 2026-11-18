@@ -43,6 +43,8 @@ export function GlobalSearch() {
                     ? `/journeys/${encodeURIComponent(entity.id)}?${serializeContext(context)}`
                     : entity.type === 'application'
                       ? `/applications/${encodeURIComponent(entity.id)}?${serializeContext(context, { returnTo: `${location.pathname}${location.search}` })}`
+                    : entity.type === 'release'
+                      ? `/readiness?${serializeContext(context, { releaseId: entity.id })}`
                     : entity.type === 'ticket' && /(?:^| · )(incident|problem_rca|major_incident)(?: · |$)/.test(entity.distinguishingInfo || '')
                       ? `/operations?${serializeContext(context, { incidentId: entity.id })}`
                     : `/portfolio?${serializeContext(context, { entityId: entity.id, q: entity.id })}`}

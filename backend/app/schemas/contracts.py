@@ -247,3 +247,32 @@ class CorrelationsPage(Envelope[list[CorrelationLink]]):
 class OperationsMetricsPage(Envelope[list[MetricValue]]):
     """Bound the named supplied reliability measures."""
     page: Page
+
+
+class ReadinessCategories(BaseModel):
+    """Name the five independent supplied evidence categories."""
+    build: ApplicationCategory
+    test: ApplicationCategory
+    security: ApplicationCategory
+    change: ApplicationCategory
+    environment: ApplicationCategory
+
+
+class ReleaseEvidenceRecord(BaseModel):
+    """Expose exact release and application identity without a computed gate."""
+    id: str
+    label: str
+    application: Entity
+    source: Source
+    sourceRef: str | None
+    categories: ReadinessCategories
+
+
+class ReadinessEvidencePage(Envelope[list[ReleaseEvidenceRecord]]):
+    """Bound associated release evidence and retain total count."""
+    page: Page
+
+
+class ReadinessMetricsPage(Envelope[list[MetricValue]]):
+    """Bound named measures for one exact readiness family."""
+    page: Page

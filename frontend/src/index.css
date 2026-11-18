@@ -137,3 +137,7 @@ input { font: inherit; color: var(--foreground); background: var(--surface); bor
 .evidence-fields > div { margin: 8px 0; }
 .evidence-fields dt { color: var(--foreground-muted); font-size: .8rem; }
 .evidence-fields dd { margin: 0; }
+
+.readiness-navigation { display: flex; flex-wrap: wrap; gap: 16px 24px; }
+.readiness-navigation [aria-current] { color: var(--foreground); font-weight: 600; }
+.readiness-period { max-width: 240px; margin-bottom: 32px; }

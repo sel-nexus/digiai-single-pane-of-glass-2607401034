@@ -41,7 +41,7 @@ def seed_database(repository: SqliteRepository) -> None:
             ('summary-1', 'ticket', 'Sample enrollment observability summary', None, {'recordType': 'observability_summary', 'applicationId': 'app-0001', 'serviceId': 'service-enrollment', 'signal': 'Summary coverage supplied; no live freshness assertion'}),
             ('problem-1', 'ticket', 'Sample recurring latency problem', None, {'recordType': 'problem_rca', 'subtype': 'problem', 'applicationId': 'app-0001', 'status': 'Under review (sample)'}),
             ('rca-1', 'ticket', 'Sample latency analysis', None, {'recordType': 'problem_rca', 'subtype': 'rca', 'applicationId': 'app-0001', 'reason': 'Supplied synthetic capacity observation; not a causal diagnosis'}),
-            ('release-1', 'release', 'Sample enrollment release', None, {'applicationId': 'app-0001', 'build': 'Passed (sample)', 'test': 'Supplied test evidence', 'security': 'Supplied findings', 'change': 'Sample approved change', 'environment': 'Sample environment evidence'}),
+            ('release-1', 'release', 'Sample enrollment release', None, {'applicationId': 'app-0001', 'period': 'month', 'build': 'Passed (sample)', 'test': 'Supplied test evidence', 'security': 'Supplied findings', 'change': 'Sample approved change', 'environment': 'Sample environment evidence'}),
             ('defect-1', 'ticket', 'Sample enrollment validation defect', None, {'recordType': 'defect', 'applicationId': 'app-0001', 'status': 'Open (sample)'}),
             ('finding-1', 'ticket', 'Sample dependency security finding', None, {'recordType': 'security_finding', 'applicationId': 'app-0001', 'findingSeverity': 'Medium (sample)'}),
         ]

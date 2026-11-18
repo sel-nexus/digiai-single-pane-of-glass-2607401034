@@ -11,6 +11,11 @@ import ApplicationProfile from './pages/portfolio/ApplicationProfile';
 import IncidentBoard from './pages/operations/IncidentBoard';
 import ReliabilityBoard from './pages/operations/ReliabilityBoard';
 
+import ReleaseEvidence from './pages/readiness/ReleaseEvidence';
+import DevSecOpsMetrics from './pages/readiness/DevSecOpsMetrics';
+import QeEnvironmentMetrics from './pages/readiness/QeEnvironmentMetrics';
+import SecurityPosture from './pages/readiness/SecurityPosture';
+
 /** Disclose destinations not yet registered without fetching future domain APIs. */
 function UnavailableModule() {
   const { context } = useSharedContext();
@@ -42,6 +47,10 @@ export default function App() {
             <Route path="/journeys/:journeyId" element={<JourneyMap />} />
             <Route path="/operations" element={<IncidentBoard />} />
             <Route path="/operations/reliability" element={<ReliabilityBoard />} />
+            <Route path="/readiness" element={<ReleaseEvidence />} />
+            <Route path="/readiness/release" element={<DevSecOpsMetrics />} />
+            <Route path="/readiness/qe" element={<QeEnvironmentMetrics />} />
+            <Route path="/readiness/security" element={<SecurityPosture />} />
             <Route path="*" element={<UnavailableModule />} />
           </Route>
         </Routes>
