@@ -35,8 +35,12 @@ def seed_database(repository: SqliteRepository) -> None:
             ('journey-renewal', 'journey', 'Member Renewal', None, {'description': 'Synthetic journey; relationship evidence not supplied'}),
             ('api-enrollment', 'api', 'Enrollment API asset', None, {'applicationId': 'app-0001', 'description': 'Represented asset only; no live API connection'}),
             ('ticket-1', 'ticket', 'Sample enrollment incident', None, {'recordType': 'incident', 'severity': 'Sev1', 'applicationId': 'app-0001', 'toolSource': 'sample-monitor', 'dateRange': '2025-01/2025-02'}),
-            ('problem-1', 'ticket', 'Sample recurring latency problem', None, {'recordType': 'problem', 'applicationId': 'app-0001'}),
-            ('rca-1', 'ticket', 'Sample latency analysis', None, {'recordType': 'rca', 'applicationId': 'app-0001', 'reason': 'Supplied synthetic capacity observation'}),
+            ('ticket-2', 'ticket', 'Sample incident without linked evidence', None, {'recordType': 'incident', 'severity': 'Sev2'}),
+            ('major-1', 'ticket', 'Sample major incident record', None, {'recordType': 'major_incident', 'severity': 'Sev1', 'applicationId': 'app-0001', 'status': 'Review (sample)'}),
+            ('event-1', 'ticket', 'Sample enrollment latency event', None, {'recordType': 'observability_event', 'applicationId': 'app-0001', 'serviceId': 'service-enrollment', 'signal': 'Supplied latency observation', 'toolSource': 'sample-monitor'}),
+            ('summary-1', 'ticket', 'Sample enrollment observability summary', None, {'recordType': 'observability_summary', 'applicationId': 'app-0001', 'serviceId': 'service-enrollment', 'signal': 'Summary coverage supplied; no live freshness assertion'}),
+            ('problem-1', 'ticket', 'Sample recurring latency problem', None, {'recordType': 'problem_rca', 'subtype': 'problem', 'applicationId': 'app-0001', 'status': 'Under review (sample)'}),
+            ('rca-1', 'ticket', 'Sample latency analysis', None, {'recordType': 'problem_rca', 'subtype': 'rca', 'applicationId': 'app-0001', 'reason': 'Supplied synthetic capacity observation; not a causal diagnosis'}),
             ('release-1', 'release', 'Sample enrollment release', None, {'applicationId': 'app-0001', 'build': 'Passed (sample)', 'test': 'Supplied test evidence', 'security': 'Supplied findings', 'change': 'Sample approved change', 'environment': 'Sample environment evidence'}),
             ('defect-1', 'ticket', 'Sample enrollment validation defect', None, {'recordType': 'defect', 'applicationId': 'app-0001', 'status': 'Open (sample)'}),
             ('finding-1', 'ticket', 'Sample dependency security finding', None, {'recordType': 'security_finding', 'applicationId': 'app-0001', 'findingSeverity': 'Medium (sample)'}),
@@ -57,6 +61,9 @@ def seed_database(repository: SqliteRepository) -> None:
             ('owner-digital', 'app-0001', 'owns'),
             ('app-0001', 'api-enrollment', 'depends_on'),
             ('journey-enrollment', 'api-enrollment', 'impact'),
+            ('ticket-1', 'event-1', 'correlates_with'),
+            ('ticket-1', 'journey-enrollment', 'context'),
+            ('ticket-1', 'api-enrollment', 'context'),
         ]):
             db.execute('INSERT INTO relationship VALUES (?,?,?,?,?,?,?,?)', (f'rel-{index}', source, target, kind, 'Explicit synthetic association; not causal', 'sample-v1', 'sample', 'sample-v1'))
         for family, metrics in METRICS.items():

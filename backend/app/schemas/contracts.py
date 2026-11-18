@@ -211,3 +211,39 @@ class ApplicationProfile(BaseModel):
     source: Source
     sourceRef: str | None
     categories: ApplicationCategories
+
+
+class OperationRecord(BaseModel):
+    """Expose supplied operational fields separately from security findings."""
+    id: str
+    label: str
+    recordType: Literal['incident', 'problem_rca', 'major_incident', 'observability_event', 'observability_summary']
+    source: Source
+    sourceRef: str | None
+    evidence: ApplicationCategory
+    businessContext: ApplicationCategory
+
+
+class OperationsPage(Envelope[list[OperationRecord]]):
+    """Bound operational records and preserve matching counts."""
+    page: Page
+
+
+class CorrelationLink(BaseModel):
+    """Identify one explicit directed evidence relationship without diagnosis."""
+    id: str
+    sourceEntityId: str
+    targetEntityId: str
+    relationshipLabel: Literal['represented correlation'] = 'represented correlation'
+    evidence: ApplicationEvidence
+
+
+class CorrelationsPage(Envelope[list[CorrelationLink]]):
+    """Bound links for one exact incident identity."""
+    incidentId: str
+    page: Page
+
+
+class OperationsMetricsPage(Envelope[list[MetricValue]]):
+    """Bound the named supplied reliability measures."""
+    page: Page

@@ -8,6 +8,8 @@ import PortfolioExplorer from './pages/portfolio/PortfolioExplorer';
 import JourneyList from './pages/journeys/JourneyList';
 import JourneyMap from './pages/journeys/JourneyMap';
 import ApplicationProfile from './pages/portfolio/ApplicationProfile';
+import IncidentBoard from './pages/operations/IncidentBoard';
+import ReliabilityBoard from './pages/operations/ReliabilityBoard';
 
 /** Disclose destinations not yet registered without fetching future domain APIs. */
 function UnavailableModule() {
@@ -38,6 +40,8 @@ export default function App() {
             <Route path="/applications/:applicationId" element={<ApplicationProfile />} />
             <Route path="/journeys" element={<JourneyList />} />
             <Route path="/journeys/:journeyId" element={<JourneyMap />} />
+            <Route path="/operations" element={<IncidentBoard />} />
+            <Route path="/operations/reliability" element={<ReliabilityBoard />} />
             <Route path="*" element={<UnavailableModule />} />
           </Route>
         </Routes>
