@@ -17,6 +17,15 @@ function respond(url) {
     const persona = personas.find((p) => p.id === parsed.searchParams.get('personaId'));
     const m = persona.id === 'engineering' ? { ...metric, id: 'pipeline', label: 'Pipeline success', value: 97.1234 } : metric;
     data = { persona, widgets: [{ id: m.id, title: m.label, metric: m }], scenarios: [{ id: 'scenario', label: 'Enrollment context', description: 'Supplied journey', destination: '/journeys/journey-enrollment' }] };
+  } else if (parsed.pathname.endsWith('/journeys/journey-enrollment')) {
+    data = {
+      id: 'journey-enrollment', label: 'Enrollment', type: 'journey',
+      description: 'Supplied enrollment journey', source: 'sample', sourceRef: 'journey-map',
+      relationships: [],
+      dependency: { availability: 'unavailable', value: [] },
+      impactOverlay: { availability: 'unavailable', value: [] },
+      impact: { availability: 'unavailable', value: null },
+    };
   } else data = [{ ...metric, value: parsed.searchParams.get('period') === 'week' ? null : metric.value, availability: parsed.searchParams.get('period') === 'week' ? 'unavailable' : 'available' }];
   return Promise.resolve(new Response(JSON.stringify({ data, availability: 'available' })));
 }
@@ -64,9 +73,9 @@ it('changes exact period and follows supplied scenario then returns through link
   await user.selectOptions(await screen.findByLabelText('Reporting period'), 'week');
   expect(await within(screen.getByRole('region', { name: 'KPI evidence' })).findByText('Unavailable')).toBeInTheDocument();
   expect(window.location.search).toContain('period=week');
-  await user.click(screen.getByRole('link', { name: /View scenario context/ }));
-  expect(screen.getByRole('heading', { name: 'Module unavailable' })).toBeInTheDocument();
-  await user.click(screen.getByRole('link', { name: 'Return to dashboard' }));
+  await user.click(screen.getByRole('link', { name: 'View journey context →' }));
+  expect(await screen.findByRole('heading', { name: 'Enrollment', exact: true })).toBeInTheDocument();
+  await user.click(screen.getByRole('link', { name: 'Return to previous view' }));
   expect(await screen.findByRole('heading', { name: 'Executive perspective' })).toBeInTheDocument();
   expect(screen.getByLabelText('Reporting period')).toHaveValue('week');
 });
