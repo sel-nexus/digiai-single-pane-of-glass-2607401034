@@ -29,7 +29,9 @@ async function request(path, options = {}) {
     try { body = await response.json(); }
     catch { throw new ApiError(writing ? 'Write completion is unconfirmed. Verify before retrying.' : 'The service returned an invalid response.', writing ? 'UNCONFIRMED' : 'INVALID_RESPONSE'); }
     if (!response.ok) {
-      if (writing && response.status >= 500) throw new ApiError('Write completion is unconfirmed. Verify before retrying.', 'UNCONFIRMED');
+      if (writing && response.status >= 500 && !(body?.error?.code === 'STORAGE_UNAVAILABLE' && body.error.details?.commitStatus === 'not_committed')) {
+        throw new ApiError('Write completion is unconfirmed. Verify before retrying.', 'UNCONFIRMED', { uploadId: body?.data?.uploadId });
+      }
       if (!body?.error || typeof body.error.message !== 'string' || typeof body.error.code !== 'string') throw new ApiError('The service returned an invalid error response.', 'INVALID_RESPONSE');
       throw new ApiError(body.error.message, body.error.code, body.error.details);
     }
@@ -53,4 +55,14 @@ export function getJson(path, context = {}, extra = {}, signal) {
 /** Submit an explicit JSON write; connection loss remains unconfirmed. */
 export function postJson(path, body, signal) {
   return request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal });
+}
+
+/** Submit an explicit file and mapping; let the browser supply the multipart boundary. */
+export function postUpload(file, datasetClass, mapping, actor) {
+  const body = new FormData();
+  body.append('file', file);
+  body.append('datasetClass', datasetClass);
+  body.append('mapping', JSON.stringify(mapping));
+  body.append('actor', JSON.stringify(actor));
+  return request('/admin/uploads', { method: 'POST', body });
 }

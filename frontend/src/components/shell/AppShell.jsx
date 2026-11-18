@@ -46,12 +46,8 @@ export function AppShell() {
               aria-current={location.pathname.startsWith('/readiness') ? 'page' : undefined}>Readiness</Link>
             <Link to={`/insights${location.search}`} onClick={() => setExpanded(false)}
               aria-current={location.pathname.startsWith('/insights') ? 'page' : undefined}>Insights</Link>
-            {['Administration'].map((label) => (
-              <Link key={label} to={`/${label.toLowerCase()}${location.search}`} onClick={() => setExpanded(false)}>
-                {label}
-                <small>Unavailable</small>
-              </Link>
-            ))}
+            <Link to={`/admin/uploads${location.search}`} onClick={() => setExpanded(false)}
+              aria-current={location.pathname === '/admin/uploads' ? 'page' : undefined}>Uploads</Link>
           </nav>
         </div>
       )}

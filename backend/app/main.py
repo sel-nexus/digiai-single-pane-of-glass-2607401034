@@ -17,6 +17,8 @@ from app.api.applications import router as applications_router
 from app.api.operations import router as operations_router
 from app.api.readiness import router as readiness_router
 from app.api.insights import router as insights_router
+from app.api.uploads import router as uploads_router
+from app.domain.upload_service import UploadService
 from app.domain.insights_service import InsightsService
 from app.domain.readiness_service import ReadinessService
 from app.core.config import Settings
@@ -44,6 +46,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if config.seed_on_startup:
             await run_in_threadpool(seed_database, repository)
         application.state.repository = repository
+        application.state.upload_service = UploadService(repository, config)
         application.state.kpi_service = KpiService(repository)
         application.state.entity_service = EntityService(repository)
         application.state.journey_service = JourneyService(repository, application.state.entity_service)
@@ -54,7 +57,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         yield
 
     application = FastAPI(title='DigiAI Single Pane of Glass', version='1.0.0', description='Synthetic prototype evidence. Mock personas are not authentication.', lifespan=lifespan)
-    application.add_middleware(CORSMiddleware, allow_origins=config.origins, allow_credentials=False, allow_methods=['GET'], allow_headers=['Content-Type'])
+    application.add_middleware(CORSMiddleware, allow_origins=config.origins, allow_credentials=False, allow_methods=['GET', 'POST'], allow_headers=['Content-Type'])
     application.include_router(health_router)
     application.include_router(dashboard_router)
     application.include_router(domains_router)
@@ -63,6 +66,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(operations_router)
     application.include_router(readiness_router)
     application.include_router(insights_router)
+    application.include_router(uploads_router)
 
     @application.middleware('http')
     async def no_dynamic_cache(request: Request, call_next) -> object:

@@ -141,3 +141,13 @@ input { font: inherit; color: var(--foreground); background: var(--surface); bor
 .readiness-navigation { display: flex; flex-wrap: wrap; gap: 16px 24px; }
 .readiness-navigation [aria-current] { color: var(--foreground); font-weight: 600; }
 .readiness-period { max-width: 240px; margin-bottom: 32px; }
+.upload-page > p { margin-top: 16px; }
+.upload-page form { margin-top: 40px; }
+.upload-page fieldset { border: 0; padding: 0; margin: 0 0 32px; min-width: 0; }
+.upload-page legend { font-size: 1.25rem; margin-bottom: 16px; }
+.upload-page input { width: 100%; }
+.upload-feedback { margin-top: 32px; overflow-wrap: anywhere; }
+.upload-feedback p { margin-top: 12px; }
+.upload-feedback[role='alert'] { color: var(--error); }
+.upload-page input[aria-invalid='true'] { border-color: var(--error); }
+.upload-feedback summary { cursor: pointer; padding: 12px 0; }
