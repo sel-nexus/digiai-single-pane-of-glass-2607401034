@@ -5,10 +5,37 @@ import { useApi } from '../../hooks/useApi';
 import { useSharedContext } from '../../context/SharedContextProvider';
 import { DataState } from '../../components/shared/DataState';
 
+/** Round validated decimal literals half away from zero without losing text precision.
+ * Bound input length, exponent and magnitude to keep BigInt work and display safe.
+ * @param {number|string} value Supplied numeric value or retained upload text.
+ * @returns {string|null} Two-decimal percentage, or null for unsupported input.
+ */
+function formatPercent(value) {
+  if (typeof value !== 'string' && (typeof value !== 'number' || !Number.isFinite(value))) return null;
+  const text = String(value);
+  if (text.length > 1024) return null;
+  const match = /^([+-]?)(?:([0-9]+)(?:\.([0-9]*))?|\.([0-9]+))(?:[eE]([+-]?[0-9]+))?$/.exec(text);
+  if (!match) return null;
+  const exponent = Number(match[5] || 0);
+  if (!Number.isSafeInteger(exponent) || Math.abs(exponent) > 1000) return null;
+  const fraction = match[3] ?? match[4] ?? '';
+  const coefficient = BigInt(`${match[2] || '0'}${fraction}`);
+  const shift = exponent - fraction.length + 2;
+  let cents;
+  if (shift >= 0) cents = coefficient * (10n ** BigInt(shift));
+  else {
+    const divisor = 10n ** BigInt(-shift);
+    cents = coefficient / divisor + (coefficient % divisor * 2n >= divisor ? 1n : 0n);
+  }
+  if (cents > 900719925474099100n) return null;
+  const digits = cents.toString().padStart(3, '0');
+  return `${match[1] === '-' && cents !== 0n ? '-' : ''}${digits.slice(0, -2)}.${digits.slice(-2)}%`;
+}
+
 /** Preserve zero and raw non-percent units; absent evidence is never healthy. */
 export function formatMetric(metric) {
-  if (metric.availability !== 'available' || metric.value === null) return 'Unavailable';
-  if (metric.unit === '%' && typeof metric.value === 'number') return `${metric.value.toFixed(2)}%`;
+  if (metric.availability !== 'available' || metric.value == null) return 'Unavailable';
+  if (metric.unit === '%') return formatPercent(metric.value) ?? 'Unavailable';
   return `${metric.value}${metric.unit ? ` ${metric.unit}` : ''}`;
 }
 

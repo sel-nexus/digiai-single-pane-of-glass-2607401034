@@ -1,5 +1,6 @@
 /** Exercise represented journey evidence through real backend-driven navigation. */
-import { test, expect } from './fixtures';
+import { test, expect } from './fixtures.js';
+import { navigatePrimary } from './helpers.js';
 
 test('journey overlays, application profile and return retain source scope', async ({ page }) => {
   await page.goto('/');
@@ -7,7 +8,7 @@ test('journey overlays, application profile and return retain source scope', asy
   await page.getByText('Shared filters (0 selected)').click();
   await page.getByLabel('Domain', { exact: true }).selectOption('domain-member');
   const listResponse = page.waitForResponse((res) => new URL(res.url()).pathname === '/api/v1/journeys' && res.ok());
-  await page.getByRole('link', { name: 'Journeys', exact: true }).click();
+  await navigatePrimary(page, 'Journeys');
   const list = await (await listResponse).json();
   expect(list.data.map((row) => row.id)).toEqual(['journey-enrollment']);
   const detailResponse = page.waitForResponse((res) => res.url().includes('/journeys/journey-enrollment') && res.ok());
@@ -30,7 +31,7 @@ test('journey overlays, application profile and return retain source scope', asy
   expect(profile.id).toBe('app-0001');
   expect(profile.label).toBe('Member Portal');
   expect(Object.keys(profile.categories)).toHaveLength(11);
-  await expect(page.getByRole('heading', { name: profile.label, exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: profile.label, level: 1, exact: true })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Health', exact: true }).getByText(profile.categories.health.value[0].value, { exact: true })).toBeVisible();
   const dependency = profile.categories.dependencies.value[0];
   await expect(page.getByRole('region', { name: 'Dependencies', exact: true }).getByText(dependency.value.id, { exact: true })).toBeVisible();

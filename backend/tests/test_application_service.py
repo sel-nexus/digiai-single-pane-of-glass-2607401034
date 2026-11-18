@@ -18,7 +18,8 @@ def test_complete_profile_preserves_eleven_categories_and_sources(repository):
     assert len(profile.categories.model_dump()) == 11
     assert all(getattr(profile.categories, key).availability == 'available' for key in CATEGORIES)
     assert profile.categories.health.value[0].value == 'Warning (sample)'
-    assert profile.categories.incidents.value[0].value['id'] == 'ticket-1'
+    incident = next(item for item in profile.categories.incidents.value if item.id == 'ticket-1')
+    assert incident.value['id'] == 'ticket-1'
     assert profile.categories.defects.value[0].value['id'] == 'defect-1'
     coverage = next(item for item in profile.categories.observabilityCoverage.value if item.id == 'coverage')
     assert (coverage.value, coverage.unit, coverage.period, coverage.association) == (84.321, '%', 'month', 'metric:coverage.entityId')
@@ -82,7 +83,8 @@ def test_direct_relationship_and_metric_zero_preserve_evidence(repository):
                    ('automation-zero', 'Supplied automation', 'automation', None, 0, '%', 'quarter',
                     'app-0002', 'available', 'sample-v1', 'uploaded', 'automation-file'))
     first = service(repository).profile('app-0001', QueryContext()).data
-    assert first.categories.incidents.value[0].association == 'relationship:rel-2'
+    incident = next(item for item in first.categories.incidents.value if item.id == 'ticket-1')
+    assert incident.association == 'relationship:rel-2'
     item = service(repository).profile('app-0002', QueryContext()).data.categories.automationMaturity.value[0]
     assert (item.value, item.unit, item.period, item.sourceRef) == (0, '%', 'quarter', 'automation-file')
 

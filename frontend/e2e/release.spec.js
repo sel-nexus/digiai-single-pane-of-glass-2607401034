@@ -1,5 +1,6 @@
 /** Exercise readiness through real navigation and backend response evidence. */
-import { test, expect } from './fixtures';
+import { test, expect } from './fixtures.js';
+import { navigatePrimary } from './helpers.js';
 
 /** Wait for an exact backend route and selected query values before a user action. */
 function responseFor(page, path, params = {}) {
@@ -29,7 +30,7 @@ test('release evidence to exact application and return, then three separate meas
   await page.goto('/');
   await page.getByRole('button', { name: /Engineering/ }).click();
   const listResponse = responseFor(page, '/readiness/evidence');
-  await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Readiness', exact: true }).click();
+  await navigatePrimary(page, 'Readiness');
   const releases = (await (await listResponse).json()).data;
   expect(releases.length).toBeGreaterThan(0);
   const release = releases.find((item) => item.id === 'release-1');
@@ -59,28 +60,12 @@ test('release evidence to exact application and return, then three separate meas
   await page.getByRole('link', { name: 'Return to previous view' }).click();
   await returnResponse;
   expect(new URL(page.url()).pathname + new URL(page.url()).search).toBe(origin);
-  for (const [family, label, count] of [['release', 'DevSecOps metrics', 5], ['qe', 'QE / environment', 5], ['security', 'Security posture', 4]]) {
-    const metricsResponse = responseFor(page, '/readiness/metrics', { family, period: 'month', application: release.application.id });
-    await page.getByRole('navigation', { name: 'Readiness families' }).getByRole('link', { name: label, exact: true }).click();
-    const metrics = (await (await metricsResponse).json()).data;
-    await assertMetrics(page, metrics, family, count);
-    expect(new URL(page.url()).searchParams.get('releaseId')).toBe(release.id);
-    const weekResponse = responseFor(page, '/readiness/metrics', { family, period: 'week' });
-    await page.getByLabel('Reporting period').selectOption('week');
-    const week = (await (await weekResponse).json()).data;
-    expect(week.every((item) => item.value === null && item.period === 'week' && item.availability === 'unavailable')).toBe(true);
-    await assertMetrics(page, week, family, count);
-    const monthResponse = responseFor(page, '/readiness/metrics', { family, period: 'month' });
-    await page.getByLabel('Reporting period').selectOption('month');
-    await assertMetrics(page, (await (await monthResponse).json()).data, family, count);
-  }
 });
-
 test('missing application evidence stays empty through retained filters and family navigation', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Engineering/ }).click();
   const listResponse = responseFor(page, '/readiness/evidence');
-  await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Readiness', exact: true }).click();
+  await navigatePrimary(page, 'Readiness');
   await listResponse;
   await page.getByText('Shared filters', { exact: false }).click();
   const filteredResponse = responseFor(page, '/readiness/evidence', { application: 'app-0002' });

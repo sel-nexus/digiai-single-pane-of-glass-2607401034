@@ -1,13 +1,13 @@
 /** Present explicit source periods in supplied order, without interpolation. */
 import PropTypes from 'prop-types';
+import { formatMetric } from '../dashboard/KpiBoard';
 
 /** Format supplied primitives and units, with two decimals only for percentages. */
 export function insightValue(metric) {
   if (metric?.availability !== 'available' || metric.value === null || metric.value === undefined
     || !metric.period || !metric.sourceRef || !['string', 'number'].includes(typeof metric.value)) return 'Unavailable';
   if (typeof metric.value === 'number' && !Number.isFinite(metric.value)) return 'Unavailable';
-  return metric.unit === '%' && typeof metric.value === 'number' ? `${metric.value.toFixed(2)}%`
-    : `${metric.value}${metric.unit ? ` ${metric.unit}` : ''}`;
+  return formatMetric(metric);
 }
 
 /** Require at least two qualified explicit-period points before labeling a series as a trend. */

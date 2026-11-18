@@ -6,7 +6,7 @@ import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { SharedContextProvider, useSharedContext } from '../../context/SharedContextProvider';
 import RecommendationList, { ContextualRecommendations } from './RecommendationList';
 import TransformationBoard from './TransformationBoard';
-import TransformationTrends from './TransformationTrends';
+import TransformationTrends, { insightValue } from './TransformationTrends';
 import ApplicationProfile from '../portfolio/ApplicationProfile';
 import IncidentBoard from '../operations/IncidentBoard';
 import ReleaseEvidence from '../readiness/ReleaseEvidence';
@@ -128,6 +128,54 @@ it('renders supplied measure precision and series order without labeling single 
   await user.selectOptions(screen.getByLabelText('Source reporting period'), 'later');
   expect(await screen.findByText(/Trend unavailable. A single point/)).toBeInTheDocument();
   expect(screen.getByLabelText('URL')).toHaveTextContent('period=later');
+});
+
+it.each([
+  ['65.4321', '65.43%'],
+  ['1.005', '1.01%'],
+  ['-1.005', '-1.01%'],
+  ['0', '0.00%'],
+])('formats numeric-text percentage %s in measures and supplied series as %s', async (value, expected) => {
+  const user = userEvent.setup();
+  const measure = point('text-measure', 'later', value);
+  const seriesPoints = [point('text-later', 'later', value), point('text-earlier', 'earlier', '58.25')];
+  fetch.mockImplementation(async () => response([{
+    ...transformation,
+    measures: [measure],
+    series: [{ label: 'Adoption', availability: 'available', points: seriesPoints }],
+  }]));
+  mount('/insights/transformation');
+  await user.click(screen.getByRole('button', { name: 'Select persona' }));
+  const card = within(await screen.findByRole('article', { name: transformation.label }));
+  expect(card.getByText(expected, { exact: true })).toBeInTheDocument();
+  const points = within(card.getByRole('list', { name: 'Adoption source order' })).getAllByRole('listitem');
+  expect(points[0]).toHaveTextContent(`later · ${expected}`);
+  expect(points[1]).toHaveTextContent('earlier · 58.25%');
+  expect(card.queryByRole('status')).not.toBeInTheDocument();
+  expect(measure.value).toBe(value);
+  expect(seriesPoints[0].value).toBe(value);
+});
+
+it.each([
+  { availability: 'unavailable' },
+  { period: null },
+  { sourceRef: null },
+  { value: null },
+  { value: undefined },
+  { value: { unsafe: 1 } },
+  { value: true },
+  { value: Infinity },
+  { value: NaN },
+])('retains insight evidence guards for %j', (override) => {
+  expect(insightValue({ ...point('guarded', 'later', '65.4321'), ...override })).toBe('Unavailable');
+});
+
+it.each([
+  ['Developing', null, 'Developing'],
+  ['1200.2500', 'USD', '1200.2500 USD'],
+  ['Source estimate', 'hours', 'Source estimate hours'],
+])('preserves raw non-percent value %s and unit %s', (value, unit, expected) => {
+  expect(insightValue({ ...point('raw', 'later', value), unit })).toBe(expected);
 });
 
 it('handles absent and malformed periods safely without invented trend or object rendering', () => {

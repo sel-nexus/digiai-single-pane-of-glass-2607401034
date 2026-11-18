@@ -6,6 +6,7 @@ import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { SharedContextProvider, useSharedContext } from '../../context/SharedContextProvider';
 import IncidentBoard from './IncidentBoard';
 import ReliabilityBoard from './ReliabilityBoard';
+import { GlobalSearch } from '../../components/shell/GlobalSearch';
 
 const absent = { availability: 'unavailable', value: null };
 const evidence = { id: 'ticket-1', label: 'Supplied fields', value: { severity: 'Sev1', status: 'Review', note: '<img onerror=alert(1)>', signal: [0, false] }, source: 'uploaded', sourceRef: 'incident-file', association: 'entity:ticket-1' };
@@ -22,13 +23,16 @@ function response(data, extra = {}) {
 
 /** Mount actual routes and shared context while exposing retained URL state. */
 function Harness() {
-  const { setPersona } = useSharedContext();
+  const { context, setPersona, setScope } = useSharedContext();
   const location = useLocation();
   return (
     <div>
       <button onClick={() => setPersona('operations')}>Select persona</button>
+      <button onClick={() => setScope({ filters: { domain: ['d2'] }, hierarchyNodeId: 'node-2' })}>Narrow scope</button>
       <output aria-label="URL">{location.pathname}{location.search}</output>
+      <output aria-label="Scope">{JSON.stringify(context)}</output>
       <Routes>
+        <Route path="/portfolio" element={<GlobalSearch />} />
         <Route path="/operations" element={<IncidentBoard />} />
         <Route path="/operations/reliability" element={<ReliabilityBoard />} />
         <Route path="/applications/:applicationId" element={<h1>Exact application destination</h1>} />
@@ -180,3 +184,71 @@ it('preserves type filtering and shows unsupported dimensions rather than unfilt
   expect(screen.getByLabelText('URL')).toHaveTextContent('recordType=major_incident');
   expect(screen.getByText('No operational records in this scope. Filters are retained.')).toBeInTheDocument();
 });
+
+it('returns from a searched operational ticket to the exact originating URL and scope after local navigation', async () => {
+  const user = userEvent.setup();
+  const origin = '/portfolio?domain=d1&domain=d3&environment=prod&hierarchyNodeId=node-1&q=Enrollment%20incident&cursor=origin-page';
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url) => {
+    if (url.includes('/entities')) return response([{ id: 'ticket-1', label: 'Search enrollment ticket', type: 'ticket', distinguishingInfo: 'incident', source: 'uploaded' }]);
+    if (url.includes('/operations/incidents') && !new URL(url, 'http://test').searchParams.has('incidentId')) {
+      return response(records, { page: { total: 22, limit: 20, nextCursor: 'records-page-2' } });
+    }
+    return original(url);
+  });
+  mount(origin);
+  await user.click(screen.getByRole('button', { name: 'Select persona' }));
+  await user.type(screen.getByRole('textbox', { name: 'Search names or IDs' }), 'Enrollment');
+  await user.click(screen.getByRole('button', { name: 'Search', exact: true }));
+  await user.click(await screen.findByRole('link', { name: 'Search enrollment ticket' }));
+  expect(await screen.findByRole('region', { name: 'Selected record' })).toHaveTextContent('Enrollment incident');
+  expect(screen.getByRole('link', { name: 'Return to previous view' })).toHaveAttribute('href', origin);
+
+  await user.click(screen.getByRole('button', { name: 'Narrow scope' }));
+  await user.selectOptions(screen.getByLabelText('Record type'), 'major_incident');
+  await user.click(await screen.findByRole('link', { name: 'Next records' }));
+  expect(screen.getByLabelText('URL')).toHaveTextContent('cursor=records-page-2');
+  await user.click(screen.getByRole('link', { name: 'First records' }));
+  expect(screen.getByLabelText('URL').textContent).not.toContain('cursor=');
+  await user.click(await screen.findByRole('link', { name: 'Unlinked incident' }));
+  expect(screen.getByRole('link', { name: 'Return to previous view' })).toHaveAttribute('href', origin);
+  await user.click(screen.getByRole('link', { name: 'Return to previous view' }));
+  expect(screen.getByLabelText('URL').textContent).toBe(origin);
+  await waitFor(() => expect(JSON.parse(screen.getByLabelText('Scope').textContent)).toMatchObject({
+    personaId: 'operations', filters: { domain: ['d1', 'd3'], environment: ['prod'] }, hierarchyNodeId: 'node-1',
+  }));
+});
+
+it('retains query-based return context, repeated filters and hierarchy through pagination and type changes', async () => {
+  const user = userEvent.setup();
+  const origin = '/portfolio?domain=d1&hierarchyNodeId=node-1&q=original%20search';
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url) => url.includes('/operations/incidents')
+    ? response(records, { page: { nextCursor: 'next-page' } }) : original(url));
+  mount(`/operations?domain=d1&domain=d3&hierarchyNodeId=node-1&q=retained&returnTo=${encodeURIComponent(origin)}`);
+  await user.click(screen.getByRole('button', { name: 'Select persona' }));
+  await user.click(await screen.findByRole('link', { name: 'Next records' }));
+  await user.click(screen.getByRole('link', { name: 'First records' }));
+  await user.selectOptions(screen.getByLabelText('Record type'), 'problem_rca');
+  const query = new URLSearchParams(screen.getByLabelText('URL').textContent.split('?')[1]);
+  expect(query.getAll('domain')).toEqual(['d1', 'd3']);
+  expect(query.get('hierarchyNodeId')).toBe('node-1');
+  expect(query.get('q')).toBe('retained');
+  expect(query.get('returnTo')).toBe(origin);
+  expect(query.get('recordType')).toBe('problem_rca');
+  expect(screen.getByRole('link', { name: 'Return to previous view' })).toHaveAttribute('href', origin);
+  await user.click(screen.getByRole('link', { name: 'Return to previous view' }));
+  expect(screen.getByLabelText('URL').textContent).toBe(origin);
+});
+
+it.each(['https://outside.test/path', '//outside.test/path', '/\\outside.test', '/portfolio\nunsafe', '/portfolio\runsafe', null])(
+  'falls back to a scope-preserving internal return for unsafe or absent origin %s', async (origin) => {
+    const user = userEvent.setup();
+    mount({ pathname: '/operations', search: '?domain=d1&domain=d3&hierarchyNodeId=node-1', state: { origin } });
+    await user.click(screen.getByRole('button', { name: 'Select persona' }));
+    const link = screen.getByRole('link', { name: 'Return to previous view' });
+    expect(link).toHaveAttribute('href', '/portfolio?personaId=operations&hierarchyNodeId=node-1&domain=d1&domain=d3');
+    await user.click(link);
+    expect(screen.getByLabelText('URL').textContent).toBe('/portfolio?personaId=operations&hierarchyNodeId=node-1&domain=d1&domain=d3');
+  },
+);

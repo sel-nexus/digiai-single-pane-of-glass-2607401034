@@ -122,15 +122,18 @@ class OperationsService:
 
     def metrics(self, context: QueryContext, period: str = 'month', limit: int = 50,
                 cursor: str | None = None) -> OperationsMetricsPage:
-        """Return the nine named measures using exact supplied KPI values, never formulas."""
+        """Expose distinct source values per named measure; only absent labels get placeholders."""
         offset = self.entities._offset(limit, cursor)
         unknown = [key for key, value in context.filters.items() if value and key not in DIMENSIONS]
         supported = context.model_copy(update={'filters': {key: value for key, value in context.filters.items() if key in DIMENSIONS}})
         summaries = [self.kpis.summary(supported, period, family) for family in ('enterprise', 'reliability')]
-        supplied = {metric.label: metric for summary in summaries for metric in summary.data}
-        values = [supplied.get(label) or MetricValue(id=f'operations-{index}', label=label, family='reliability',
-            value=None, unit=None, period=period, availability='unavailable', source='sample', sourceRef=None)
-            for index, label in enumerate(MEASURES)]
+        values = []
+        for index, label in enumerate(MEASURES):
+            candidates = [metric for summary in summaries for metric in summary.data if metric.label == label]
+            # Source-less scope/period descriptors must not compete with supplied evidence.
+            supplied = [metric for metric in candidates if metric.sourceRef is not None or metric.availability == 'available']
+            values.extend(supplied or candidates[:1] or [MetricValue(id=f'operations-{index}', label=label, family='reliability',
+                value=None, unit=None, period=period, availability='unavailable', source='sample', sourceRef=None)])
         dimensions = sorted({dim for summary in summaries for dim in summary.unavailableDimensions} | set(unknown))
         if unknown:
             values = [item.model_copy(update={'value': None, 'availability': 'unavailable'}) for item in values]

@@ -13,10 +13,13 @@ async def test_incidents_types_selection_and_context(client):
     assert body['page']['total'] == 5
     assert response.headers['cache-control'] == 'no-store'
     selected = await client.get('/api/v1/operations/incidents?incidentId=ticket-1')
+    assert selected.status_code == 200
     assert {item['value']['id'] for item in selected.json()['data'][0]['businessContext']['value']} == {'app-0001', 'api-enrollment', 'journey-enrollment'}
     absent = await client.get('/api/v1/operations/incidents?incidentId=ticket-2')
+    assert absent.status_code == 200
     assert absent.json()['data'][0]['businessContext'] == {'availability': 'unavailable', 'value': None}
     types = await client.get('/api/v1/operations/incidents?recordType=problem_rca')
+    assert types.status_code == 200
     assert len(types.json()['data']) == 2
 
 
@@ -31,8 +34,10 @@ async def test_correlations_exact_sources_no_link_and_scope(client):
     assert body['data'][0]['evidence']['sourceRef'] == 'sample-v1'
     assert body['data'][0]['evidence']['association'] == 'relationship:rel-3'
     absent = await client.get('/api/v1/operations/correlations?incidentId=ticket-2')
+    assert absent.status_code == 200
     assert absent.json()['data'] == [] and absent.json()['availability'] == 'unavailable'
     excluded = await client.get('/api/v1/operations/correlations?incidentId=ticket-1&application=app-0002')
+    assert excluded.status_code == 200
     assert excluded.json()['data'] == []
 
 
@@ -56,9 +61,43 @@ async def test_metrics_exact_nine_and_unavailable_period(client):
     assert metrics[0]['value'] == 99.23456 and metrics[0]['unit'] == '%'
     assert metrics[5]['value'] is None and metrics[5]['availability'] == 'unavailable'
     week = await client.get('/api/v1/operations/metrics?period=week')
+    assert week.status_code == 200
     assert all(row['value'] is None and row['period'] == 'week' for row in week.json()['data'])
     scoped = await client.get('/api/v1/operations/metrics?application=app-0002')
+    assert scoped.status_code == 200
     assert all(row['value'] is None for row in scoped.json()['data'])
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('value', ['87.9950000000000000001', '0'])
+async def test_scoped_uploaded_metric_has_no_competing_family_placeholder(client, tmp_path, value):
+    """Keep exact uploaded evidence instead of a same-label out-of-scope descriptor."""
+    from app.storage.sqlite_repository import SqliteRepository
+
+    store = SqliteRepository(str(tmp_path / 'api.db'))
+    with store.transaction() as db:
+        db.execute('INSERT INTO metric (id,name,family,value_text,unit,period,entity_id,availability,dataset_version_id,source_kind,source_ref) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                   ('uploaded-availability', 'Availability %', 'reliability', value, '%', 'month',
+                    'app-0002', 'available', 'sample-v1', 'uploaded', 'uploaded-metrics.csv'))
+    for scope in ({'application': 'app-0002'}, {'hierarchyNodeId': 'app-0002'}):
+        response = await client.get('/api/v1/operations/metrics', params=scope)
+        assert response.status_code == 200
+        body = response.json()
+        rows = [row for row in body['data'] if row['label'] == 'Availability %']
+        assert len(rows) == 1
+        assert rows[0] == {'id': 'uploaded-availability', 'label': 'Availability %', 'family': 'reliability',
+                           'value': value, 'unit': '%', 'period': 'month', 'availability': 'available',
+                           'source': 'uploaded', 'sourceRef': 'uploaded-metrics.csv'}
+        assert body['availability'] == 'available'
+        assert body['page']['total'] == len(MEASURES)
+        first = await client.get('/api/v1/operations/metrics', params=scope | {'limit': 1})
+        assert first.status_code == 200
+        assert first.json()['data'] == rows
+    for query in ({'application': 'app-0001'}, {'application': 'app-0002', 'period': 'week'}):
+        response = await client.get('/api/v1/operations/metrics', params=query)
+        assert response.status_code == 200
+        assert all(row['sourceRef'] != 'uploaded-metrics.csv' for row in response.json()['data'])
+    assert store.read('SELECT value_text FROM metric WHERE id=?', ('uploaded-availability',))[0]['value_text'] == value
 
 
 @pytest.mark.asyncio
@@ -71,6 +110,7 @@ async def test_observability_summary_context_and_no_association(client):
     assert row['evidence']['value'][0]['sourceRef'] == 'sample-v1'
     assert {item['value']['id'] for item in row['businessContext']['value']} == {'app-0001', 'service-enrollment'}
     missing = await client.get('/api/v1/operations/observability?application=app-0002')
+    assert missing.status_code == 200
     assert missing.json()['data'] == [] and missing.json()['availability'] == 'unavailable'
 
 
@@ -91,11 +131,50 @@ async def test_unsupported_filters_are_unavailable(client, endpoint):
 async def test_invalid_list_inputs(client, query):
     """Reject malformed bounds, types and context through public validation."""
     response = await client.get('/api/v1/operations/incidents?' + query)
-    assert response.status_code == 422 and response.json()['error']['code'] == 'INVALID_REQUEST'
+    assert response.status_code == 422
+    assert response.json()['error']['code'] == 'INVALID_REQUEST'
 
 
 @pytest.mark.asyncio
 async def test_required_incident_and_invalid_period(client):
     """Reject absent correlation identity and unsupported reporting periods."""
-    assert (await client.get('/api/v1/operations/correlations')).status_code == 422
-    assert (await client.get('/api/v1/operations/metrics?period=year')).status_code == 422
+    correlations = await client.get('/api/v1/operations/correlations')
+    assert correlations.status_code == 422
+    period = await client.get('/api/v1/operations/metrics?period=year')
+    assert period.status_code == 422
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('endpoint', ['/api/v1/kpis', '/api/v1/operations/metrics'])
+async def test_twoapps_exact_sources_scope_hierarchy_and_period(client, tmp_path, endpoint):
+    """Exercise duplicate labels through both real public reliability read contracts."""
+    from app.storage.sqlite_repository import SqliteRepository
+    from tests.test_kpi_scope import seed_twoapps
+    store = SqliteRepository(str(tmp_path / 'api.db'))
+    seed_twoapps(store)
+    base = {'family': 'reliability'} if endpoint.endswith('/kpis') else {}
+    expected = {'a-month': ('99.2345600000000000001', 'uploaded', 'csv-source-a'),
+                'b-month': ('87.9950000000000000001', 'local', 'xlsx-source-b')}
+    for query, ids in [({}, set(expected)), ({'application': 'app-0001'}, {'a-month'}),
+                       ({'application': 'app-0002'}, {'b-month'}),
+                       ({'hierarchyNodeId': 'app-0001'}, {'a-month'}),
+                       ({'hierarchyNodeId': 'app-0002'}, {'b-month'}),
+                       ({'hierarchyNodeId': 'service-enrollment'}, set(expected)),
+                       ({'application': 'missing'}, set())]:
+        response = await client.get(endpoint, params=base | query)
+        assert response.status_code == 200
+        body = response.json()
+        rows = [row for row in body['data'] if row['availability'] == 'available']
+        assert {row['id'] for row in rows} == ids
+        assert all((row['value'], row['source'], row['sourceRef']) == expected[row['id']] for row in rows)
+        assert body['availability'] == ('available' if ids or endpoint.endswith('/kpis') else 'unavailable')
+    week = await client.get(endpoint, params=base | {'application': 'app-0002', 'period': 'week'})
+    assert week.status_code == 200
+    assert week.json()['availability'] == 'unavailable'
+    assert all(row['value'] is None and row['sourceRef'] is None and row['period'] == 'week' for row in week.json()['data'])
+    supplied_week = await client.get(endpoint, params=base | {'application': 'app-0001', 'period': 'week'})
+    assert supplied_week.status_code == 200
+    available = [row for row in supplied_week.json()['data'] if row['availability'] == 'available']
+    assert len(available) == 1 and available[0]['value'] == '91.125'
+    assert available[0]['sourceRef'] == 'csv-week-a'
+    assert store.read("SELECT value_text FROM metric WHERE id='a-month'")[0]['value_text'] == expected['a-month'][0]

@@ -19,17 +19,24 @@ class KpiService:
         return [Persona.model_validate(json.loads(row['payload_json'])) for row in self.repository.read("SELECT payload_json FROM app_config WHERE config_kind=? ORDER BY rowid LIMIT 100", ('persona',))]
 
     def _metric(self, metric_id: str, period: str, context: QueryContext) -> MetricValue:
-        """Return exact-period evidence or an unavailable value, never a fallback."""
+        """Resolve a configured identity; ambiguous alternate periods are unavailable."""
         rows = self.repository.read('SELECT * FROM metric WHERE id=?', (metric_id,))
         if not rows:
             return MetricValue(id=metric_id, label='Metric unavailable', family='enterprise', value=None, unit=None, period=period, availability='unavailable', source='sample', sourceRef=None)
         row = rows[0]
-        exact = self.repository.read('SELECT * FROM metric WHERE name=? AND family=? AND period=? AND entity_id IS ? ORDER BY id LIMIT 1', (row['name'], row['family'], period, row['entity_id']))
+        exact = [row] if row['period'] == period else self.repository.read('SELECT * FROM metric WHERE name=? AND family=? AND period=? AND entity_id IS ? ORDER BY id', (row['name'], row['family'], period, row['entity_id']))
         scoped, _ = EntityService(self.repository).matching_ids(context, [row['entity_id']])
         supported = (not context.filters and not context.hierarchyNodeId) or row['entity_id'] in scoped
-        supplied = exact[0] if exact else row
-        available = bool(exact) and supported and supplied['availability'] == 'available' and (supplied['value_number'] is not None or supplied['value_text'] is not None)
-        return MetricValue(id=metric_id, label=row['name'], family=row['family'], value=(supplied['value_number'] if supplied['value_number'] is not None else supplied['value_text']) if available else None, unit=supplied['unit'] if exact else None, period=period, availability='available' if available else 'unavailable', source=supplied['source_kind'], sourceRef=supplied['source_ref'] if exact else None)
+        return self._value(exact[0] if len(exact) == 1 else row, period, supported and len(exact) == 1).model_copy(update={'id': metric_id})
+
+    def _value(self, row: dict, period: str, exact: bool) -> MetricValue:
+        """Present one source row without converting stored decimal text or aggregating."""
+        available = exact and row['availability'] == 'available' and (row['value_number'] is not None or row['value_text'] is not None)
+        return MetricValue(id=row['id'], label=row['name'], family=row['family'],
+            value=(row['value_text'] if row['value_text'] is not None else row['value_number']) if available else None,
+            unit=row['unit'] if exact else None, period=period,
+            availability='available' if available else 'unavailable', source=row['source_kind'],
+            sourceRef=row['source_ref'] if exact else None)
 
     def summary(self, context: QueryContext, period: str = 'month', family: str = 'enterprise') -> Envelope[list[MetricValue]]:
         """Return bounded family measures for the exact supplied reporting period.
@@ -41,11 +48,32 @@ class KpiService:
             raise ValueError('Unsupported KPI family or period')
         if context.personaId and context.personaId not in {persona.id for persona in self.personas()}:
             raise LookupError('Unknown configured persona')
-        rows = self.repository.read('SELECT id FROM metric WHERE family=? GROUP BY name ORDER BY id LIMIT 100', (family,))
-        entity_ids = [row['entity_id'] for row in self.repository.read('SELECT entity_id FROM metric WHERE family=?', (family,))]
-        _, dimensions = EntityService(self.repository).matching_ids(context, entity_ids)
-        metrics = [self._metric(row['id'], period, context) for row in rows]
-        return Envelope(data=metrics, availability='unavailable' if dimensions or not rows else 'available', unavailableDimensions=dimensions)
+        rows = self.repository.read('SELECT * FROM metric WHERE family=? ORDER BY id', (family,))
+        family_rows = rows
+        # An empty family means absent measures, not unsupported entity dimensions.
+        scoped, dimensions = EntityService(self.repository).matching_ids(context, [row['entity_id'] for row in rows] if rows else None)
+        if context.filters or context.hierarchyNodeId:
+            rows = [row for row in rows if row['entity_id'] in scoped]
+        no_scoped_evidence = bool(family_rows) and not rows
+        groups = {}
+        for row in rows:
+            groups.setdefault((row['entity_id'], row['name']), []).append(row)
+        metrics = []
+        for candidates in groups.values():
+            exact = [row for row in candidates if row['period'] == period]
+            # Every exact-period identity is distinct evidence, not a preferred row.
+            metrics.extend(self._value(row, period, not dimensions) for row in exact)
+            if not exact:
+                metrics.append(self._value(candidates[0], period, False))
+        # Retain known names without treating another application's row as evidence.
+        represented_names = {metric.label for metric in metrics}
+        for row in sorted(family_rows, key=lambda row: (row['period'] != period, row['id'])):
+            if row['name'] not in represented_names:
+                metrics.append(self._value(row, period, False))
+                represented_names.add(row['name'])
+        metrics.sort(key=lambda metric: metric.id)
+        available = not dimensions and (no_scoped_evidence or any(metric.availability == 'available' for metric in metrics))
+        return Envelope(data=metrics[:100], availability='available' if available else 'unavailable', unavailableDimensions=dimensions)
 
     def dashboard(self, context: QueryContext, period: str = 'month') -> Envelope[Dashboard]:
         """Compose only the selected persona's visible widgets.

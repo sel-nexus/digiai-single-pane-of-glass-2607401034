@@ -1,4 +1,5 @@
 """Exercise persona delivery HTTP contracts against lifespan-seeded file SQLite."""
+import sqlite3
 import httpx
 import pytest
 
@@ -134,3 +135,28 @@ async def test_entities_route_returns_actual_application_records(client: httpx.A
         'distinguishingInfo': 'app-0001 · service-enrollment',
     }]
     assert body['page'] == {'limit': 50, 'total': 1, 'nextCursor': None}
+
+
+@pytest.mark.parametrize('failure_boundary', ['read', 'personas'])
+async def test_persona_catalog_read_failure_preserves_real_database(client, monkeypatch, failure_boundary):
+    """Return storage failure, not stale personas or an empty successful catalog."""
+    state = client._transport.app.state
+    repository = state.repository
+    before = repository.read('SELECT * FROM app_config ORDER BY id')
+    audit_before = repository.read('SELECT * FROM audit_event ORDER BY id')
+    assert len([row for row in before if row['config_kind'] == 'persona']) == 4
+    assert audit_before == []
+    def unavailable(*args, **kwargs):
+        raise sqlite3.OperationalError('persona read unavailable')
+    with monkeypatch.context() as patch:
+        boundary = repository if failure_boundary == 'read' else state.kpi_service
+        patch.setattr(boundary, failure_boundary, unavailable)
+        response = await client.get('/api/v1/personas')
+        assert response.status_code == 503
+        assert response.json()['error']['code'] == 'STORAGE_UNAVAILABLE'
+        assert 'data' not in response.json()
+    assert repository.read('SELECT * FROM app_config ORDER BY id') == before
+    assert repository.read('SELECT * FROM audit_event ORDER BY id') == audit_before
+    response = await client.get('/api/v1/personas')
+    assert response.status_code == 200
+    assert [item['id'] for item in response.json()['data']] == ['executive', 'operations', 'engineering', 'administrator']

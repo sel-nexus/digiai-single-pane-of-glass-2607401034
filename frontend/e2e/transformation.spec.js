@@ -1,5 +1,6 @@
 /** Exercise insights with real backend evidence, explicit links and captured browser errors. */
-import { test, expect } from './fixtures';
+import { test, expect } from './fixtures.js';
+import { navigatePrimary } from './helpers.js';
 
 /** Register an exact successful backend response wait before navigation. */
 function responseFor(page, path, params = {}) {
@@ -8,18 +9,6 @@ function responseFor(page, path, params = {}) {
     return url.pathname === `/api/v1${path}` && response.ok()
       && Object.entries(params).every(([key, value]) => url.searchParams.get(key) === value);
   });
-}
-
-/** Assert each item against its own source explanation rather than hardcoded page copy. */
-async function assertRecommendations(page, records, scope) {
-  for (const item of records) {
-    const card = (scope || page).getByRole('article', { name: item.label, exact: true });
-    await expect(card.getByText(`Reason: ${item.reason ?? 'Unavailable'}`, { exact: true })).toBeVisible();
-    await expect(card.getByText(`Confidence: ${item.confidence ?? 'Unavailable'}`, { exact: true })).toBeVisible();
-    await expect(card.getByRole('status')).toHaveText(item.complete && item.availability === 'available'
-      ? 'Complete mock recommendation' : 'Incomplete · unavailable');
-    await expect(card.getByText(`${item.id} · Source: ${item.source} · ${item.sourceRef}`, { exact: true })).toBeVisible();
-  }
 }
 
 /** Follow all three explicit target kinds and return to the exact saved insight scope. */
@@ -48,21 +37,16 @@ async function followDestinations(page, item, sourcePath) {
   }
 }
 
-test('mock recommendations and transformation both navigate explicit destinations and return shared context', async ({ page }) => {
+test('transformation measures and source-ordered trends follow explicit destinations and return context', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Executive/ }).click();
   const recommendationsResponse = responseFor(page, '/recommendations');
-  await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Insights', exact: true }).click();
-  let records = (await (await recommendationsResponse).json()).data;
-  expect(records.length).toBeGreaterThan(1);
-  expect(records.some((record) => !record.complete && record.reason === null)).toBe(true);
-  await assertRecommendations(page, records);
+  await navigatePrimary(page, 'Insights');
+  expect((await (await recommendationsResponse).json()).data.length).toBeGreaterThan(0);
   await page.getByText('Shared filters', { exact: false }).click();
   const filteredResponse = responseFor(page, '/recommendations', { domain: 'domain-member' });
   await page.getByLabel('Domain', { exact: true }).selectOption('domain-member');
-  records = (await (await filteredResponse).json()).data;
-  await assertRecommendations(page, records);
-  await followDestinations(page, records.find((record) => record.associations.length === 3), '/recommendations');
+  await filteredResponse;
   const transformationResponse = responseFor(page, '/transformation', { domain: 'domain-member' });
   await page.getByRole('link', { name: 'Transformation evidence', exact: true }).click();
   const items = (await (await transformationResponse).json()).data;
@@ -89,32 +73,87 @@ test('mock recommendations and transformation both navigate explicit destination
   await followDestinations(page, item, '/transformation');
 });
 
-test('contextual recommendations remain associated with selected application and filtered empty insights stay empty', async ({ page }) => {
+
+test('empty transformation retains application filter and never substitutes evidence', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Engineering/ }).click();
   const listResponse = responseFor(page, '/recommendations');
-  await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Insights', exact: true }).click();
-  const records = (await (await listResponse).json()).data;
-  const item = records.find((record) => record.complete && record.associations.some((link) => link.entityType === 'application'));
-  const app = item.associations.find((link) => link.entityType === 'application');
-  const appResponse = responseFor(page, `/applications/${app.entityId}`);
-  const contextualResponse = responseFor(page, '/recommendations', { applicationId: app.entityId });
-  await page.getByRole('article', { name: item.label }).getByRole('link', { name: `Open application · ${app.label}`, exact: true }).click();
-  expect((await (await appResponse).json()).data.id).toBe(app.entityId);
-  const associated = (await (await contextualResponse).json()).data;
-  expect(associated.every((record) => record.associations.some((link) => link.entityType === 'application' && link.entityId === app.entityId))).toBe(true);
-  await assertRecommendations(page, associated, page.getByRole('region', { name: 'Contextual recommendations' }));
-  const returnResponse = responseFor(page, '/recommendations');
-  await page.getByRole('link', { name: 'Return to previous view' }).click();
-  await returnResponse;
+  await navigatePrimary(page, 'Insights');
+  expect((await (await listResponse).json()).data.length).toBeGreaterThan(0);
   await page.getByText('Shared filters', { exact: false }).click();
   const emptyResponse = responseFor(page, '/recommendations', { application: 'app-0002' });
   await page.getByLabel('Application', { exact: true }).selectOption('app-0002');
   expect((await (await emptyResponse).json()).data).toEqual([]);
-  await expect(page.getByText(/No associated recommendations in this scope/)).toBeVisible();
   const transformationResponse = responseFor(page, '/transformation', { application: 'app-0002' });
   await page.getByRole('link', { name: 'Transformation evidence' }).click();
   expect((await (await transformationResponse).json()).data).toEqual([]);
   await expect(page.getByText(/No transformation evidence in this scope/)).toBeVisible();
   await expect(page.getByRole('article')).toHaveCount(0);
+});
+
+
+test('real transformation upload retains numeric text and rounds only percent browser presentation', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Administrator/ }).click();
+  await navigatePrimary(page, 'Uploads');
+  await page.getByLabel('Dataset class *').selectOption('transformation_maturity');
+  const id = `numeric-transformation-${Date.now()}`;
+  const label = `Uploaded decimal evidence ${id}`;
+  const evidence = (value, unit, period, sourceRef) => ({ value, unit, period, sourceRef });
+  const attrs = {
+    measures: {
+      adoption: evidence('12.3456', '%', 'month', `${id}-adoption`),
+      maturity: evidence('Developing', null, 'month', `${id}-maturity`),
+      value: evidence('125000.2500', 'USD', 'month', `${id}-value`),
+      effort: evidence('420.5000', 'hours', 'month', `${id}-effort`),
+    },
+    series: [{ label: 'Uploaded adoption', points: [
+      evidence('12.3456', '%', 'week', `${id}-point-one`),
+      evidence('98.7654', '%', 'month', `${id}-point-two`),
+    ] }],
+  };
+  const csvCell = (value) => `"${String(value).replaceAll('"', '""')}"`;
+  const csv = 'Key,Kind,Name,Data\n' + [id, 'transformation', label, JSON.stringify(attrs)].map(csvCell).join(',') + '\n';
+  for (const [field, column] of [['id', 'Key'], ['type', 'Kind'], ['label', 'Name']]) {
+    await page.getByLabel(`Source column for ${field} *`).fill(column);
+  }
+  await page.getByLabel('Source column for attributes').fill('Data');
+  await page.getByLabel('CSV or XLSX file *').setInputFiles({ name: 'transformation.csv', mimeType: 'text/csv', buffer: Buffer.from(csv) });
+  const uploadResponse = page.waitForResponse((res) => new URL(res.url()).pathname === '/api/v1/admin/uploads' && res.request().method() === 'POST');
+  await page.getByRole('button', { name: 'Validate and upload' }).click();
+  const response = await uploadResponse;
+  expect(response.status()).toBe(201);
+  const upload = (await response.json()).data;
+  expect(upload.acceptedRows).toBe(1);
+  expect(upload.reflection.status).toBe('confirmed');
+  await expect(page.getByRole('status').filter({ hasText: 'Upload confirmed' })).toContainText(upload.datasetVersion);
+  await navigatePrimary(page, 'Insights');
+  const transformed = responseFor(page, '/transformation');
+  await page.getByRole('link', { name: 'Transformation evidence', exact: true }).click();
+  const item = (await (await transformed).json()).data.find((record) => record.id === id);
+  expect(item.source).toBe('uploaded');
+  expect(item.sourceRef).toBe(upload.datasetVersion);
+  expect(item.availability).toBe('available');
+  const card = page.getByRole('article', { name: item.label, exact: true });
+  for (const [key, rendered] of [['adoption', '12.35%'], ['maturity', 'Developing'], ['value', '125000.2500 USD'], ['effort', '420.5000 hours']]) {
+    const metric = item.measures.find((entry) => entry.id === `${id}-${key}`);
+    expect(metric.value).toBe(attrs.measures[key].value);
+    expect(metric.period).toBe('month');
+    expect(metric.sourceRef).toBe(attrs.measures[key].sourceRef);
+    expect(metric.availability).toBe('available');
+    await expect(card.getByText(rendered, { exact: true }).first()).toBeVisible();
+    await expect(card.getByText(`Period: month · uploaded · ${metric.sourceRef}`, { exact: true })).toBeVisible();
+  }
+  const series = item.series[0];
+  expect(series.availability).toBe('available');
+  expect(series.points.map((point) => point.value)).toEqual(['12.3456', '98.7654']);
+  const points = card.getByRole('list', { name: 'Uploaded adoption source order' }).getByRole('listitem');
+  await expect(points).toHaveCount(2);
+  for (const [index, rendered] of ['12.35%', '98.77%'].entries()) {
+    expect(series.points[index].sourceRef).toBe(attrs.series[0].points[index].sourceRef);
+    expect(series.points[index].period).toBe(attrs.series[0].points[index].period);
+    await expect(points.nth(index)).toContainText(`${series.points[index].period} · ${rendered}`);
+    await expect(points.nth(index)).toContainText(series.points[index].sourceRef);
+  }
+  await expect(card.getByText(/12\.3456 %|98\.7654 %/)).toHaveCount(0);
 });

@@ -113,3 +113,23 @@ it('keeps theme independent of persona and formats zero and missing values faith
   expect(formatMetric({ ...metric, value: null })).toBe('Unavailable');
   expect(formatMetric({ ...metric, value: 12.345, unit: 'hours' })).toBe('12.345 hours');
 });
+
+it('renders distinct same-name text evidence with separate source references', async () => {
+  vi.stubGlobal('fetch', vi.fn((url) => {
+    if (new URL(url, 'http://test').pathname.endsWith('/kpis')) {
+      return Promise.resolve(new Response(JSON.stringify({ data: [
+        { ...metric, id: 'app-a', value: '99.2345600000000000001', source: 'uploaded', sourceRef: 'csv-source-a' },
+        { ...metric, id: 'app-b', value: '87.9950000000000000001', source: 'local', sourceRef: 'xlsx-source-b' },
+      ], availability: 'available' })));
+    }
+    return respond(url);
+  }));
+  render(<App />);
+  await userEvent.setup().click(await screen.findByRole('button', { name: /Executive/ }));
+  const board = within(await screen.findByRole('region', { name: 'KPI evidence' }));
+  expect(await board.findByText('88.00%')).toBeInTheDocument();
+  expect(board.getByText('99.23%')).toBeInTheDocument();
+  expect(board.getByText('Source: csv-source-a')).toBeInTheDocument();
+  expect(board.getByText('Source: xlsx-source-b')).toBeInTheDocument();
+  expect(board.getAllByRole('article', { name: 'Availability %' })).toHaveLength(2);
+});

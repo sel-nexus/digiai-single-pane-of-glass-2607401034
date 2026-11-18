@@ -114,6 +114,8 @@ def parse_xlsx(data: bytes, config: Settings) -> tuple[list[str], list[list[str]
                     kind = cell.get('t', 'n')
                     value = cell.findtext(NS + 'v', '')
                     if kind == 's':
+                        if not re.fullmatch(r'[0-9]+', value) or int(value) >= len(strings):
+                            raise reject('Shared string indexes must reference an existing nonnegative entry.')
                         value = strings[int(value)]
                     elif kind == 'inlineStr':
                         value = ''.join(node.text or '' for node in cell.iter(NS + 't'))

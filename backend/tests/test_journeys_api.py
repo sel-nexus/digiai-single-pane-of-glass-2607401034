@@ -8,10 +8,13 @@ async def test_list_detail_and_independent_overlays(client):
     assert first.status_code == 200
     body = first.json()
     assert body['page'] == {'limit': 1, 'nextCursor': '1', 'total': 2}
-    second = (await client.get('/api/v1/journeys?limit=1&cursor=1')).json()
+    second_response = await client.get('/api/v1/journeys?limit=1&cursor=1')
+    assert second_response.status_code == 200
+    second = second_response.json()
     assert second['data'][0]['id'] != body['data'][0]['id']
     detail = await client.get('/api/v1/journeys/journey-enrollment')
-    assert detail.status_code == 200 and detail.headers['cache-control'] == 'no-store'
+    assert detail.status_code == 200
+    assert detail.headers['cache-control'] == 'no-store'
     data = detail.json()['data']
     assert data['id'] == 'journey-enrollment' and data['source'] == 'sample'
     assert data['dependency']['availability'] == 'available'
@@ -27,27 +30,36 @@ async def test_list_detail_and_independent_overlays(client):
 async def test_invalid_page_contract(client, query):
     """Reject unbounded or noncanonical pages with public validation errors."""
     response = await client.get('/api/v1/journeys?' + query)
-    assert response.status_code == 422 and response.json()['error']['code'] == 'INVALID_REQUEST'
+    assert response.status_code == 422
+    assert response.json()['error']['code'] == 'INVALID_REQUEST'
 
 
 @pytest.mark.parametrize('identifier', ['missing', 'app-0001', "' OR 1=1 --"])
 async def test_unknown_or_wrong_type_is_404(client, identifier):
     """Never treat a SQL-like string or another entity class as a journey."""
     response = await client.get('/api/v1/journeys/' + identifier)
-    assert response.status_code == 404 and response.json()['error']['code'] == 'RESOURCE_NOT_FOUND'
+    assert response.status_code == 404
+    assert response.json()['error']['code'] == 'RESOURCE_NOT_FOUND'
 
 
 async def test_missing_relationships_and_shared_scope(client):
     """Preserve unavailable overlays, empty scopes and unsupported dimensions."""
-    empty = (await client.get('/api/v1/journeys/journey-renewal')).json()['data']
+    empty_response = await client.get('/api/v1/journeys/journey-renewal')
+    assert empty_response.status_code == 200
+    empty = empty_response.json()['data']
     assert empty['relationships'] == [] and empty['dependency']['value'] is None
     assert empty['impactOverlay']['availability'] == 'unavailable'
     scoped = await client.get('/api/v1/journeys', params=[('application', 'app-0001'), ('application', 'missing'),
                               ('hierarchyNodeId', 'service-enrollment'), ('toolSource', 'sample-monitor')])
+    assert scoped.status_code == 200
     assert [row['id'] for row in scoped.json()['data']] == ['journey-enrollment']
     excluded = await client.get('/api/v1/journeys/journey-enrollment?application=app-0002')
-    assert excluded.status_code == 200 and excluded.json()['data'] is None
-    assert (await client.get('/api/v1/journeys?application=missing')).json()['data'] == []
+    assert excluded.status_code == 200
+    assert excluded.json()['data'] is None
+    missing = await client.get('/api/v1/journeys?application=missing')
+    assert missing.status_code == 200
+    assert missing.json()['data'] == []
     unsupported = await client.get('/api/v1/journeys/journey-renewal?dateRange=missing')
+    assert unsupported.status_code == 200
     assert unsupported.json()['unavailableDimensions'] == ['dateRange']
     assert unsupported.json()['availability'] == 'unavailable'

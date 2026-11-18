@@ -5,6 +5,7 @@ from app.domain.entity_service import EntityService
 from app.domain.kpi_service import KpiService
 from app.domain.operations_service import MEASURES, OperationsService
 from app.schemas.contracts import QueryContext
+from tests.test_kpi_scope import seed_twoapps
 
 
 @pytest.fixture
@@ -106,3 +107,38 @@ def test_supplied_observability_context_and_absence(service, repository):
         db.execute("DELETE FROM relationship WHERE target_entity_id='event-1'")
         db.execute("DELETE FROM entity WHERE id IN ('event-1','summary-1')")
     assert service.observability(QueryContext()).availability == 'unavailable'
+
+
+@pytest.mark.parametrize('context,expected', [
+    (QueryContext(), {'a-month', 'b-month'}),
+    (QueryContext(filters={'application': ['app-0001']}), {'a-month'}),
+    (QueryContext(filters={'application': ['app-0002']}), {'b-month'}),
+    (QueryContext(hierarchyNodeId='app-0001'), {'a-month'}),
+    (QueryContext(hierarchyNodeId='app-0002'), {'b-month'}),
+    (QueryContext(hierarchyNodeId='service-enrollment'), {'a-month', 'b-month'}),
+])
+def test_same_label_distinct_supported_operations(service, repository, context, expected):
+    """Preserve each app's supplied measure, with pagination counting evidence rows."""
+    seed_twoapps(repository)
+    rows = service.metrics(context).data
+    available = [row for row in rows if row.availability == 'available']
+    assert {row.id for row in available} == expected
+    evidence = {'a-month': ('99.2345600000000000001', 'uploaded', 'csv-source-a'),
+                'b-month': ('87.9950000000000000001', 'local', 'xlsx-source-b')}
+    assert all((row.value, row.source, row.sourceRef) == evidence[row.id] for row in available)
+    assert service.metrics(context).page.total == len(expected) + 8
+    first = service.metrics(context, limit=1)
+    second = service.metrics(context, limit=1, cursor=first.page.nextCursor)
+    if len(expected) == 2:
+        assert {first.data[0].id, second.data[0].id} == expected
+
+
+def test_operations_same_label_across_families_and_missing_period(service, repository):
+    """Do not prefer a family or borrow an available period for a missing app."""
+    seed_twoapps(repository)
+    with repository.transaction() as db:
+        db.execute("INSERT INTO metric SELECT 'enterprise-a',name,'enterprise','45.67',NULL,unit,period,entity_id,availability,dataset_version_id,source_kind,'enterprise-source' FROM metric WHERE id='a-month'")
+    assert {row.id for row in service.metrics(QueryContext()).data if row.availability == 'available'} == {'a-month', 'b-month', 'enterprise-a'}
+    missing = service.metrics(QueryContext(filters={'application': ['app-0002']}), 'week')
+    assert missing.availability == 'unavailable'
+    assert all(row.value is None and row.sourceRef is None and row.period == 'week' for row in missing.data)

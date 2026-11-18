@@ -9,6 +9,11 @@ import EvidencePanel from '../portfolio/EvidencePanel';
 import CorrelationView from './CorrelationView';
 import { ContextualRecommendations } from '../insights/RecommendationList';
 
+/** Reject external or malformed origins while retaining internal URL context. */
+function safeOrigin(origin) {
+  return typeof origin === 'string' && /^\/(?!\/)[^\\\r\n]*$/.test(origin);
+}
+
 /** Keep selection, type and pagination shareable while retaining all shared filters. */
 export default function IncidentBoard() {
   const { context } = useSharedContext();
@@ -18,6 +23,15 @@ export default function IncidentBoard() {
   const incidentId = query.get('incidentId');
   const recordType = query.get('recordType') || '';
   const cursor = query.get('cursor');
+  const origin = location.state?.origin || query.get('returnTo');
+  const returnTo = safeOrigin(origin) ? origin : `/portfolio?${serializeContext(context)}`;
+  /** Change only pagination keys so contextual return and shared scope survive. */
+  const pageSearch = (nextCursor) => {
+    const next = new URLSearchParams(location.search);
+    next.delete('incidentId');
+    if (nextCursor) next.set('cursor', nextCursor); else next.delete('cursor');
+    return next.toString();
+  };
   const state = useApi(context.personaId ? '/operations/incidents' : null, context, { recordType, limit: 20, cursor });
   const detail = useApi(context.personaId && incidentId ? '/operations/incidents' : null, context, { incidentId });
   const selected = detail.data?.find((record) => record.id === incidentId);
@@ -26,7 +40,7 @@ export default function IncidentBoard() {
     next.delete('cursor');
     next.delete('incidentId');
     if (value) next.set('recordType', value); else next.delete('recordType');
-    navigate({ search: next.toString() });
+    navigate({ search: next.toString() }, { state: location.state });
   };
   if (!context.personaId) return <PersonaSelector />;
   const targets = [...new Map((selected?.businessContext?.value || []).map((item) => [item.value.id, item.value])).values()];
@@ -34,6 +48,7 @@ export default function IncidentBoard() {
     <div className="section-stack">
       <header>
         <p className="eyebrow">Operations evidence</p>
+        <Link to={returnTo}>Return to previous view</Link>
         <h1>Incident command center</h1>
         <p className="muted">Incident, problem/RCA and major incident records are distinct. Co-presentation does not imply linkage.</p>
         <Link to={`/operations/reliability?${serializeContext(context)}`}>Review reliability</Link>
@@ -58,7 +73,13 @@ export default function IncidentBoard() {
             next.set('incidentId', record.id);
             return (
               <li key={record.id}>
-                <Link to={{ search: next.toString() }} aria-current={incidentId === record.id ? 'true' : undefined}>{record.label}</Link>
+                <Link
+                  to={{ search: next.toString() }}
+                  state={location.state}
+                  aria-current={incidentId === record.id ? 'true' : undefined}
+                >
+                  {record.label}
+                </Link>
                 <p>{record.recordType} · {record.id}</p>
                 <p className="source-ref">Source: {record.source} · {record.sourceRef || 'Reference unavailable'}</p>
               </li>
@@ -66,9 +87,9 @@ export default function IncidentBoard() {
           })}
         </ul>
         {state.envelope?.page?.nextCursor && (
-          <Link to={{ search: serializeContext(context, { recordType, cursor: state.envelope.page.nextCursor }) }}>Next records</Link>
+          <Link to={{ search: pageSearch(state.envelope.page.nextCursor) }} state={location.state}>Next records</Link>
         )}
-        {cursor && <Link to={{ search: serializeContext(context, { recordType }) }}>First records</Link>}
+        {cursor && <Link to={{ search: pageSearch(null) }} state={location.state}>First records</Link>}
       </DataState>
       {incidentId && (
         <DataState loading={detail.loading} error={detail.error} onRetry={detail.refetch}>
@@ -80,8 +101,13 @@ export default function IncidentBoard() {
               <EvidencePanel title="Business impact context" category={selected.businessContext} />
               <p className="muted">Only explicit application, API, journey and dependency references are shown. No impact is inferred.</p>
               {targets.filter((target) => ['application', 'journey'].includes(target.type)).map((target) => (
-                <Link key={target.id} to={`/${target.type === 'application' ? 'applications' : 'journeys'}/${encodeURIComponent(target.id)}?${serializeContext(context, { returnTo: `${location.pathname}${location.search}` })}`}
-                  state={{ origin: `${location.pathname}${location.search}` }}>
+                <Link
+                  key={target.id}
+                  to={`/${target.type === 'application' ? 'applications' : 'journeys'}/${encodeURIComponent(target.id)}?${
+                    serializeContext(context, { returnTo: `${location.pathname}${location.search}` })
+                  }`}
+                  state={{ origin: `${location.pathname}${location.search}` }}
+                >
                   Open {target.type} · {target.label}
                 </Link>
               ))}
