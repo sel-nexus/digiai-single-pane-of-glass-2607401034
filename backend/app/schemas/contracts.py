@@ -79,3 +79,47 @@ class Dashboard(BaseModel):
 class Health(BaseModel):
     """Report process liveness only."""
     status: Literal['ok'] = 'ok'
+
+
+EntityType = Literal['domain', 'portfolio', 'service', 'application', 'environment', 'ticket', 'release', 'journey', 'owner']
+
+
+class Entity(BaseModel):
+    """Expose an exact source record without synthesizing a profile."""
+    id: str
+    type: EntityType
+    label: str
+    parentId: str | None
+    source: Source
+    sourceRef: str | None
+    distinguishingInfo: str = ''
+
+
+class Page(BaseModel):
+    """Carry bounded pagination and matching count."""
+    limit: int
+    nextCursor: str | None
+    total: int
+
+
+class EntityPage(Envelope[list[Entity]]):
+    """Return bounded discovery records."""
+    page: Page
+
+
+class HierarchyNode(Entity):
+    """Describe a represented five-level link."""
+    level: str
+    hasRepresentedChildren: bool
+
+
+class HierarchyPage(Envelope[list[HierarchyNode]]):
+    """Preserve ancestry separately from scoped children."""
+    ancestry: list[Entity] = Field(default_factory=list)
+    page: Page
+
+
+class FilterOption(BaseModel):
+    """Name an exact source filter value."""
+    id: str
+    label: str

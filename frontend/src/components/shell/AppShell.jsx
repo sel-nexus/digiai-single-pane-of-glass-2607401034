@@ -6,6 +6,8 @@ import { ThemeToggle } from './ThemeToggle';
 import { PersonaSwitcher } from './PersonaSwitcher';
 import { StatusBadge } from './StatusBadge';
 import { Breadcrumbs } from './Breadcrumbs';
+import { GlobalSearch } from './GlobalSearch';
+import { GlobalFilters } from './GlobalFilters';
 
 /** Expose only implemented dashboard navigation plus labeled future destinations. */
 export function AppShell() {
@@ -16,7 +18,10 @@ export function AppShell() {
     <div className="app-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="app-header">
-        <Link className="brand" to={`/${location.search}`}><span>DigiAI</span> <span className="muted">/ Single pane of glass</span></Link>
+        <Link className="brand" to={`/${location.search}`}>
+          <span>DigiAI</span>
+          <span className="muted"> / Single pane of glass</span>
+        </Link>
         <div className="header-actions">
           <StatusBadge>Sample prototype</StatusBadge>
           {context.personaId && <PersonaSwitcher />}
@@ -25,17 +30,25 @@ export function AppShell() {
       </header>
       {context.personaId && (
         <div className="nav-bar">
-          <button className="nav-toggle" aria-expanded={expanded} aria-controls="primary-navigation" onClick={() => setExpanded(!expanded)}>Navigation</button>
+          <button className="nav-toggle" aria-expanded={expanded} aria-controls="primary-navigation"
+            onClick={() => setExpanded(!expanded)}>Navigation</button>
           <nav id="primary-navigation" aria-label="Primary" className={expanded ? 'expanded' : ''}>
             <Link to={`/dashboard${location.search}`} aria-current={location.pathname === '/dashboard' ? 'page' : undefined}>Dashboard</Link>
-            {['Portfolio', 'Journeys', 'Operations', 'Readiness', 'Insights', 'Administration'].map((label) => (
-              <Link key={label} to={`/${label.toLowerCase()}${location.search}`} onClick={() => setExpanded(false)}>{label} <small>Unavailable</small></Link>
+            <Link to={`/portfolio${location.search}`} onClick={() => setExpanded(false)}
+              aria-current={location.pathname === '/portfolio' ? 'page' : undefined}>Portfolio</Link>
+            {['Journeys', 'Operations', 'Readiness', 'Insights', 'Administration'].map((label) => (
+              <Link key={label} to={`/${label.toLowerCase()}${location.search}`} onClick={() => setExpanded(false)}>
+                {label}
+                <small>Unavailable</small>
+              </Link>
             ))}
           </nav>
         </div>
       )}
       <main id="main-content" tabIndex="-1">
         {context.personaId && <Breadcrumbs />}
+        {context.personaId && <GlobalSearch />}
+        {context.personaId && <GlobalFilters />}
         <Outlet />
       </main>
       <footer>Read-only synthetic evidence · No production controls · Mock persona is display context only</footer>

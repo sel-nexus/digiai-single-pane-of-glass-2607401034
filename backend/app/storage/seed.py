@@ -32,7 +32,7 @@ def seed_database(repository: SqliteRepository) -> None:
             ('service-enrollment', 'service', 'Enrollment Services', 'portfolio-digital', {}),
             ('owner-digital', 'owner', 'Digital Platform Team', None, {}),
             ('journey-enrollment', 'journey', 'Member Enrollment', None, {'description': 'Synthetic enrollment journey'}),
-            ('ticket-1', 'ticket', 'Sample enrollment incident', None, {'recordType': 'incident', 'severity': 'Sev1', 'applicationId': 'app-0001', 'toolSource': 'sample-monitor'}),
+            ('ticket-1', 'ticket', 'Sample enrollment incident', None, {'recordType': 'incident', 'severity': 'Sev1', 'applicationId': 'app-0001', 'toolSource': 'sample-monitor', 'dateRange': '2025-01/2025-02'}),
             ('problem-1', 'ticket', 'Sample recurring latency problem', None, {'recordType': 'problem', 'applicationId': 'app-0001'}),
             ('rca-1', 'ticket', 'Sample latency analysis', None, {'recordType': 'rca', 'applicationId': 'app-0001', 'reason': 'Supplied synthetic capacity observation'}),
             ('release-1', 'release', 'Sample enrollment release', None, {'applicationId': 'app-0001', 'build': 'Passed (sample)', 'test': 'Supplied test evidence', 'security': 'Supplied findings', 'change': 'Sample approved change', 'environment': 'Sample environment evidence'}),

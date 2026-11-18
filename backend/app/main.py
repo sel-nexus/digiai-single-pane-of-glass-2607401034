@@ -10,9 +10,11 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException
 from starlette.concurrency import run_in_threadpool
 from app.api.dashboard import router as dashboard_router
+from app.api.domains import router as domains_router
 from app.api.health import router as health_router
 from app.core.config import Settings
 from app.domain.kpi_service import KpiService
+from app.domain.entity_service import EntityService
 from app.storage.seed import seed_database
 from app.storage.sqlite_repository import SqliteRepository
 
@@ -33,12 +35,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             await run_in_threadpool(seed_database, repository)
         application.state.repository = repository
         application.state.kpi_service = KpiService(repository)
+        application.state.entity_service = EntityService(repository)
         yield
 
     application = FastAPI(title='DigiAI Single Pane of Glass', version='1.0.0', description='Synthetic prototype evidence. Mock personas are not authentication.', lifespan=lifespan)
     application.add_middleware(CORSMiddleware, allow_origins=config.origins, allow_credentials=False, allow_methods=['GET'], allow_headers=['Content-Type'])
     application.include_router(health_router)
     application.include_router(dashboard_router)
+    application.include_router(domains_router)
 
     @application.middleware('http')
     async def no_dynamic_cache(request: Request, call_next) -> object:

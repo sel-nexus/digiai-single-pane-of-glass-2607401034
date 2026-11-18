@@ -28,7 +28,10 @@ export function SharedContextProvider({ children }) {
   useEffect(() => dispatch({ type: 'scope', scope: parseScope(location.search) }), [location.search]);
   const setScope = (scope) => {
     dispatch({ type: 'scope', scope });
-    navigate({ pathname: location.pathname, search: serializeContext(scope) });
+    const query = new URLSearchParams(location.search);
+    const extras = Object.fromEntries([...query].filter(([key]) => !dimensions.includes(key)
+      && key !== 'hierarchyNodeId' && key !== 'personaId'));
+    navigate({ pathname: location.pathname, search: serializeContext(scope, extras) }, { state: location.state });
   };
   return (
     <SharedContext.Provider value={{ context, setPersona: (id) => dispatch({ type: 'persona', id }), setScope }}>

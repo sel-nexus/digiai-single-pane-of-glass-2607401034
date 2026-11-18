@@ -50,12 +50,71 @@ def test_unknown_persona_and_invalid_family_are_rejected(repository: SqliteRepos
         service.summary(QueryContext(), family='invented')
 
 
-def test_scope_is_explicitly_unavailable(repository: SqliteRepository) -> None:
-    """Avoid silently ignoring shared scope before discovery is implemented."""
-    result = KpiService(repository).summary(QueryContext(filters={'domain': ['domain-member']}, hierarchyNodeId='app-0001'))
-    assert result.unavailableDimensions == ['domain', 'hierarchyNodeId']
+@pytest.mark.parametrize('filters', [
+    {'domain': ['domain-member']},
+    {'portfolio': ['portfolio-digital']},
+    {'application': ['app-0001']},
+    {'environment': ['prod']},
+    {'criticality': ['high']},
+    {'dateRange': ['2025-01/2025-02']},
+    {'toolSource': ['sample-monitor']},
+    {'incidentSeverity': ['Sev1']},
+    {'domain': ['absent', 'domain-member'], 'portfolio': ['portfolio-digital'],
+     'application': ['app-0001'], 'environment': ['prod'], 'criticality': ['high'],
+     'dateRange': ['2025-01/2025-02'], 'toolSource': ['sample-monitor'], 'incidentSeverity': ['Sev1']},
+])
+def test_supported_scope_preserves_source_associated_metrics(repository: SqliteRepository, filters: dict[str, list[str]]) -> None:
+    """Use represented ancestry and direct evidence with OR within and AND across facets."""
+    result = KpiService(repository).summary(QueryContext(filters=filters, hierarchyNodeId='app-0001'))
+    assert result.unavailableDimensions == []
+    assert result.availability == 'available'
+    metrics = {m.id: m for m in result.data}
+    assert {key: m.value for key, m in metrics.items()} == {
+        'availability': 99.23456, 'sla': 98.76543, 'sev-count': 7,
+        'mttd': 4.5, 'mttr': None, 'repeat': 3.12, 'noise': 18.5,
+    }
+    assert metrics['mttr'].availability == 'unavailable'
+    assert all(m.availability == 'available' for key, m in metrics.items() if key != 'mttr')
+    assert metrics['availability'].unit == '%'
+    assert all(m.period == 'month' and m.source == 'sample' and m.sourceRef == f'sample-kpi-{m.id}' for m in result.data)
+
+
+@pytest.mark.parametrize('context', [
+    QueryContext(filters={'domain': ['domain-member'], 'application': ['app-0002']}),
+    QueryContext(filters={'environment': ['absent']}),
+    QueryContext(hierarchyNodeId='app-0002'),
+])
+def test_supported_scope_without_associated_metrics_is_null(repository: SqliteRepository, context: QueryContext) -> None:
+    """Do not ignore mismatches or transfer evidence along application dependencies."""
+    result = KpiService(repository).summary(context)
+    assert result.unavailableDimensions == []
+    assert result.availability == 'available'
+    assert len(result.data) == 7
+    assert all(m.value is None and m.availability == 'unavailable' for m in result.data)
+
+
+@pytest.mark.parametrize('dimension', ['dateRange', 'toolSource', 'incidentSeverity'])
+def test_scope_without_source_dimension_is_explicitly_unavailable(repository: SqliteRepository, dimension: str) -> None:
+    """Report absent source facets instead of returning unfiltered KPI values."""
+    with repository.transaction() as db:
+        row = db.execute('SELECT attributes_json FROM entity WHERE id=?', ('ticket-1',)).fetchone()
+        attributes = json.loads(row[0])
+        attributes.pop('severity' if dimension == 'incidentSeverity' else dimension)
+        db.execute('UPDATE entity SET attributes_json=? WHERE id=?', (json.dumps(attributes), 'ticket-1'))
+    result = KpiService(repository).summary(QueryContext(filters={dimension: ['opaque']}, hierarchyNodeId='app-0001'))
+    assert result.unavailableDimensions == [dimension]
     assert result.availability == 'unavailable'
-    assert all(m.value is None for m in result.data)
+    assert len(result.data) == 7
+    assert all(m.value is None and m.availability == 'unavailable' for m in result.data)
+
+
+def test_unknown_hierarchy_scope_is_explicitly_unavailable(repository: SqliteRepository) -> None:
+    """Keep an unknown hierarchy selection distinct from a represented no-match."""
+    result = KpiService(repository).summary(QueryContext(filters={'domain': ['domain-member']}, hierarchyNodeId='absent'))
+    assert result.unavailableDimensions == ['hierarchyNodeId']
+    assert result.availability == 'unavailable'
+    assert len(result.data) == 7
+    assert all(m.value is None and m.availability == 'unavailable' for m in result.data)
 
 
 def test_hidden_widget_and_seed_restart_preserve_configuration(repository: SqliteRepository) -> None:

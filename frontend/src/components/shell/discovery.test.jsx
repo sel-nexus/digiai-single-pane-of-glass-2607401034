@@ -1,0 +1,178 @@
+/** Verify discovery controls, safe rendering and context-preserving navigation. */
+import { render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { beforeEach, afterEach, expect, it, vi } from 'vitest';
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { SharedContextProvider, useSharedContext } from '../../context/SharedContextProvider';
+import { GlobalSearch } from './GlobalSearch';
+import { GlobalFilters, filterLabels } from './GlobalFilters';
+import { HierarchyExplorer } from './HierarchyExplorer';
+import PortfolioExplorer from '../../pages/portfolio/PortfolioExplorer';
+
+const entity = { id: 'app-1', label: '<img src=x onerror=alert(1)>', type: 'application',
+  parentId: 'service-1', source: 'sample', sourceRef: 'sample-1', distinguishingInfo: 'app-1 · service-1' };
+const options = Object.fromEntries(Object.keys(filterLabels).map((key) => [key, [{ id: `${key}-1`, label: `${key} option` }]]));
+
+/** Expose current URL and explicit persona setup without mocking shared context. */
+function Harness() {
+  const { setPersona } = useSharedContext();
+  const location = useLocation();
+  return (
+    <div>
+      <button onClick={() => setPersona('executive')}>Select persona</button>
+      <output aria-label="URL">{location.pathname}{location.search}</output>
+      <GlobalSearch />
+      <GlobalFilters />
+      <Routes>
+        <Route path="/portfolio" element={<PortfolioExplorer />} />
+        <Route path="*" element={<HierarchyExplorer />} />
+      </Routes>
+    </div>
+  );
+}
+
+/** Render real provider and router for observable user interactions. */
+function mount(entry = '/dashboard') {
+  return render(
+    <MemoryRouter initialEntries={[entry]}>
+      <SharedContextProvider>
+        <Harness />
+      </SharedContextProvider>
+    </MemoryRouter>,
+  );
+}
+
+/** Return a valid qualified API response for component network boundaries. */
+function response(data, extra = {}) {
+  return { ok: true, json: async () => ({ data, availability: 'available', page: { total: data.length || 0 }, ...extra }) };
+}
+
+beforeEach(() => {
+  vi.stubGlobal('fetch', vi.fn(async (url) => {
+    if (url.includes('/filters/options')) return response(options);
+    if (url.includes('/entities')) return response([entity]);
+    return response([], { ancestry: [] });
+  }));
+});
+afterEach(() => vi.unstubAllGlobals());
+
+it('requires explicit search submit, renders XSS as text, opens actual explorer and returns', async () => {
+  const user = userEvent.setup();
+  mount('/dashboard?domain=domain-1');
+  await user.click(screen.getByRole('button', { name: 'Select persona' }));
+  await user.type(screen.getByLabelText('Search names or IDs'), 'portal');
+  expect(fetch.mock.calls.some(([url]) => url.includes('/entities'))).toBe(false);
+  await user.click(screen.getByRole('button', { name: 'Search', exact: true }));
+  const result = await screen.findByRole('link', { name: entity.label });
+  expect(document.querySelector('img')).toBeNull();
+  expect(screen.getByText(/application · app-1/)).toBeInTheDocument();
+  await user.click(result);
+  expect(await screen.findByRole('heading', { name: 'Portfolio explorer' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: entity.label })).toBeInTheDocument();
+  expect(screen.getByLabelText('URL')).toHaveTextContent('domain=domain-1');
+  await user.click(screen.getByRole('link', { name: 'Return to previous view' }));
+  expect(screen.getByLabelText('URL')).toHaveTextContent('/dashboard?domain=domain-1');
+  await user.click(screen.getByRole('button', { name: 'Clear search' }));
+  expect(screen.queryByText(/Results for/)).not.toBeInTheDocument();
+  expect(screen.getByLabelText('Search names or IDs')).toHaveValue('');
+});
+
+it('selects all eight dimensions, clears one and all while preserving selected route', async () => {
+  const user = userEvent.setup();
+  mount('/dashboard?entityId=app-1');
+  await user.click(screen.getByText('Shared filters (0 selected)'));
+  for (const [key, label] of Object.entries(filterLabels)) {
+    await user.selectOptions(await screen.findByLabelText(label), `${key}-1`);
+    await waitFor(() => expect(screen.getByLabelText('URL')).toHaveTextContent(`${key}=${key}-1`));
+  }
+  expect(screen.getByLabelText('URL')).toHaveTextContent('entityId=app-1');
+  await user.click(screen.getByRole('button', { name: 'Clear Domain' }));
+  expect(screen.getByLabelText('Domain')).toHaveValue([]);
+  expect(screen.getByLabelText('Portfolio')).toHaveValue(['portfolio-1']);
+  await user.click(screen.getByRole('button', { name: 'Clear all filters' }));
+  for (const label of Object.values(filterLabels)) expect(screen.getByLabelText(label)).toHaveValue([]);
+});
+
+it('shows search loading, actionable failure retry, empty and unsupported scope', async () => {
+  const user = userEvent.setup();
+  let resolve;
+  fetch.mockImplementation((url) => url.includes('/entities')
+    ? new Promise((done) => { resolve = done; }) : Promise.resolve(response([])));
+  mount();
+  await user.type(screen.getByLabelText('Search names or IDs'), 'missing');
+  await user.click(screen.getByRole('button', { name: 'Search', exact: true }));
+  expect(screen.getByText('Loading prototype evidence…')).toBeInTheDocument();
+  resolve({ ok: false, json: async () => ({ error: { code: 'FAILED', message: 'Storage offline' } }) });
+  expect(await screen.findByText('Storage offline')).toBeInTheDocument();
+  fetch.mockImplementation(async () => response([], { unavailableDimensions: ['dateRange'] }));
+  await user.click(screen.getByRole('button', { name: 'Try again' }));
+  expect(await screen.findByText('No matching entities. Selected filters are retained.')).toBeInTheDocument();
+  expect(screen.getByText('Unavailable dimensions: dateRange')).toBeInTheDocument();
+});
+
+it('retains selected unavailable facet values and exposes options errors', async () => {
+  const user = userEvent.setup();
+  fetch.mockImplementation(async (url) => url.includes('/filters/options')
+    ? response({}, { unavailableDimensions: ['dateRange'] }) : response([]));
+  mount('/dashboard?dateRange=unknown');
+  await user.click(screen.getByText('Shared filters (1 selected)'));
+  expect(await screen.findByText('unknown (selected; not in current options)')).toBeInTheDocument();
+  expect(screen.getByLabelText('Date range')).toHaveValue(['unknown']);
+  expect(screen.getAllByText('No represented options')).toHaveLength(8);
+  fetch.mockRejectedValue(new Error('network'));
+  await user.click(screen.getByRole('button', { name: 'Clear Date range' }));
+  expect((await screen.findAllByRole('alert'))[0]).toHaveTextContent('Cannot reach prototype service');
+});
+
+it('selects only current-parent children, shows ancestry, returns and reports empty leaves', async () => {
+  const user = userEvent.setup();
+  const root = { ...entity, id: 'd1', label: 'Member domain', type: 'domain', level: 'domain',
+    parentId: null, hasRepresentedChildren: true };
+  fetch.mockImplementation(async (url) => {
+    if (url.includes('/filters/options')) return response(options);
+    if (url.includes('parentId=d1')) return response([], { ancestry: [root] });
+    return response([root], { ancestry: [] });
+  });
+  mount();
+  await user.click(await screen.findByRole('button', { name: 'Member domain' }));
+  expect(await screen.findByText('No represented children in this scope. Filters are retained.')).toBeInTheDocument();
+  const ancestry = screen.getByRole('navigation', { name: 'Hierarchy ancestors' });
+  expect(within(ancestry).getByRole('button', { name: 'Member domain' })).toHaveAttribute('aria-current', 'location');
+  await user.click(within(ancestry).getByRole('button', { name: 'All domains' }));
+  expect(await screen.findByRole('button', { name: 'Member domain' })).toBeInTheDocument();
+});
+
+it('pages search and hierarchy results and rejects a stale child', async () => {
+  const user = userEvent.setup();
+  const stale = { ...entity, label: 'Wrong-parent child', level: 'application', hasRepresentedChildren: false };
+  fetch.mockImplementation(async (url) => {
+    if (url.includes('/filters/options')) return response(options);
+    if (url.includes('/entities')) return response([entity], { page: { total: 2, nextCursor: url.includes('cursor=1') ? null : '1' } });
+    return response([stale], { ancestry: [], page: { total: 2, nextCursor: url.includes('cursor=1') ? null : '1' } });
+  });
+  mount();
+  await user.click(await screen.findByRole('button', { name: 'Wrong-parent child' }));
+  expect(screen.getByLabelText('URL')).not.toHaveTextContent('hierarchyNodeId');
+  await user.click(screen.getByRole('button', { name: 'Next children' }));
+  expect(await screen.findByRole('button', { name: 'First children' })).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: 'First children' }));
+  await user.type(screen.getByLabelText('Search names or IDs'), 'portal');
+  await user.click(screen.getByRole('button', { name: 'Search', exact: true }));
+  await user.click(await screen.findByRole('button', { name: 'Next search results' }));
+  expect(await screen.findByRole('button', { name: 'First search results' })).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: 'First search results' }));
+  expect(await screen.findByRole('button', { name: 'Next search results' })).toBeInTheDocument();
+});
+
+it('discards late search responses when cleared', async () => {
+  const user = userEvent.setup();
+  let resolve;
+  fetch.mockImplementation((url) => url.includes('/entities')
+    ? new Promise((done) => { resolve = done; }) : Promise.resolve(response([])));
+  mount();
+  await user.type(screen.getByLabelText('Search names or IDs'), 'portal');
+  await user.click(screen.getByRole('button', { name: 'Search', exact: true }));
+  await user.click(screen.getByRole('button', { name: 'Clear search' }));
+  resolve(response([entity]));
+  await waitFor(() => expect(screen.queryByRole('link', { name: entity.label })).not.toBeInTheDocument());
+});

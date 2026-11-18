@@ -78,19 +78,59 @@ async def test_kpi_invalid_context_is_rejected(client: httpx.AsyncClient, query:
     assert 'error' in response.json()
 
 
-async def test_all_scope_dimensions_are_explicitly_unavailable(client: httpx.AsyncClient) -> None:
-    """Preserve unsupported selected scope instead of showing unfiltered evidence."""
+async def test_supported_scope_preserves_source_associated_widgets(client: httpx.AsyncClient) -> None:
+    """Intersect all represented facets while retaining supplied precision and provenance."""
+    params = {
+        'personaId': 'executive', 'hierarchyNodeId': 'app-0001',
+        'domain': ['absent', 'domain-member'], 'portfolio': 'portfolio-digital',
+        'application': 'app-0001', 'environment': 'prod', 'criticality': 'high',
+        'dateRange': '2025-01/2025-02', 'toolSource': 'sample-monitor', 'incidentSeverity': 'Sev1',
+    }
+    response = await client.get('/api/v1/dashboard', params=params)
+    assert response.status_code == 200
+    body = response.json()
+    assert body['availability'] == 'available'
+    assert body['unavailableDimensions'] == []
+    widgets = {w['id']: w['metric'] for w in body['data']['widgets']}
+    assert {key: m['value'] for key, m in widgets.items()} == {'availability': 99.23456, 'sla': 98.76543, 'adoption': 65.4321}
+    assert all(m['availability'] == 'available' and m['unit'] == '%' and m['period'] == 'month'
+               and m['source'] == 'sample' and m['sourceRef'] == f'sample-kpi-{key}' for key, m in widgets.items())
+
+
+async def test_supported_dimensions_with_unmatched_values_are_null(client: httpx.AsyncClient) -> None:
+    """Keep unknown facet values as no-match, not unsupported dimensions or unfiltered evidence."""
     dimensions = ['domain', 'portfolio', 'application', 'environment', 'criticality', 'dateRange', 'toolSource', 'incidentSeverity']
     params = [('personaId', 'executive'), ('hierarchyNodeId', 'app-0001')] + [(key, 'opaque') for key in dimensions] + [('domain', 'second')]
     response = await client.get('/api/v1/dashboard', params=params)
     assert response.status_code == 200
+    assert response.json()['availability'] == 'available'
+    assert response.json()['unavailableDimensions'] == []
+    assert {w['id'] for w in response.json()['data']['widgets']} == {'availability', 'sla', 'adoption'}
+    assert all(w['metric']['value'] is None and w['metric']['availability'] == 'unavailable' for w in response.json()['data']['widgets'])
+
+
+async def test_unknown_hierarchy_scope_is_explicitly_unavailable(client: httpx.AsyncClient) -> None:
+    """Report only the unrepresented hierarchy dimension and keep widget values null."""
+    response = await client.get('/api/v1/dashboard', params={
+        'personaId': 'executive', 'domain': 'domain-member', 'hierarchyNodeId': 'absent',
+    })
+    assert response.status_code == 200
     assert response.json()['availability'] == 'unavailable'
-    assert set(response.json()['unavailableDimensions']) == set(dimensions + ['hierarchyNodeId'])
-    assert all(w['metric']['value'] is None for w in response.json()['data']['widgets'])
+    assert response.json()['unavailableDimensions'] == ['hierarchyNodeId']
+    assert {w['id'] for w in response.json()['data']['widgets']} == {'availability', 'sla', 'adoption'}
+    assert all(w['metric']['value'] is None and w['metric']['availability'] == 'unavailable' for w in response.json()['data']['widgets'])
 
 
-async def test_other_domain_apis_are_not_implemented(client: httpx.AsyncClient) -> None:
-    """Keep discovery and other feature routes out of the persona slice."""
-    response = await client.get('/api/v1/entities?type=application')
-    assert response.status_code == 404
-    assert 'error' in response.json()
+async def test_entities_route_returns_actual_application_records(client: httpx.AsyncClient) -> None:
+    """Expose the implemented discovery route with identified source records."""
+    response = await client.get('/api/v1/entities', params={'type': 'application', 'q': 'Member Portal'})
+    assert response.status_code == 200
+    body = response.json()
+    assert body['availability'] == 'available'
+    assert body['unavailableDimensions'] == []
+    assert body['data'] == [{
+        'id': 'app-0001', 'type': 'application', 'label': 'Member Portal',
+        'parentId': 'service-enrollment', 'source': 'sample', 'sourceRef': 'sample-v1',
+        'distinguishingInfo': 'app-0001 · service-enrollment',
+    }]
+    assert body['page'] == {'limit': 50, 'total': 1, 'nextCursor': None}
