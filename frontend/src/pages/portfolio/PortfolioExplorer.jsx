@@ -5,12 +5,13 @@ import { useApi } from '../../hooks/useApi';
 import { HierarchyExplorer } from '../../components/shell/HierarchyExplorer';
 import { PersonaSelector } from '../../components/shell/PersonaSelector';
 import { DataState } from '../../components/shared/DataState';
+import { serializeContext } from '../../services/apiClient';
 
-/** Display source identity here until a dedicated profile destination exists. */
+/** Display exact source identity and link represented application profiles. */
 function SelectedEntity() {
   const { context } = useSharedContext();
   const location = useLocation();
-  const id = new URLSearchParams(location.search).get('entityId');
+  const id = new URLSearchParams(location.search).get('entityId') || context.hierarchyNodeId;
   const state = useApi(id ? '/entities' : null, context, { q: id, limit: 100 });
   if (!id) return null;
   const entity = state.data?.find((item) => item.id === id);
@@ -22,7 +23,12 @@ function SelectedEntity() {
             <h2>{entity.label}</h2>
             <p>{entity.type} · {entity.id}</p>
             <p className="muted">{entity.distinguishingInfo} · Source: {entity.source} · {entity.sourceRef}</p>
-            <p>Source identity only. A dedicated detail profile is not implemented in this slice.</p>
+            {entity.type === 'application' ? (
+              <Link to={`/applications/${encodeURIComponent(entity.id)}?${serializeContext(context, { returnTo: `${location.pathname}${location.search}` })}`}
+                state={{ origin: `${location.pathname}${location.search}` }}>
+                Open Application 360 · {entity.label}
+              </Link>
+            ) : <p>Source identity only. No dedicated profile for this entity type.</p>}
           </div>
         ) : <p role="status">Selected entity unavailable in this scope. No unfiltered details are shown.</p>}
       </DataState>

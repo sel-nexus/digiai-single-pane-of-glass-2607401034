@@ -6,7 +6,7 @@ import { serializeContext } from '../../services/apiClient';
 import { useApi } from '../../hooks/useApi';
 import { DataState } from '../shared/DataState';
 
-/** Offer the nearest implemented destination without fabricating profiles. */
+/** Open exact implemented destinations without fabricating profile identities. */
 export function GlobalSearch() {
   const { context } = useSharedContext();
   const location = useLocation();
@@ -41,6 +41,8 @@ export function GlobalSearch() {
                 <li key={entity.id}>
                   <Link to={entity.type === 'journey'
                     ? `/journeys/${encodeURIComponent(entity.id)}?${serializeContext(context)}`
+                    : entity.type === 'application'
+                      ? `/applications/${encodeURIComponent(entity.id)}?${serializeContext(context, { returnTo: `${location.pathname}${location.search}` })}`
                     : `/portfolio?${serializeContext(context, { entityId: entity.id, q: entity.id })}`}
                     state={{ origin: `${location.pathname}${location.search}` }}>
                     {entity.label}

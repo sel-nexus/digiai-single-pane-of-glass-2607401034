@@ -8,10 +8,34 @@ import { GlobalSearch } from './GlobalSearch';
 import { GlobalFilters, filterLabels } from './GlobalFilters';
 import { HierarchyExplorer } from './HierarchyExplorer';
 import PortfolioExplorer from '../../pages/portfolio/PortfolioExplorer';
+import ApplicationProfile, { APPLICATION_CATEGORIES } from '../../pages/portfolio/ApplicationProfile';
 
 const entity = { id: 'app-1', label: '<img src=x onerror=alert(1)>', type: 'application',
   parentId: 'service-1', source: 'sample', sourceRef: 'sample-1', distinguishingInfo: 'app-1 · service-1' };
 const options = Object.fromEntries(Object.keys(filterLabels).map((key) => [key, [{ id: `${key}-1`, label: `${key} option` }]]));
+
+const evidenceValues = {
+  ownership: { id: 'owner-1', label: 'Member platform team', type: 'owner' },
+  domainPortfolio: { id: 'domain-1', label: 'Member experience', type: 'domain' },
+  criticality: 'high',
+  health: 'Supplied healthy',
+  incidents: { id: 'incident-1', severity: 'Sev1', note: entity.label },
+  releaseHistory: { id: 'release-1', version: '1.2.0', applicationId: entity.id },
+  defects: { id: 'defect-1', openCount: 0 },
+  securityPosture: { id: 'finding-1', resolved: false },
+  dependencies: { id: 'api-1', label: 'Enrollment API', type: 'api' },
+  automationMaturity: 72,
+  observabilityCoverage: 95,
+};
+const profile = { id: entity.id, label: entity.label, source: entity.source, sourceRef: entity.sourceRef,
+  categories: Object.fromEntries(Object.entries(evidenceValues).map(([key, value]) => [key, {
+    availability: 'available', value: [{ id: `evidence-${key}`, label: `Supplied ${key}`, value,
+      source: 'sample', sourceRef: `sample-${key}`, association: `entity:${entity.id}.${key}`,
+      unit: ['automationMaturity', 'observabilityCoverage'].includes(key) ? '%' : null,
+      period: ['automationMaturity', 'observabilityCoverage'].includes(key) ? '2025-01' : null,
+    }],
+  }])),
+};
 
 /** Expose current URL and explicit persona setup without mocking shared context. */
 function Harness() {
@@ -24,6 +48,7 @@ function Harness() {
       <GlobalSearch />
       <GlobalFilters />
       <Routes>
+        <Route path="/applications/:applicationId" element={<ApplicationProfile />} />
         <Route path="/portfolio" element={<PortfolioExplorer />} />
         <Route path="*" element={<HierarchyExplorer />} />
       </Routes>
@@ -50,15 +75,17 @@ function response(data, extra = {}) {
 beforeEach(() => {
   vi.stubGlobal('fetch', vi.fn(async (url) => {
     if (url.includes('/filters/options')) return response(options);
+    if (url.includes('/applications/app-1')) return response(profile);
     if (url.includes('/entities')) return response([entity]);
     return response([], { ancestry: [] });
   }));
 });
 afterEach(() => vi.unstubAllGlobals());
 
-it('requires explicit search submit, renders XSS as text, opens actual explorer and returns', async () => {
+it('requires explicit search submit, renders XSS as text, opens actual application profile and returns', async () => {
   const user = userEvent.setup();
-  mount('/dashboard?domain=domain-1');
+  const origin = '/dashboard?domain=domain-1&hierarchyNodeId=service-1';
+  mount(origin);
   await user.click(screen.getByRole('button', { name: 'Select persona' }));
   await user.type(screen.getByLabelText('Search names or IDs'), 'portal');
   expect(fetch.mock.calls.some(([url]) => url.includes('/entities'))).toBe(false);
@@ -67,11 +94,30 @@ it('requires explicit search submit, renders XSS as text, opens actual explorer 
   expect(document.querySelector('img')).toBeNull();
   expect(screen.getByText(/application · app-1/)).toBeInTheDocument();
   await user.click(result);
-  expect(await screen.findByRole('heading', { name: 'Portfolio explorer' })).toBeInTheDocument();
   expect(await screen.findByRole('heading', { name: entity.label })).toBeInTheDocument();
+  expect(screen.getByText('Application 360')).toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: 'Portfolio explorer' })).not.toBeInTheDocument();
+  expect(Object.keys(profile.categories)).toHaveLength(11);
+  for (const [key, title] of Object.entries(APPLICATION_CATEGORIES)) {
+    const panel = within(screen.getByRole('region', { name: title, exact: true }));
+    expect(panel.getByRole('heading', { name: `Supplied ${key}` })).toBeInTheDocument();
+    expect(panel.getByText(`Source: sample · sample-${key}`)).toBeInTheDocument();
+    expect(panel.getByText(`Association: entity:app-1.${key}`)).toBeInTheDocument();
+  }
+  expect(within(screen.getByRole('region', { name: 'Incidents', exact: true })).getByText(entity.label)).toBeInTheDocument();
+  expect(within(screen.getByRole('region', { name: 'Defects', exact: true })).getByText('0')).toBeInTheDocument();
+  expect(within(screen.getByRole('region', { name: 'Security posture', exact: true })).getByText('false')).toBeInTheDocument();
+  expect(document.querySelector('img')).toBeNull();
+  expect(screen.getByLabelText('URL').textContent.split('?')[0]).toBe('/applications/app-1');
   expect(screen.getByLabelText('URL')).toHaveTextContent('domain=domain-1');
+  expect(screen.getByLabelText('URL')).toHaveTextContent('hierarchyNodeId=service-1');
+  const profileRequest = fetch.mock.calls.find(([url]) => url.includes('/applications/app-1'));
+  expect(profileRequest).toBeDefined();
+  const scope = new URL(profileRequest[0], 'http://localhost').searchParams;
+  expect(scope.get('domain')).toBe('domain-1');
+  expect(scope.get('hierarchyNodeId')).toBe('service-1');
   await user.click(screen.getByRole('link', { name: 'Return to previous view' }));
-  expect(screen.getByLabelText('URL')).toHaveTextContent('/dashboard?domain=domain-1');
+  expect(screen.getByLabelText('URL').textContent).toBe(origin);
   await user.click(screen.getByRole('button', { name: 'Clear search' }));
   expect(screen.queryByText(/Results for/)).not.toBeInTheDocument();
   expect(screen.getByLabelText('Search names or IDs')).toHaveValue('');

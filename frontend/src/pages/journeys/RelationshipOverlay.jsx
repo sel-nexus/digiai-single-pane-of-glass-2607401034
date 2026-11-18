@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSharedContext } from '../../context/SharedContextProvider';
 import { serializeContext } from '../../services/apiClient';
 
-/** Link applications to implemented identity views and disclose API assets inline. */
+/** Link exact application profiles and disclose represented API assets inline. */
 export default function RelationshipOverlay({ overlay, kind }) {
   const { context } = useSharedContext();
   const location = useLocation();
@@ -25,7 +25,7 @@ export default function RelationshipOverlay({ overlay, kind }) {
               <p className="source-ref">Relationship source: {row.source} · {row.sourceRef}</p>
               {row.representedContext && <p>{row.representedContext}</p>}
               {row.target.entityType === 'application' ? (
-                <Link to={`/portfolio?${serializeContext(context, { entityId: row.target.entityId, q: row.target.entityId })}`}
+                <Link to={`/applications/${encodeURIComponent(row.target.entityId)}?${serializeContext(context, { returnTo: `${location.pathname}${location.search}` })}`}
                   state={{ origin: `${location.pathname}${location.search}` }}>
                   Open application · {row.target.label}
                 </Link>

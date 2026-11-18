@@ -38,10 +38,15 @@ def seed_database(repository: SqliteRepository) -> None:
             ('problem-1', 'ticket', 'Sample recurring latency problem', None, {'recordType': 'problem', 'applicationId': 'app-0001'}),
             ('rca-1', 'ticket', 'Sample latency analysis', None, {'recordType': 'rca', 'applicationId': 'app-0001', 'reason': 'Supplied synthetic capacity observation'}),
             ('release-1', 'release', 'Sample enrollment release', None, {'applicationId': 'app-0001', 'build': 'Passed (sample)', 'test': 'Supplied test evidence', 'security': 'Supplied findings', 'change': 'Sample approved change', 'environment': 'Sample environment evidence'}),
+            ('defect-1', 'ticket', 'Sample enrollment validation defect', None, {'recordType': 'defect', 'applicationId': 'app-0001', 'status': 'Open (sample)'}),
+            ('finding-1', 'ticket', 'Sample dependency security finding', None, {'recordType': 'security_finding', 'applicationId': 'app-0001', 'findingSeverity': 'Medium (sample)'}),
         ]
         for index in range(1, 1001):
             app_id = f'app-{index:04d}'
-            records.append((app_id, 'application', 'Member Portal' if index == 1 else f'Sample Application {index:04d}', 'service-enrollment', {'domain': 'domain-member', 'portfolio': 'portfolio-digital', 'ownerId': 'owner-digital', 'health': 'Warning (sample)' if index == 1 else 'Unavailable', 'automationMaturity': 'Developing', 'observabilityCoverage': 84.321}))
+            attributes = {'domain': 'domain-member', 'portfolio': 'portfolio-digital', 'ownerId': 'owner-digital'}
+            if index == 1:
+                attributes.update({'health': 'Warning (sample)', 'automationMaturity': 'Developing', 'observabilityCoverage': 84.321})
+            records.append((app_id, 'application', 'Member Portal' if index == 1 else f'Sample Application {index:04d}', 'service-enrollment', attributes))
             records.append((f'env-{index:04d}', 'environment', f'Sample production environment {index:04d}', app_id, {'environment': 'prod', 'applicationId': app_id}))
         for entity_id, kind, label, parent, attributes in records:
             db.execute('INSERT INTO entity VALUES (?,?,?,?,?,?,?,?,?)', (entity_id, kind, label, parent, 'high' if kind == 'application' else None, json.dumps(attributes), 'sample-v1', 'sample', 'sample-v1'))

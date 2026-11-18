@@ -9,7 +9,8 @@ export function Breadcrumbs() {
       <Link to={`/dashboard${location.search}`}>Command center</Link>
       {location.pathname.startsWith('/journeys') && <span> / Journeys</span>}
       {location.pathname === '/portfolio' && <span> / Portfolio</span>}
-      {!['/dashboard', '/portfolio'].includes(location.pathname) && !location.pathname.startsWith('/journeys') && (
+      {location.pathname.startsWith('/applications/') && <span aria-current="page"> / Application 360</span>}
+      {!['/dashboard', '/portfolio'].includes(location.pathname) && !location.pathname.startsWith('/journeys') && !location.pathname.startsWith('/applications/') && (
         <span> / Module unavailable</span>
       )}
     </nav>

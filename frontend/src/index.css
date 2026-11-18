@@ -128,3 +128,12 @@ input { font: inherit; color: var(--foreground); background: var(--surface); bor
 .relationship-overlay li > p { margin-bottom: 8px; }
 .relationship-overlay summary { cursor: pointer; padding: 12px 0; color: var(--primary); }
 .relationship-overlay details p { margin-top: 8px; overflow-wrap: anywhere; }
+.application-heading { display: grid; gap: 12px; margin: 32px 0 48px; }
+.application-evidence { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,320px),1fr)); gap: 40px 32px; }
+.evidence-panel { min-width: 0; border-top: 1px solid var(--border); padding-top: 20px; }
+.evidence-panel > p { margin-top: 16px; color: var(--foreground-muted); }
+.evidence-panel li > h3 { margin-bottom: 12px; }
+.evidence-fields { margin: 12px 0; overflow-wrap: anywhere; }
+.evidence-fields > div { margin: 8px 0; }
+.evidence-fields dt { color: var(--foreground-muted); font-size: .8rem; }
+.evidence-fields dd { margin: 0; }

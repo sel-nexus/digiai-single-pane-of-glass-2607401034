@@ -7,6 +7,7 @@ import { SharedContextProvider, useSharedContext } from '../../context/SharedCon
 import JourneyList from './JourneyList';
 import JourneyMap from './JourneyMap';
 import PortfolioExplorer from '../portfolio/PortfolioExplorer';
+import ApplicationProfile from '../portfolio/ApplicationProfile';
 import { GlobalSearch } from '../../components/shell/GlobalSearch';
 
 const identity = { id: 'journey-1', label: 'Enrollment', type: 'journey', source: 'sample', sourceRef: 'journey-map' };
@@ -39,6 +40,7 @@ function Harness() {
         <Route path="/journeys" element={<JourneyList />} />
         <Route path="/journeys/:journeyId" element={<JourneyMap />} />
         <Route path="/portfolio" element={<PortfolioExplorer />} />
+        <Route path="/applications/:applicationId" element={<ApplicationProfile />} />
       </Routes>
     </div>
   );
@@ -58,6 +60,10 @@ function mount(entry = '/journeys?domain=d1&hierarchyNodeId=s1') {
 beforeEach(() => {
   vi.stubGlobal('fetch', vi.fn(async (url) => {
     if (url.includes('/personas')) return response([{ id: 'executive', label: 'Executive' }]);
+    if (url.includes('/applications/')) return response({ ...app, categories: {
+      health: { availability: 'available', value: [{ id: 'health-1', label: 'Supplied health', value: 'Warning (uploaded)',
+        source: 'uploaded', sourceRef: 'health-file', association: 'entity:app-1.health' }] },
+    } });
     if (url.includes('/journeys/')) return response(detail);
     if (url.includes('/journeys')) return response([identity], { page: { total: 1, nextCursor: null } });
     if (url.includes('/entities')) return response([app]);
@@ -83,11 +89,17 @@ it('selects a journey, switches overlays and opens exact application identity wi
   await user.click(screen.getByRole('link', { name: 'Dependency overlay', exact: true }));
   await user.click(screen.getByRole('link', { name: 'Open application · Member Portal' }));
   expect(await screen.findByRole('heading', { name: 'Member Portal' })).toBeInTheDocument();
-  expect(screen.getByLabelText('URL')).toHaveTextContent('entityId=app-1');
+  expect(screen.getByLabelText('URL')).toHaveTextContent('/applications/app-1');
+  expect(screen.getByText('Warning (uploaded)')).toBeInTheDocument();
+  expect(screen.getByText('Source: uploaded · asset-file')).toBeInTheDocument();
+  expect(screen.getByText('Source: uploaded · health-file')).toBeInTheDocument();
+  expect(screen.getByLabelText('URL')).toHaveTextContent('hierarchyNodeId=s1');
   expect(screen.getByLabelText('URL')).toHaveTextContent('domain=d1');
   await user.click(screen.getByRole('link', { name: 'Return to previous view' }));
   expect(await screen.findByRole('heading', { name: 'Enrollment' })).toBeInTheDocument();
   expect(screen.getByLabelText('URL')).toHaveTextContent('hierarchyNodeId=s1');
+  expect(screen.getByLabelText('URL')).toHaveTextContent('domain=d1');
+  expect(screen.getByLabelText('URL')).toHaveTextContent('overlay=depends_on');
   await user.click(screen.getByRole('link', { name: 'All journeys' }));
   expect(await screen.findByRole('heading', { name: 'Business journeys' })).toBeInTheDocument();
 });

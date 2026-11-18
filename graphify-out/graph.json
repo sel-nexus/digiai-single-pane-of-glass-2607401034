@@ -426,6 +426,97 @@
       "community": 4
     },
     {
+      "id": "backend_app_api_journeys",
+      "label": "journeys.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_get_service",
+      "label": "get_service()",
+      "file_type": "code",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_py_request",
+      "label": "Request",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_py_get",
+      "label": "get",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_journeys",
+      "label": "journeys()",
+      "file_type": "code",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_py_depends",
+      "label": "Depends",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_journey",
+      "label": "journey()",
+      "file_type": "code",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_rationale_1",
+      "label": "Expose synchronous journey reads through injected domain services.",
+      "file_type": "rationale",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_rationale_13",
+      "label": "Resolve the lifespan-owned service for dependency override support.",
+      "file_type": "rationale",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_rationale_21",
+      "label": "Delegate bounded identities and shared context unchanged.",
+      "file_type": "rationale",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_api_journeys_rationale_29",
+      "label": "Resolve the exact opaque identifier, never a fallback journey.",
+      "file_type": "rationale",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
       "id": "backend_app_core_init",
       "label": "__init__.py",
       "file_type": "code",
@@ -761,6 +852,108 @@
       "_origin": "ast"
     },
     {
+      "id": "backend_app_domain_journey_service",
+      "label": "journey_service.py",
+      "file_type": "code",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_journeyservice",
+      "label": "JourneyService",
+      "file_type": "code",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L12",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_journeyservice_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L15",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_journeyservice_list_journeys",
+      "label": ".list_journeys()",
+      "file_type": "code",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L20",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_journeyservice_relationships",
+      "label": ".relationships()",
+      "file_type": "code",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_journeyservice_overlay",
+      "label": "._overlay()",
+      "file_type": "code",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L84",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_rationale_1",
+      "label": "Read represented journeys without inferring transitive impact or dependencies.",
+      "file_type": "rationale",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_rationale_13",
+      "label": "Use shared scope and retain only explicitly associated relationship rows.",
+      "file_type": "rationale",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_rationale_16",
+      "label": "Retain the injected repository and common filtering service.",
+      "file_type": "rationale",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_rationale_22",
+      "label": "Return bounded journey identities under the common view context.",
+      "file_type": "rationale",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_rationale_26",
+      "label": "Return direct journey rows and connected application-to-API rows. Args:\u2026",
+      "file_type": "rationale",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_domain_journey_service_rationale_85",
+      "label": "Keep absent associations null and each relationship type separate.",
+      "file_type": "rationale",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L85",
+      "_origin": "ast"
+    },
+    {
       "id": "backend_app_domain_kpi_service",
       "label": "kpi_service.py",
       "file_type": "code",
@@ -901,7 +1094,7 @@
       "label": "create_app()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L24",
+      "source_location": "L26",
       "_callable": true,
       "_origin": "ast",
       "community": 4
@@ -920,7 +1113,7 @@
       "label": "lifespan()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L30",
+      "source_location": "L32",
       "_callable": true,
       "_origin": "ast",
       "community": 0
@@ -930,7 +1123,7 @@
       "label": "no_dynamic_cache()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L48",
+      "source_location": "L52",
       "_callable": true,
       "_origin": "ast",
       "community": 4
@@ -940,7 +1133,7 @@
       "label": "invalid_request()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L56",
+      "source_location": "L60",
       "_callable": true,
       "_origin": "ast",
       "community": 4
@@ -950,7 +1143,7 @@
       "label": "missing_resource()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L62",
+      "source_location": "L66",
       "_callable": true,
       "_origin": "ast",
       "community": 4
@@ -960,7 +1153,7 @@
       "label": "http_error()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L67",
+      "source_location": "L71",
       "_callable": true,
       "_origin": "ast",
       "community": 4
@@ -970,7 +1163,7 @@
       "label": "storage_error()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L72",
+      "source_location": "L76",
       "_callable": true,
       "_origin": "ast",
       "community": 4
@@ -980,7 +1173,7 @@
       "label": "internal_error()",
       "file_type": "code",
       "source_file": "backend/app/main.py",
-      "source_location": "L78",
+      "source_location": "L82",
       "_callable": true,
       "_origin": "ast",
       "community": 4
@@ -995,11 +1188,11 @@
       "community": 0
     },
     {
-      "id": "backend_app_main_rationale_25",
+      "id": "backend_app_main_rationale_27",
       "label": "Create an independently configured app for runtime or file-backed tests.",
       "file_type": "rationale",
       "source_file": "backend/app/main.py",
-      "source_location": "L25",
+      "source_location": "L27",
       "_origin": "ast"
     },
     {
@@ -1218,6 +1411,56 @@
       "_origin": "ast"
     },
     {
+      "id": "backend_app_schemas_contracts_journeytarget",
+      "label": "JourneyTarget",
+      "file_type": "code",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L128",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_journeyrelationship",
+      "label": "JourneyRelationship",
+      "file_type": "code",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L137",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_journeyoverlay",
+      "label": "JourneyOverlay",
+      "file_type": "code",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L149",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_journeyimpact",
+      "label": "JourneyImpact",
+      "file_type": "code",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L155",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_journeydetail",
+      "label": "JourneyDetail",
+      "file_type": "code",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L161",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
       "id": "backend_app_schemas_contracts_rationale_1",
       "label": "Define public response and shared view-context contracts.",
       "file_type": "rationale",
@@ -1362,6 +1605,46 @@
       "file_type": "rationale",
       "source_file": "backend/app/schemas/contracts.py",
       "source_location": "L123",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_rationale_129",
+      "label": "Identify an explicitly represented application or API asset.",
+      "file_type": "rationale",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L129",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_rationale_138",
+      "label": "Preserve one directed source row without claiming causality.",
+      "file_type": "rationale",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L138",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_rationale_150",
+      "label": "Qualify a represented overlay independently of other overlays.",
+      "file_type": "rationale",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L150",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_rationale_156",
+      "label": "Expose supplied business-impact prose only.",
+      "file_type": "rationale",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L156",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_schemas_contracts_rationale_162",
+      "label": "Compose exact identity, supplied fields and separate overlays.",
+      "file_type": "rationale",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L162",
       "_origin": "ast"
     },
     {
@@ -2158,6 +2441,267 @@
       "_origin": "ast"
     },
     {
+      "id": "backend_tests_test_journey_service",
+      "label": "test_journey_service.py",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_service",
+      "label": "service()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_list_pagination_and_empty_scope",
+      "label": "test_list_pagination_and_empty_scope()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L15",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_direct_and_connected_rows_preserve_type_and_provenance",
+      "label": "test_direct_and_connected_rows_preserve_type_and_provenance()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L32",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_missing_associations_and_exact_unknown_id",
+      "label": "test_missing_associations_and_exact_unknown_id()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L44",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_scoped_detail_and_all_dimensions",
+      "label": "test_scoped_detail_and_all_dimensions()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L54",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_target_scope_isolation_and_missing_reference",
+      "label": "test_target_scope_isolation_and_missing_reference()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L69",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_unreferenced_journey_edge_cannot_unlock_connected_api",
+      "label": "test_unreferenced_journey_edge_cannot_unlock_connected_api()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L82",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_orphan_relationship_is_not_an_available_destination",
+      "label": "test_orphan_relationship_is_not_an_available_destination()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L90",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "label": "test_opaque_id_supplied_impact_and_seed_idempotence()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L98",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_1",
+      "label": "Verify journey scope and relationship evidence against real SQLite files.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_11",
+      "label": "Construct the journey service with the shared real scope implementation.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_16",
+      "label": "Keep bounded represented identities and empty selected intersections.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_33",
+      "label": "Never expand application dependencies into other application destinations.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L33",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_45",
+      "label": "Leave missing associations unavailable rather than borrowing another journey.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L45",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_55",
+      "label": "Reuse common AND/OR and hierarchy scope without an unfiltered fallback.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L55",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_70",
+      "label": "Hide out-of-scope targets and rows without an association source reference.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L70",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_83",
+      "label": "Require referenced journey association before exposing downstream API rows.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L83",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_91",
+      "label": "Reject corrupt orphan rows even if imported storage disabled foreign keys.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L91",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journey_service_rationale_99",
+      "label": "Resolve SQL-like identifiers literally and preserve supplied business prose.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L99",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api",
+      "label": "test_journeys_api.py",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_test_list_detail_and_independent_overlays",
+      "label": "test_list_detail_and_independent_overlays()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_py_parametrize",
+      "label": "parametrize",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_test_invalid_page_contract",
+      "label": "test_invalid_page_contract()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L27",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_test_unknown_or_wrong_type_is_404",
+      "label": "test_unknown_or_wrong_type_is_404()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L34",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_test_missing_relationships_and_shared_scope",
+      "label": "test_missing_relationships_and_shared_scope()",
+      "file_type": "code",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L40",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_rationale_1",
+      "label": "Exercise journey HTTP contracts against lifespan-owned real SQLite.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_rationale_6",
+      "label": "Verify bounded list identity, exact directed rows and source availability.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_rationale_28",
+      "label": "Reject unbounded or noncanonical pages with public validation errors.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_rationale_35",
+      "label": "Never treat a SQL-like string or another entity class as a journey.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_tests_test_journeys_api_rationale_41",
+      "label": "Preserve unavailable overlays, empty scopes and unsupported dimensions.",
+      "file_type": "rationale",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L41",
+      "_origin": "ast"
+    },
+    {
       "id": "backend_tests_test_kpi_service",
       "label": "test_kpi_service.py",
       "file_type": "code",
@@ -2426,6 +2970,14 @@
       "source_location": "L4",
       "_origin": "ast",
       "community": 2
+    },
+    {
+      "id": "frontend_e2e_journeys_spec",
+      "label": "journeys.spec.js",
+      "file_type": "code",
+      "source_file": "frontend/e2e/journeys.spec.js",
+      "source_location": "L1",
+      "_origin": "ast"
     },
     {
       "id": "frontend_e2e_persona_spec",
@@ -2901,7 +3453,7 @@
       "label": "UnavailableModule()",
       "file_type": "code",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L10",
+      "source_location": "L12",
       "_callable": true,
       "_origin": "ast",
       "community": 3
@@ -2911,7 +3463,7 @@
       "label": "App()",
       "file_type": "code",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L26",
+      "source_location": "L28",
       "_callable": true,
       "_origin": "ast",
       "community": 3
@@ -3396,6 +3948,132 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeylist",
+      "label": "JourneyList.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeylist_journeylist",
+      "label": "JourneyList()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeymap",
+      "label": "JourneyMap.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeymap_journeymap",
+      "label": "JourneyMap()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_relationshipoverlay",
+      "label": "RelationshipOverlay.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
+      "label": "RelationshipOverlay()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L8",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test",
+      "label": "journeys.test.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_identity",
+      "label": "identity",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_app",
+      "label": "app",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_dependency",
+      "label": "dependency",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_api",
+      "label": "api",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_detail",
+      "label": "detail",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_response",
+      "label": "response()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_harness",
+      "label": "Harness()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_mount",
+      "label": "mount()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L48",
+      "_callable": true,
+      "_origin": "ast"
     },
     {
       "id": "frontend_src_pages_portfolio_portfolioexplorer",
@@ -4649,6 +5327,329 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_app_api_journeys",
+      "target": "fastapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_api_dashboard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_api_domains",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_domain_journey_service",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_schemas_contracts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_api_journeys_get_service",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_get_service",
+      "target": "backend_app_api_journeys_py_request",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_get_service",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_api_journeys_py_get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_api_journeys_journeys",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_api_journeys_py_depends",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_api_journeys_get_service",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_api_dashboard_get_context",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_api_domains_pagination",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_schemas_contracts_entitypage",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_api_journeys_py_get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_api_journeys_journey",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_api_journeys_py_depends",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_api_journeys_get_service",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_api_dashboard_get_context",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_schemas_contracts_envelope",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_rationale_1",
+      "target": "backend_app_api_journeys",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_rationale_13",
+      "target": "backend_app_api_journeys_get_service",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_rationale_21",
+      "target": "backend_app_api_journeys_journeys",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_rationale_29",
+      "target": "backend_app_api_journeys_journey",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_app_core_init_rationale_1",
       "target": "backend_app_core_init",
       "relation": "rationale_for",
@@ -5298,6 +6299,259 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_domain_entity_service",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_storage_sqlite_repository",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_domain_journey_service_journeyservice_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_init",
+      "target": "backend_app_storage_sqlite_repository_entityrepository",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_init",
+      "target": "backend_app_domain_entity_service_entityservice",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_domain_journey_service_journeyservice_list_journeys",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_list_journeys",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_list_journeys",
+      "target": "backend_app_schemas_contracts_entitypage",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_domain_journey_service_journeyservice_relationships",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_relationships",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_relationships",
+      "target": "backend_app_schemas_contracts_envelope",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_relationships",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_domain_journey_service_journeyservice_overlay",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_overlay",
+      "target": "backend_app_schemas_contracts_journeyrelationship",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_overlay",
+      "target": "backend_app_schemas_contracts_journeyoverlay",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_relationships",
+      "target": "backend_app_domain_journey_service_journeyservice_overlay",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_rationale_1",
+      "target": "backend_app_domain_journey_service",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_rationale_13",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_rationale_16",
+      "target": "backend_app_domain_journey_service_journeyservice_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_rationale_22",
+      "target": "backend_app_domain_journey_service_journeyservice_list_journeys",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_rationale_26",
+      "target": "backend_app_domain_journey_service_journeyservice_relationships",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_rationale_85",
+      "target": "backend_app_domain_journey_service_journeyservice_overlay",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_app_domain_kpi_service",
       "target": "backend_app_schemas_contracts",
       "relation": "imports_from",
@@ -5660,7 +6914,7 @@
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_core_config",
+      "target": "backend_app_api_journeys",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -5671,7 +6925,7 @@
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_domain_kpi_service",
+      "target": "backend_app_core_config",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -5682,7 +6936,7 @@
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_domain_entity_service",
+      "target": "backend_app_domain_kpi_service",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -5693,7 +6947,7 @@
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_storage_seed",
+      "target": "backend_app_domain_entity_service",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -5704,7 +6958,7 @@
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_storage_sqlite_repository",
+      "target": "backend_app_domain_journey_service",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -5715,11 +6969,33 @@
     },
     {
       "source": "backend_app_main",
+      "target": "backend_app_storage_seed",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_storage_sqlite_repository",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
       "target": "backend_app_main_create_app",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5730,7 +7006,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5741,7 +7017,7 @@
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5751,7 +7027,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L30",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5761,7 +7037,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L48",
+      "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5771,7 +7047,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L56",
+      "source_location": "L60",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5781,7 +7057,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L62",
+      "source_location": "L66",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5791,7 +7067,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L67",
+      "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5801,7 +7077,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L72",
+      "source_location": "L76",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5811,7 +7087,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L78",
+      "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5823,7 +7099,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "backend/app/main.py",
-      "source_location": "L41",
+      "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5838,12 +7114,12 @@
       "_origin": "ast"
     },
     {
-      "source": "backend_app_main_rationale_25",
+      "source": "backend_app_main_rationale_27",
       "target": "backend_app_main_create_app",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L25",
+      "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -6158,6 +7434,106 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_app_schemas_contracts",
+      "target": "backend_app_schemas_contracts_journeytarget",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L128",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_journeytarget",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L128",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts",
+      "target": "backend_app_schemas_contracts_journeyrelationship",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_journeyrelationship",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts",
+      "target": "backend_app_schemas_contracts_journeyoverlay",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_journeyoverlay",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts",
+      "target": "backend_app_schemas_contracts_journeyimpact",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_journeyimpact",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_journeydetail",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_app_schemas_contracts_rationale_1",
       "target": "backend_app_schemas_contracts",
       "relation": "rationale_for",
@@ -6324,6 +7700,56 @@
       "confidence": "EXTRACTED",
       "source_file": "backend/app/schemas/contracts.py",
       "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_rationale_129",
+      "target": "backend_app_schemas_contracts_journeytarget",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_rationale_138",
+      "target": "backend_app_schemas_contracts_journeyrelationship",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_rationale_150",
+      "target": "backend_app_schemas_contracts_journeyoverlay",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L150",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_rationale_156",
+      "target": "backend_app_schemas_contracts_journeyimpact",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L156",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_schemas_contracts_rationale_162",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/contracts.py",
+      "source_location": "L162",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -7444,6 +8870,440 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_domain_entity_service",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_domain_journey_service",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_schemas_contracts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_storage_seed",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_list_pagination_and_empty_scope",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_direct_and_connected_rows_preserve_type_and_provenance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_missing_associations_and_exact_unknown_id",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_scoped_detail_and_all_dimensions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_target_scope_isolation_and_missing_reference",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_unreferenced_journey_edge_cannot_unlock_connected_api",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_orphan_relationship_is_not_an_available_destination",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_list_pagination_and_empty_scope",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_direct_and_connected_rows_preserve_type_and_provenance",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_missing_associations_and_exact_unknown_id",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_scoped_detail_and_all_dimensions",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_target_scope_isolation_and_missing_reference",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_unreferenced_journey_edge_cannot_unlock_connected_api",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_orphan_relationship_is_not_an_available_destination",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L106",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_1",
+      "target": "backend_tests_test_journey_service",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_11",
+      "target": "backend_tests_test_journey_service_service",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_16",
+      "target": "backend_tests_test_journey_service_test_list_pagination_and_empty_scope",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_33",
+      "target": "backend_tests_test_journey_service_test_direct_and_connected_rows_preserve_type_and_provenance",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_45",
+      "target": "backend_tests_test_journey_service_test_missing_associations_and_exact_unknown_id",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_55",
+      "target": "backend_tests_test_journey_service_test_scoped_detail_and_all_dimensions",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_70",
+      "target": "backend_tests_test_journey_service_test_target_scope_isolation_and_missing_reference",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_83",
+      "target": "backend_tests_test_journey_service_test_unreferenced_journey_edge_cannot_unlock_connected_api",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_91",
+      "target": "backend_tests_test_journey_service_test_orphan_relationship_is_not_an_available_destination",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_rationale_99",
+      "target": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api",
+      "target": "backend_tests_test_journeys_api_test_list_detail_and_independent_overlays",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api_test_invalid_page_contract",
+      "target": "backend_tests_test_journeys_api_py_parametrize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api",
+      "target": "backend_tests_test_journeys_api_test_invalid_page_contract",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api_test_unknown_or_wrong_type_is_404",
+      "target": "backend_tests_test_journeys_api_py_parametrize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api",
+      "target": "backend_tests_test_journeys_api_test_unknown_or_wrong_type_is_404",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api",
+      "target": "backend_tests_test_journeys_api_test_missing_relationships_and_shared_scope",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api_rationale_1",
+      "target": "backend_tests_test_journeys_api",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api_rationale_6",
+      "target": "backend_tests_test_journeys_api_test_list_detail_and_independent_overlays",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api_rationale_28",
+      "target": "backend_tests_test_journeys_api_test_invalid_page_contract",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api_rationale_35",
+      "target": "backend_tests_test_journeys_api_test_unknown_or_wrong_type_is_404",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journeys_api_rationale_41",
+      "target": "backend_tests_test_journeys_api_test_missing_relationships_and_shared_scope",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journeys_api.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_tests_test_kpi_service",
       "target": "backend_app_domain_kpi_service",
       "relation": "imports_from",
@@ -7964,6 +9824,28 @@
       "confidence": "EXTRACTED",
       "source_file": "frontend/e2e/fixtures.js",
       "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_journeys_spec",
+      "target": "frontend_e2e_fixtures",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/journeys.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_journeys_spec",
+      "target": "frontend_e2e_fixtures_test",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/journeys.spec.js",
+      "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -8621,11 +10503,33 @@
     },
     {
       "source": "frontend_src_app",
+      "target": "frontend_src_pages_journeys_journeylist",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_pages_journeys_journeymap",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
       "target": "frontend_src_app_unavailablemodule",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L10",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -8635,7 +10539,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -8646,7 +10550,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L35",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -10327,6 +12231,600 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_context_sharedcontextprovider",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_services_apiclient",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_services_apiclient_serializecontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_hooks_useapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_hooks_useapi_useapi",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_components_shared_datastate",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_components_shared_datastate_datastate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_components_shell_personaselector",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_components_shell_personaselector_personaselector",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist",
+      "target": "frontend_src_pages_journeys_journeylist_journeylist",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_context_sharedcontextprovider",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_services_apiclient",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_services_apiclient_serializecontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_hooks_useapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_hooks_useapi_useapi",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_components_shared_datastate",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_components_shared_datastate_datastate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_components_shell_personaselector",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_components_shell_personaselector_personaselector",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_pages_journeys_relationshipoverlay",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_pages_journeys_journeymap_journeymap",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay",
+      "target": "ref_prop_types",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay",
+      "target": "frontend_src_context_sharedcontextprovider",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay",
+      "target": "frontend_src_services_apiclient",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay",
+      "target": "frontend_src_services_apiclient_serializecontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay",
+      "target": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "ref_testing_library_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "ref_testing_library_user_event",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "ref_vitest",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_context_sharedcontextprovider",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_context_sharedcontextprovider_sharedcontextprovider",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeylist",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeymap",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_portfolio_portfolioexplorer",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_components_shell_globalsearch",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_components_shell_globalsearch_globalsearch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_identity",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_dependency",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_api",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_detail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_response",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_harness",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_mount",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_mount",
+      "target": "frontend_src_pages_journeys_journeys_test_harness",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_response",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_mount",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_src_pages_portfolio_portfolioexplorer",
       "target": "ref_react_router_dom",
       "relation": "imports_from",
@@ -10715,6 +13213,28 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_src_app",
+      "target": "frontend_src_pages_journeys_journeylist_journeylist",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_pages_journeys_journeymap_journeymap",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_src_components_shell_discovery_test",
       "target": "frontend_src_pages_portfolio_portfolioexplorer_portfolioexplorer",
       "relation": "imports",
@@ -10744,6 +13264,50 @@
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/dashboard.test.jsx",
       "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap",
+      "target": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeylist_journeylist",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeymap_journeymap",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_portfolio_portfolioexplorer_portfolioexplorer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -10902,6 +13466,83 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_api_dashboard_get_context",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_api_domains_pagination",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_schemas_contracts_entitypage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_schemas_contracts_envelope",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_app_domain_entity_service",
       "target": "backend_app_schemas_contracts_entity",
       "relation": "imports",
@@ -10997,6 +13638,116 @@
       "confidence": "EXTRACTED",
       "source_file": "backend/app/domain/entity_service.py",
       "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_domain_entity_service_entityservice",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_entitypage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_envelope",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_journeyimpact",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_journeyoverlay",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_journeyrelationship",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_journeytarget",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service",
+      "target": "backend_app_storage_sqlite_repository_entityrepository",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11106,7 +13857,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11117,7 +13868,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11128,7 +13879,18 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L17",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11139,7 +13901,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L18",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11150,7 +13912,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L19",
+      "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11243,6 +14005,50 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_domain_entity_service_entityservice",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service",
+      "target": "backend_app_storage_seed_seed_database",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_tests_test_kpi_service",
       "target": "backend_app_domain_kpi_service_kpiservice",
       "relation": "imports",
@@ -11293,7 +14099,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L11",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11359,7 +14165,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/GlobalSearch.jsx",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11507,6 +14313,105 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_src_pages_journeys_journeylist_journeylist",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist_journeylist",
+      "target": "frontend_src_hooks_useapi_useapi",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist_journeylist",
+      "target": "frontend_src_services_apiclient_serializecontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap_journeymap",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap_journeymap",
+      "target": "frontend_src_hooks_useapi_useapi",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap_journeymap",
+      "target": "frontend_src_services_apiclient_serializecontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
+      "target": "frontend_src_services_apiclient_serializecontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_harness",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_src_pages_portfolio_portfolioexplorer_selectedentity",
       "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
       "relation": "calls",
@@ -11557,7 +14462,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11568,7 +14473,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11579,7 +14484,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11590,7 +14495,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/main.py",
-      "source_location": "L38",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_create_app",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -11723,6 +14639,127 @@
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/test_entity_service.py",
       "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_service",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_service",
+      "target": "backend_app_domain_entity_service_entityservice",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_list_pagination_and_empty_scope",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_direct_and_connected_rows_preserve_type_and_provenance",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_missing_associations_and_exact_unknown_id",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_scoped_detail_and_all_dimensions",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_target_scope_isolation_and_missing_reference",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_unreferenced_journey_edge_cannot_unlock_connected_api",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_orphan_relationship_is_not_an_available_destination",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "target": "backend_app_storage_seed_seed_database",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L106",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -12156,6 +15193,94 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_app_api_journeys_get_service",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L18",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L27",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_schemas_contracts_entitypage",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L20",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_schemas_contracts_envelope",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L28",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L28",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journeys",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L19",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_api_journeys_journey",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/api/journeys.py",
+      "source_location": "L28",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_app_domain_entity_service_entityservice",
       "target": "backend_app_schemas_contracts_entity",
       "relation": "uses",
@@ -12250,6 +15375,116 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "backend/app/domain/entity_service.py",
+      "source_location": "L15",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_domain_entity_service_entityservice",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L15",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_entitypage",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L21",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_envelope",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L25",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_journeydetail",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L25",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_journeyimpact",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L82",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_journeyoverlay",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L84",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_journeyrelationship",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L68",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_journeytarget",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L71",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L20",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice",
+      "target": "backend_app_storage_sqlite_repository_entityrepository",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/domain/journey_service.py",
       "source_location": "L15",
       "weight": 0.8,
       "_origin": "ast"
@@ -12360,7 +15595,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "backend/app/main.py",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 0.8,
       "_origin": "ast"
     },
@@ -12371,7 +15606,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "backend/app/main.py",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 0.8,
       "_origin": "ast"
     },
@@ -12382,7 +15617,18 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "backend/app/main.py",
-      "source_location": "L38",
+      "source_location": "L40",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_create_app",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/app/main.py",
+      "source_location": "L41",
       "weight": 0.8,
       "_origin": "ast"
     },
@@ -12393,7 +15639,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "backend/app/main.py",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 0.8,
       "_origin": "ast"
     },
@@ -12581,6 +15827,116 @@
       "confidence_score": 0.95,
       "source_file": "backend/tests/test_entity_service.py",
       "source_location": "L97",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_service",
+      "target": "backend_app_domain_entity_service_entityservice",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_service",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_list_pagination_and_empty_scope",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L18",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_direct_and_connected_rows_preserve_type_and_provenance",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_missing_associations_and_exact_unknown_id",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L46",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_scoped_detail_and_all_dimensions",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L56",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_target_scope_isolation_and_missing_reference",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L74",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_unreferenced_journey_edge_cannot_unlock_connected_api",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L86",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_orphan_relationship_is_not_an_available_destination",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L94",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "target": "backend_app_schemas_contracts_querycontext",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L106",
       "weight": 0.8,
       "_origin": "ast"
     },
@@ -12973,6 +16329,42 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_app_domain_journey_service_journeyservice_relationships",
+      "target": "backend_app_schemas_contracts_journeyrelationship",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_relationships",
+      "target": "backend_app_schemas_contracts_journeytarget",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_domain_journey_service_journeyservice_relationships",
+      "target": "backend_app_schemas_contracts_journeyimpact",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/domain/journey_service.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_app_domain_kpi_service_kpiservice_metric",
       "target": "backend_app_domain_entity_service_entityservice",
       "relation": "calls",
@@ -13028,7 +16420,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13040,7 +16432,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "backend/app/main.py",
-      "source_location": "L35",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13052,7 +16444,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13064,7 +16456,19 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L38",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_create_app_lifespan",
+      "target": "backend_app_domain_journey_service_journeyservice",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13100,7 +16504,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L13",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13112,7 +16516,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L29",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13124,7 +16528,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13136,7 +16540,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13148,7 +16552,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L33",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13160,7 +16564,31 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L34",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app_app",
+      "target": "frontend_src_pages_journeys_journeylist_journeylist",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app_app",
+      "target": "frontend_src_pages_journeys_journeymap_journeymap",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13208,7 +16636,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L49",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13220,7 +16648,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L50",
+      "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13232,7 +16660,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L51",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13425,6 +16853,126 @@
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
       "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist_journeylist",
+      "target": "frontend_src_components_shell_personaselector_personaselector",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeylist_journeylist",
+      "target": "frontend_src_components_shared_datastate_datastate",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/JourneyList.jsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap_journeymap",
+      "target": "frontend_src_components_shell_personaselector_personaselector",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap_journeymap",
+      "target": "frontend_src_components_shared_datastate_datastate",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeymap_journeymap",
+      "target": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/JourneyMap.jsx",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_harness",
+      "target": "frontend_src_components_shell_globalsearch_globalsearch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_harness",
+      "target": "frontend_src_pages_journeys_journeylist_journeylist",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_harness",
+      "target": "frontend_src_pages_journeys_journeymap_journeymap",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_harness",
+      "target": "frontend_src_pages_portfolio_portfolioexplorer_portfolioexplorer",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_mount",
+      "target": "frontend_src_context_sharedcontextprovider_sharedcontextprovider",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -13645,6 +17193,42 @@
       "_origin": "ast"
     },
     {
+      "source": "backend_tests_test_journey_service_test_target_scope_isolation_and_missing_reference",
+      "target": "backend_app_storage_sqlite_repository_sqliterepository_transaction",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_unreferenced_journey_edge_cannot_unlock_connected_api",
+      "target": "backend_app_storage_sqlite_repository_sqliterepository_transaction",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_tests_test_journey_service_test_opaque_id_supplied_impact_and_seed_idempotence",
+      "target": "backend_app_storage_sqlite_repository_sqliterepository_transaction",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "backend/tests/test_journey_service.py",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "backend_tests_test_kpi_service_test_catalog_and_isolated_widgets",
       "target": "backend_app_domain_kpi_service_kpiservice_personas",
       "relation": "calls",
@@ -13861,158 +17445,17 @@
       "_origin": "ast"
     },
     {
-      "source": "backend_app_storage_sqlite_repository_entityrepository",
-      "target": "backend_app_domain_kpi_service_kpiservice_init",
+      "source": "backend_app_api_dashboard_get_service",
+      "target": "backend_app_api_dashboard_dashboard",
       "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_init",
-      "_tgt": "backend_app_storage_sqlite_repository_entityrepository"
-    },
-    {
-      "source": "backend_app_schemas_contracts_dashboard",
-      "target": "backend_app_domain_kpi_service_kpiservice_dashboard",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "context": "generic_arg",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L46",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_dashboard",
-      "_tgt": "backend_app_schemas_contracts_dashboard"
-    },
-    {
-      "source": "backend_app_schemas_contracts_envelope",
-      "target": "backend_app_domain_kpi_service_kpiservice_dashboard",
-      "relation": "references",
-      "_origin": "ast",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "return_type",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L46",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_dashboard",
-      "_tgt": "backend_app_schemas_contracts_envelope"
-    },
-    {
-      "source": "backend_app_schemas_contracts_envelope",
-      "target": "backend_app_domain_kpi_service_kpiservice_summary",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "return_type",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L32",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_summary",
-      "_tgt": "backend_app_schemas_contracts_envelope"
-    },
-    {
-      "source": "backend_app_schemas_contracts_metricvalue",
-      "target": "backend_app_domain_kpi_service_kpiservice_metric",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "return_type",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L20",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_metric",
-      "_tgt": "backend_app_schemas_contracts_metricvalue"
-    },
-    {
-      "source": "backend_app_schemas_contracts_metricvalue",
-      "target": "backend_app_domain_kpi_service_kpiservice_summary",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "generic_arg",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L32",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_summary",
-      "_tgt": "backend_app_schemas_contracts_metricvalue"
-    },
-    {
-      "source": "backend_app_schemas_contracts_persona",
-      "target": "backend_app_domain_kpi_service_kpiservice_personas",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "generic_arg",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_personas",
-      "_tgt": "backend_app_schemas_contracts_persona"
-    },
-    {
-      "source": "backend_app_schemas_contracts_querycontext",
-      "target": "backend_app_domain_kpi_service_kpiservice_dashboard",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L46",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_dashboard",
-      "_tgt": "backend_app_schemas_contracts_querycontext"
-    },
-    {
-      "source": "backend_app_schemas_contracts_querycontext",
-      "target": "backend_app_domain_kpi_service_kpiservice_metric",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L20",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_metric",
-      "_tgt": "backend_app_schemas_contracts_querycontext"
-    },
-    {
-      "source": "backend_app_schemas_contracts_querycontext",
-      "target": "backend_app_domain_kpi_service_kpiservice_summary",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "backend/app/domain/kpi_service.py",
-      "source_location": "L32",
-      "weight": 1.0,
-      "_src": "backend_app_domain_kpi_service_kpiservice_summary",
-      "_tgt": "backend_app_schemas_contracts_querycontext"
-    },
-    {
-      "source": "backend_app_api_dashboard_get_context",
-      "target": "backend_app_api_dashboard_kpis",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "generic_arg",
       "source_file": "backend/app/api/dashboard.py",
-      "source_location": "L35",
+      "source_location": "L29",
       "weight": 1.0,
-      "_src": "backend_app_api_dashboard_kpis",
-      "_tgt": "backend_app_api_dashboard_get_context"
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_dashboard",
+      "_tgt": "backend_app_api_dashboard_get_service"
     },
     {
       "source": "backend_app_api_dashboard_get_service",
@@ -14025,8 +17468,8 @@
       "source_file": "backend/app/api/dashboard.py",
       "source_location": "L35",
       "weight": 1.0,
-      "_src": "backend_app_api_dashboard_kpis",
-      "_tgt": "backend_app_api_dashboard_get_service"
+      "_src": "backend_app_api_dashboard_get_service",
+      "_tgt": "backend_app_api_dashboard_kpis"
     },
     {
       "source": "backend_app_api_dashboard_get_service",
@@ -14039,15 +17482,692 @@
       "source_file": "backend/app/api/dashboard.py",
       "source_location": "L22",
       "weight": 1.0,
+      "_src": "backend_app_api_dashboard_get_service",
+      "_tgt": "backend_app_api_dashboard_personas"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_request",
+      "target": "backend_app_api_dashboard_get_context",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_get_context",
+      "_tgt": "backend_app_api_dashboard_py_request"
+    },
+    {
+      "source": "backend_app_api_dashboard_get_context",
+      "target": "backend_app_api_dashboard_dashboard",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_dashboard",
+      "_tgt": "backend_app_api_dashboard_get_context"
+    },
+    {
+      "source": "backend_app_api_dashboard_get_context",
+      "target": "backend_app_api_dashboard_kpis",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "backend_app_api_dashboard_get_context",
+      "_tgt": "backend_app_api_dashboard_kpis"
+    },
+    {
+      "source": "backend_app_api_dashboard_get_context",
+      "target": "backend_app_api_domains_entities",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_entities",
+      "_tgt": "backend_app_api_dashboard_get_context"
+    },
+    {
+      "source": "backend_app_api_dashboard_get_context",
+      "target": "backend_app_api_domains_hierarchy",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_hierarchy",
+      "_tgt": "backend_app_api_dashboard_get_context"
+    },
+    {
+      "source": "backend_app_api_dashboard_get_context",
+      "target": "backend_app_api_domains_options",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_options",
+      "_tgt": "backend_app_api_dashboard_get_context"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_query",
+      "target": "backend_app_api_dashboard_dashboard",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_dashboard",
+      "_tgt": "backend_app_api_dashboard_py_query"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_min_length",
+      "target": "backend_app_api_dashboard_dashboard",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_dashboard",
+      "_tgt": "backend_app_api_dashboard_py_min_length"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_max_length",
+      "target": "backend_app_api_dashboard_dashboard",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_dashboard",
+      "_tgt": "backend_app_api_dashboard_py_max_length"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_get",
+      "target": "backend_app_api_dashboard_dashboard",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_dashboard",
+      "_tgt": "backend_app_api_dashboard_py_get"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_get",
+      "target": "backend_app_api_dashboard_kpis",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_kpis",
+      "_tgt": "backend_app_api_dashboard_py_get"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_get",
+      "target": "backend_app_api_dashboard_personas",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
       "_src": "backend_app_api_dashboard_personas",
-      "_tgt": "backend_app_api_dashboard_get_service"
+      "_tgt": "backend_app_api_dashboard_py_get"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_depends",
+      "target": "backend_app_api_dashboard_dashboard",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_dashboard",
+      "_tgt": "backend_app_api_dashboard_py_depends"
+    },
+    {
+      "source": "backend_app_api_dashboard_py_depends",
+      "target": "backend_app_api_dashboard_kpis",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/dashboard.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_dashboard_kpis",
+      "_tgt": "backend_app_api_dashboard_py_depends"
+    },
+    {
+      "source": "backend_app_api_domains_get_service",
+      "target": "backend_app_api_domains_entities",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_entities",
+      "_tgt": "backend_app_api_domains_get_service"
+    },
+    {
+      "source": "backend_app_api_domains_get_service",
+      "target": "backend_app_api_domains_hierarchy",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_hierarchy",
+      "_tgt": "backend_app_api_domains_get_service"
+    },
+    {
+      "source": "backend_app_api_domains_get_service",
+      "target": "backend_app_api_domains_options",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_options",
+      "_tgt": "backend_app_api_domains_get_service"
+    },
+    {
+      "source": "backend_app_api_domains_pagination",
+      "target": "backend_app_api_domains_entities",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_entities",
+      "_tgt": "backend_app_api_domains_pagination"
+    },
+    {
+      "source": "backend_app_api_domains_pagination",
+      "target": "backend_app_api_domains_hierarchy",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_hierarchy",
+      "_tgt": "backend_app_api_domains_pagination"
+    },
+    {
+      "source": "backend_app_api_domains_py_query",
+      "target": "backend_app_api_domains_entities",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_entities",
+      "_tgt": "backend_app_api_domains_py_query"
+    },
+    {
+      "source": "backend_app_api_domains_py_query",
+      "target": "backend_app_api_domains_hierarchy",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_hierarchy",
+      "_tgt": "backend_app_api_domains_py_query"
+    },
+    {
+      "source": "backend_app_api_domains_py_get",
+      "target": "backend_app_api_domains_entities",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_entities",
+      "_tgt": "backend_app_api_domains_py_get"
+    },
+    {
+      "source": "backend_app_api_domains_py_get",
+      "target": "backend_app_api_domains_hierarchy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_hierarchy",
+      "_tgt": "backend_app_api_domains_py_get"
+    },
+    {
+      "source": "backend_app_api_domains_py_get",
+      "target": "backend_app_api_domains_options",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_options",
+      "_tgt": "backend_app_api_domains_py_get"
+    },
+    {
+      "source": "backend_app_api_domains_py_depends",
+      "target": "backend_app_api_domains_hierarchy",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_hierarchy",
+      "_tgt": "backend_app_api_domains_py_depends"
+    },
+    {
+      "source": "backend_app_api_domains_py_depends",
+      "target": "backend_app_api_domains_options",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_options",
+      "_tgt": "backend_app_api_domains_py_depends"
+    },
+    {
+      "source": "backend_app_api_domains_py_max_length",
+      "target": "backend_app_api_domains_hierarchy",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/domains.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_api_domains_hierarchy",
+      "_tgt": "backend_app_api_domains_py_max_length"
+    },
+    {
+      "source": "backend_app_api_health_py_get",
+      "target": "backend_app_api_health_health",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/health.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_app_api_health_health",
+      "_tgt": "backend_app_api_health_py_get"
+    },
+    {
+      "source": "field_validator",
+      "target": "backend_app_core_config_settings_require_file",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/core/config.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_app_core_config_settings_require_file",
+      "_tgt": "field_validator"
+    },
+    {
+      "source": "any",
+      "target": "backend_app_storage_sqlite_repository_sqliterepository_read",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/storage/sqlite_repository.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_app_storage_sqlite_repository_sqliterepository_read",
+      "_tgt": "any"
+    },
+    {
+      "source": "fixture",
+      "target": "backend_tests_conftest_client",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/conftest.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_conftest_client",
+      "_tgt": "fixture"
+    },
+    {
+      "source": "fixture",
+      "target": "backend_tests_conftest_repository",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/conftest.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_conftest_repository",
+      "_tgt": "fixture"
+    },
+    {
+      "source": "path",
+      "target": "backend_tests_conftest_client",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/conftest.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_conftest_client",
+      "_tgt": "path"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_dashboard_invalid_queries_are_actionable",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_dashboard_invalid_queries_are_actionable",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_dashboard_preserves_precision_and_provenance",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_dashboard_preserves_precision_and_provenance",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_entities_route_returns_actual_application_records",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_entities_route_returns_actual_application_records",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_kpi_invalid_context_is_rejected",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_kpi_invalid_context_is_rejected",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_kpis_missing_period_and_missing_value_are_null",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_kpis_missing_period_and_missing_value_are_null",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_persona_switch_read_is_isolated",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_persona_switch_read_is_isolated",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_supported_dimensions_with_unmatched_values_are_null",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_supported_dimensions_with_unmatched_values_are_null",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_supported_scope_preserves_source_associated_widgets",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_supported_scope_preserves_source_associated_widgets",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_unknown_hierarchy_scope_is_explicitly_unavailable",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_unknown_hierarchy_scope_is_explicitly_unavailable",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_asyncclient",
+      "target": "backend_tests_test_dashboard_api_test_unknown_persona_is_not_found_without_sql_or_path_expansion",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_unknown_persona_is_not_found_without_sql_or_path_expansion",
+      "_tgt": "backend_tests_test_dashboard_api_py_asyncclient"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_parametrize",
+      "target": "backend_tests_test_dashboard_api_test_dashboard_invalid_queries_are_actionable",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_dashboard_invalid_queries_are_actionable",
+      "_tgt": "backend_tests_test_dashboard_api_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_parametrize",
+      "target": "backend_tests_test_dashboard_api_test_kpi_invalid_context_is_rejected",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_kpi_invalid_context_is_rejected",
+      "_tgt": "backend_tests_test_dashboard_api_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_parametrize",
+      "target": "backend_tests_test_dashboard_api_test_unknown_persona_is_not_found_without_sql_or_path_expansion",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_test_unknown_persona_is_not_found_without_sql_or_path_expansion",
+      "_tgt": "backend_tests_test_dashboard_api_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_domains_api_py_parametrize",
+      "target": "backend_tests_test_domains_api_test_invalid_queries_have_problem_envelope",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_domains_api.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_domains_api_test_invalid_queries_have_problem_envelope",
+      "_tgt": "backend_tests_test_domains_api_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_entity_service_py_parametrize",
+      "target": "backend_tests_test_entity_service_test_invalid_query_rejected",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_entity_service.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_entity_service_test_invalid_query_rejected",
+      "_tgt": "backend_tests_test_entity_service_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_kpi_service_py_parametrize",
+      "target": "backend_tests_test_kpi_service_test_absent_period_never_falls_back",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_service.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_service_test_absent_period_never_falls_back",
+      "_tgt": "backend_tests_test_kpi_service_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_kpi_service_py_parametrize",
+      "target": "backend_tests_test_kpi_service_test_scope_without_source_dimension_is_explicitly_unavailable",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_service.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_service_test_scope_without_source_dimension_is_explicitly_unavailable",
+      "_tgt": "backend_tests_test_kpi_service_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_kpi_service_py_parametrize",
+      "target": "backend_tests_test_kpi_service_test_supported_scope_preserves_source_associated_metrics",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_service.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_service_test_supported_scope_preserves_source_associated_metrics",
+      "_tgt": "backend_tests_test_kpi_service_py_parametrize"
+    },
+    {
+      "source": "backend_tests_test_kpi_service_py_parametrize",
+      "target": "backend_tests_test_kpi_service_test_supported_scope_without_associated_metrics_is_null",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_service.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_service_test_supported_scope_without_associated_metrics_is_null",
+      "_tgt": "backend_tests_test_kpi_service_py_parametrize"
     }
   ],
   "metadata": {
-    "built_at": "2026-11-18T14:40:15.055170+00:00",
+    "built_at": "2026-11-18T14:52:10.335969+00:00",
     "version": "graph_update-v1",
     "codebase_root": "/var/lib/sel-nexus/artifacts-v2/T09digiai0000586618112607401034/developer",
     "force": true,
-    "files_scanned": 55
+    "files_scanned": 64
   }
 }

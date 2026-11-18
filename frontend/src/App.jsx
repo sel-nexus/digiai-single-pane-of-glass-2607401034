@@ -7,6 +7,7 @@ import DashboardPage from './pages/dashboard/DashboardPage';
 import PortfolioExplorer from './pages/portfolio/PortfolioExplorer';
 import JourneyList from './pages/journeys/JourneyList';
 import JourneyMap from './pages/journeys/JourneyMap';
+import ApplicationProfile from './pages/portfolio/ApplicationProfile';
 
 /** Disclose destinations not yet registered without fetching future domain APIs. */
 function UnavailableModule() {
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="/" element={<PersonaSelector />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/portfolio" element={<PortfolioExplorer />} />
+            <Route path="/applications/:applicationId" element={<ApplicationProfile />} />
             <Route path="/journeys" element={<JourneyList />} />
             <Route path="/journeys/:journeyId" element={<JourneyMap />} />
             <Route path="*" element={<UnavailableModule />} />

@@ -1,6 +1,6 @@
 """Define public response and shared view-context contracts."""
 from typing import Any, Generic, Literal, TypeVar
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, JsonValue
 
 Availability = Literal['available', 'unavailable']
 Source = Literal['sample', 'local', 'uploaded']
@@ -169,3 +169,45 @@ class JourneyDetail(BaseModel):
     dependency: JourneyOverlay
     impactOverlay: JourneyOverlay
     impact: JourneyImpact
+
+
+class ApplicationEvidence(BaseModel):
+    """Preserve one supplied value and its exact association and provenance."""
+    id: str
+    label: str
+    value: JsonValue
+    source: Source
+    sourceRef: str | None
+    association: str
+    unit: str | None = None
+    period: str | None = None
+
+
+class ApplicationCategory(BaseModel):
+    """Keep absent category evidence explicitly unavailable and null."""
+    availability: Availability
+    value: list[ApplicationEvidence] | None
+
+
+class ApplicationCategories(BaseModel):
+    """Name all eleven source-associated profile categories."""
+    ownership: ApplicationCategory
+    domainPortfolio: ApplicationCategory
+    criticality: ApplicationCategory
+    health: ApplicationCategory
+    incidents: ApplicationCategory
+    releaseHistory: ApplicationCategory
+    defects: ApplicationCategory
+    securityPosture: ApplicationCategory
+    dependencies: ApplicationCategory
+    automationMaturity: ApplicationCategory
+    observabilityCoverage: ApplicationCategory
+
+
+class ApplicationProfile(BaseModel):
+    """Compose exact application identity without inferred status or links."""
+    id: str
+    label: str
+    source: Source
+    sourceRef: str | None
+    categories: ApplicationCategories

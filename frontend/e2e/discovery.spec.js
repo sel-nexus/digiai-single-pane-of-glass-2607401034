@@ -26,11 +26,28 @@ test('search, eight filters, hierarchy and return preserve real source context',
   await page.getByRole('button', { name: 'Search', exact: true }).click();
   const body = await (await searchResponse).json();
   expect(body.data.map((item) => item.id)).toEqual(['app-0001']);
+  const origin = page.url();
+  const profileResponse = page.waitForResponse((res) => new URL(res.url()).pathname === '/api/v1/applications/app-0001' && res.ok());
   await page.getByRole('link', { name: body.data[0].label, exact: true }).click();
-  await expect(page.getByRole('heading', { name: body.data[0].label })).toBeVisible();
+  const profile = (await (await profileResponse).json()).data;
+  expect(profile.id).toBe(body.data[0].id);
+  expect(profile.label).toBe(body.data[0].label);
+  expect(Object.keys(profile.categories)).toHaveLength(11);
+  await expect(page.getByRole('heading', { name: profile.label, exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Health', exact: true }).getByText(profile.categories.health.value[0].value, { exact: true })).toBeVisible();
+  const ownership = profile.categories.ownership.value[0];
+  await expect(page.getByRole('region', { name: 'Ownership', exact: true }).getByText(ownership.value.label, { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Ownership', exact: true }).getByText(`Source: ${ownership.source} · ${ownership.sourceRef}`, { exact: true })).toBeVisible();
+  expect(new URL(page.url()).pathname).toBe('/applications/app-0001');
   await expect(page).toHaveURL(/application=app-0001/);
   await page.getByRole('link', { name: 'Return to previous view' }).click();
+  await expect(page).toHaveURL(origin);
   await expect(page).toHaveURL(/hierarchyNodeId=service-enrollment/);
+  await expect(page.getByRole('navigation', { name: 'Hierarchy ancestors' })
+    .getByRole('button', { name: 'Enrollment Services', exact: true })).toHaveAttribute('aria-current', 'location');
+  for (const [label, value] of Object.entries(selections)) {
+    await expect(page.getByLabel(label, { exact: true })).toHaveValues([value]);
+  }
   const emptyResponse = page.waitForResponse((res) => res.url().includes('/entities') && res.status() === 200);
   await page.getByLabel('Search names or IDs').fill('no such source entity');
   await page.getByRole('button', { name: 'Search', exact: true }).click();
