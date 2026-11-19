@@ -286,3 +286,29 @@ button.primary { border-radius: var(--radius-small); }
   .app-shell.has-navigation main, .app-shell.has-navigation footer { grid-column: 1; }
   .app-shell main { padding: 24px 16px; }
 }
+
+/* Dashboard-specific hierarchy; shared cards retain their evidence and behavior. */
+.dashboard { padding: 0 0 32px; }
+.dashboard-heading .eyebrow { margin-bottom: 8px; }
+.dashboard-heading h1 { font-size: 24px; line-height: 1.25; letter-spacing: -.02em; }
+.dashboard-heading .intro { margin-top: 8px; color: var(--foreground-muted); font-size: .9rem; }
+.dashboard .section-title { margin: 28px 0 16px; }
+.dashboard .section-stack { margin-top: 40px; }
+.dashboard .section-stack > p { margin: 12px 0 20px; }
+.dashboard .metric-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.dashboard .metric-card, .dashboard .scenario-list article, .dashboard .data-state {
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: none;
+}
+.dashboard .metric-card { padding: 20px; }
+.dashboard .metric-card h3 { font-size: .9rem; line-height: 1.35; }
+.dashboard .metric-value { font-size: 1.65rem; line-height: 1.25; }
+.dashboard .metric-visualization svg { width: 96px; }
+.dashboard .scenario-list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); margin-top: 16px; }
+@media (max-width: 1100px) {
+  .dashboard .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .dashboard .metric-grid { grid-template-columns: minmax(0, 1fr); }
+}
