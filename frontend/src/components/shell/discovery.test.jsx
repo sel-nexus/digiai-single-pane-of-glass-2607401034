@@ -286,6 +286,32 @@ it('keeps anonymous selection free of navigation and preserves brand and provena
   expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveAttribute('href', '#main-content');
 });
 
+it('closes navigation with Escape and returns focus to its trigger', async () => {
+  const user = userEvent.setup();
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  const toggle = screen.getByRole('button', { name: 'Navigation', exact: true });
+  await user.click(toggle);
+  const dashboard = screen.getByRole('link', { name: 'Dashboard', exact: true });
+  dashboard.focus();
+  await user.keyboard('{Escape}');
+  expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(toggle).toHaveFocus();
+});
+
+it('changes theme without changing the current scope', async () => {
+  const user = userEvent.setup();
+  document.documentElement.dataset.theme = 'light';
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  await user.click(screen.getByRole('button', { name: 'Use dark theme' }));
+  expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+  expect(screen.getByLabelText('Shell URL')).toHaveTextContent('/portfolio?domain=domain-1&hierarchyNodeId=service-1');
+  await user.click(screen.getByRole('button', { name: 'Use light theme' }));
+  expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+  localStorage.removeItem('digiai-theme');
+});
+
 it('supports keyboard Dashboard selection and closes navigation without losing context', async () => {
   const user = userEvent.setup();
   mountShell();
@@ -297,5 +323,6 @@ it('supports keyboard Dashboard selection and closes navigation without losing c
   expect(screen.getByRole('link', { name: 'Dashboard', exact: true })).toHaveFocus();
   await user.keyboard('{Enter}');
   expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByRole('main')).toHaveFocus();
   expect(screen.getByLabelText('Shell URL')).toHaveTextContent('/dashboard?domain=domain-1&hierarchyNodeId=service-1');
 });

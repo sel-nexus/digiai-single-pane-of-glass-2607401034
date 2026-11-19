@@ -1,4 +1,4 @@
-/* Define trustworthy-precise, teal-tinted neutral themes and purposeful soft depth. */
+/* Define a compact slate-and-blue shell with light and dark themes. */
 @import '@fontsource/geist-sans/400.css';
 @import '@fontsource/geist-sans/500.css';
 @import '@fontsource/geist-sans/600.css';
@@ -9,24 +9,24 @@
 
 :root {
   color-scheme: light;
-  --background: #eef5f3; --surface: #ffffff; --surface-raised: #e2efeb;
-  --accent-surface: #d8eee7; --header-surface: rgb(255 255 255 / .96);
-  --foreground: #182522; --foreground-muted: #53635e; --border: #ccd6d1; --ring: #146b63;
-  --primary: #146b63; --primary-hover: #10574f; --on-primary: #ffffff;
+  --background: #f1f5f9; --surface: #ffffff; --surface-raised: #f1f5f9;
+  --accent-surface: #e8f0ff; --header-surface: #ffffff;
+  --foreground: #17243a; --foreground-muted: #53647a; --border: #dbe3ec; --ring: #2563bb;
+  --primary: #245cb3; --primary-hover: #194a94; --on-primary: #ffffff;
   --success: #346538; --success-background: #edf3ec; --warning: #795400; --warning-background: #fbf3db;
   --error: #9f2f2d; --error-background: #fdebec; --info: #315c71; --info-background: #eaf1f4;
-  --radius: 16px; --radius-small: 12px; --duration: 240ms; --ease: cubic-bezier(.22, 1, .36, 1);
-  --shadow: 0 2px 4px rgb(16 63 53 / .03), 0 12px 28px rgb(16 63 53 / .07);
-  --shadow-raised: 0 4px 8px rgb(16 63 53 / .05), 0 20px 40px rgb(16 63 53 / .12);
+  --radius: 8px; --radius-small: 6px; --duration: 150ms; --ease: ease-out;
+  --shadow: none;
+  --shadow-raised: 0 8px 24px rgb(23 36 58 / .14);
   font-family: 'Geist Sans', sans-serif; font-size: 16px; line-height: 1.55;
 }
 :root[data-theme='dark'] {
-  color-scheme: dark; --background: #0f1b19; --surface: #192b27; --surface-raised: #253b35;
-  --accent-surface: #25483e; --header-surface: rgb(25 43 39 / .96);
+  color-scheme: dark; --background: #111827; --surface: #1c2737; --surface-raised: #283548;
+  --accent-surface: #263f64; --header-surface: #1c2737;
   --shadow: 0 2px 4px rgb(0 0 0 / .12), 0 12px 28px rgb(0 0 0 / .2);
   --shadow-raised: 0 4px 8px rgb(0 0 0 / .18), 0 20px 40px rgb(0 0 0 / .3);
-  --foreground: #eff5f1; --foreground-muted: #b0beb6; --border: #43534a; --ring: #7bc6b6;
-  --primary: #83cbbb; --primary-hover: #a2dccf; --on-primary: #10241e;
+  --foreground: #edf3fb; --foreground-muted: #bdc9d8; --border: #435267; --ring: #9fc5ff;
+  --primary: #a4c7ff; --primary-hover: #c5dcff; --on-primary: #12243e;
   --success: #afcdb0; --success-background: #203524; --warning: #e0c990; --warning-background: #352f1e;
   --error: #efb3b0; --error-background: #392321; --info: #b1cbd5; --info-background: #213039;
 }
@@ -253,4 +253,36 @@ pre { max-width: 100%; overflow: auto; }
   .relationship-connector { position: relative; min-height: 88px; padding: 12px 0 12px 32px; justify-items: start; text-align: left; }
   .relationship-arrow { position: absolute; left: 16px; top: 0; height: 100%; width: 2px; }
   .relationship-arrow::after { right: -4px; top: auto; bottom: 1px; transform: rotate(135deg); }
+}
+
+/* The application rail stays in the normal reading order; on small screens it is a disclosure. */
+.app-shell { min-height: 100dvh; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; }
+.app-shell.has-navigation { grid-template-columns: 256px minmax(0, 1fr); }
+.app-header { grid-column: 1 / -1; min-height: 80px; padding: 12px 24px; position: relative; backdrop-filter: none; }
+.brand-mark { border-radius: 8px; box-shadow: none; }
+.nav-bar { grid-column: 1; grid-row: 2 / 4; padding: 24px 12px; border-right: 1px solid var(--border); border-bottom: 0; }
+.nav-bar nav { display: flex; flex-direction: column; gap: 4px; }
+.nav-bar a { border-radius: var(--radius-small); padding: 10px 16px; font-size: .9rem; }
+.nav-bar a[aria-current] { box-shadow: none; }
+.app-shell main { grid-column: 1; width: 100%; max-width: 1440px; padding: 24px 32px 40px; }
+.app-shell.has-navigation main { grid-column: 2; }
+.app-shell footer { grid-column: 1; }
+.app-shell.has-navigation footer { grid-column: 2; }
+main h1 { color: var(--foreground); font-size: clamp(1.75rem, 2.5vw, 2.25rem); letter-spacing: -.025em; }
+main h2 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); }
+.breadcrumbs { margin-bottom: 20px; }
+.global-search { margin-bottom: 16px; }
+.global-filters { margin-bottom: 24px; }
+.metric-card { padding: 20px; }
+.metric-value { margin: 12px 0; }
+.persona-card { border-radius: var(--radius); }
+button.primary { border-radius: var(--radius-small); }
+@media (max-width: 760px) {
+  .app-shell.has-navigation { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; }
+  .app-header { min-height: 80px; padding: 12px 16px; }
+  .nav-bar { grid-column: 1; grid-row: auto; padding: 8px 16px; border-right: 0; border-bottom: 1px solid var(--border); }
+  .nav-bar nav { display: none; }
+  .nav-bar nav.expanded { display: flex; padding-top: 8px; }
+  .app-shell.has-navigation main, .app-shell.has-navigation footer { grid-column: 1; }
+  .app-shell main { padding: 24px 16px; }
 }
