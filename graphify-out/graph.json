@@ -1,6 +1,33 @@
 {
   "nodes": [
     {
+      "id": "changelog",
+      "label": "CHANGELOG.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "changelog_changelog",
+      "label": "Changelog",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "changelog_whole_ui_modernization",
+      "label": "Whole-UI modernization",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
       "id": "backend_app_init",
       "label": "__init__.py",
       "file_type": "code",
@@ -8992,6 +9019,75 @@
       "_origin": "ast"
     },
     {
+      "id": "frontend_e2e_modern_journey_spec",
+      "label": "modern-journey.spec.js",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_modern_journey_spec_verifypairs",
+      "label": "verifyPairs()",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_modern_metrics_spec",
+      "label": "modern-metrics.spec.js",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_modern_metrics_spec_decimal",
+      "label": "decimal()",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_modern_metrics_spec_expectevidence",
+      "label": "expectEvidence()",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_modern_shell_spec",
+      "label": "modern-shell.spec.js",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_modern_shell_spec_expectnooverflow",
+      "label": "expectNoOverflow()",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_modern_shell_spec_expectdashboard",
+      "label": "expectDashboard()",
+      "file_type": "code",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L15",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
       "id": "frontend_e2e_observability_spec",
       "label": "observability.spec.js",
       "file_type": "code",
@@ -9202,11 +9298,20 @@
       "_origin": "ast"
     },
     {
+      "id": "frontend_e2e_transformation_spec_verifycomparison",
+      "label": "verifyComparison()",
+      "file_type": "code",
+      "source_file": "frontend/e2e/transformation.spec.js",
+      "source_location": "L19",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
       "id": "frontend_e2e_transformation_spec_followdestinations",
       "label": "followDestinations()",
       "file_type": "code",
       "source_file": "frontend/e2e/transformation.spec.js",
-      "source_location": "L15",
+      "source_location": "L80",
       "_callable": true,
       "_origin": "ast"
     },
@@ -9686,6 +9791,31 @@
       "community": 14
     },
     {
+      "id": "frontend_preflight_modern_spec",
+      "label": "preflight-modern.spec.js",
+      "file_type": "code",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_preflight_modern_spec_capture",
+      "label": "capture()",
+      "file_type": "code",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_preflight_config",
+      "label": "preflight.config.js",
+      "file_type": "code",
+      "source_file": "frontend/preflight.config.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
       "id": "frontend_scripts_preflight",
       "label": "preflight.mjs",
       "file_type": "code",
@@ -9944,7 +10074,7 @@
       "label": "entity",
       "file_type": "code",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "_origin": "ast"
     },
     {
@@ -9952,7 +10082,7 @@
       "label": "options",
       "file_type": "code",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast"
     },
     {
@@ -9960,7 +10090,7 @@
       "label": "evidenceValues",
       "file_type": "code",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "_origin": "ast"
     },
     {
@@ -9968,7 +10098,7 @@
       "label": "profile",
       "file_type": "code",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast"
     },
     {
@@ -9976,7 +10106,7 @@
       "label": "Harness()",
       "file_type": "code",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L41",
+      "source_location": "L42",
       "_callable": true,
       "_origin": "ast"
     },
@@ -9985,7 +10115,7 @@
       "label": "mount()",
       "file_type": "code",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L60",
+      "source_location": "L61",
       "_callable": true,
       "_origin": "ast"
     },
@@ -9994,7 +10124,25 @@
       "label": "response()",
       "file_type": "code",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L71",
+      "source_location": "L72",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_shell_discovery_test_shelldestination",
+      "label": "ShellDestination()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L228",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_components_shell_discovery_test_mountshell",
+      "label": "mountShell()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L240",
       "_callable": true,
       "_origin": "ast"
     },
@@ -10480,7 +10628,7 @@
       "label": "formatPercent()",
       "file_type": "code",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "_callable": true,
       "_origin": "ast"
     },
@@ -10489,17 +10637,26 @@
       "label": "formatMetric()",
       "file_type": "code",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L36",
+      "source_location": "L37",
       "_callable": true,
       "_origin": "ast",
       "community": 3
+    },
+    {
+      "id": "frontend_src_pages_dashboard_kpiboard_percentagevisualization",
+      "label": "percentageVisualization()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
+      "source_location": "L51",
+      "_callable": true,
+      "_origin": "ast"
     },
     {
       "id": "frontend_src_pages_dashboard_kpiboard_metriccard",
       "label": "MetricCard()",
       "file_type": "code",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L43",
+      "source_location": "L79",
       "_callable": true,
       "_origin": "ast",
       "community": 3
@@ -10509,7 +10666,7 @@
       "label": "KpiBoard()",
       "file_type": "code",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L56",
+      "source_location": "L116",
       "_callable": true,
       "_origin": "ast",
       "community": 3
@@ -10603,7 +10760,15 @@
       "label": "metric",
       "file_type": "code",
       "source_file": "frontend/src/pages/dashboard/metricFormatting.test.jsx",
-      "source_location": "L5",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_dashboard_metricformatting_test_qualified",
+      "label": "qualified",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/dashboard/metricFormatting.test.jsx",
+      "source_location": "L10",
       "_origin": "ast"
     },
     {
@@ -10671,7 +10836,25 @@
       "label": "insightValue()",
       "file_type": "code",
       "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
-      "source_location": "L6",
+      "source_location": "L7",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_insights_transformationtrends_cancompare",
+      "label": "canCompare()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
+      "source_location": "L20",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_insights_transformationtrends_comparisonchart",
+      "label": "ComparisonChart()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
+      "source_location": "L39",
       "_callable": true,
       "_origin": "ast"
     },
@@ -10680,7 +10863,7 @@
       "label": "TransformationTrends()",
       "file_type": "code",
       "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
-      "source_location": "L14",
+      "source_location": "L100",
       "_callable": true,
       "_origin": "ast"
     },
@@ -10816,7 +10999,7 @@
       "label": "identity",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "_origin": "ast"
     },
     {
@@ -10824,7 +11007,7 @@
       "label": "app",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast"
     },
     {
@@ -10832,7 +11015,7 @@
       "label": "dependency",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast"
     },
     {
@@ -10840,7 +11023,7 @@
       "label": "api",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "_origin": "ast"
     },
     {
@@ -10848,7 +11031,7 @@
       "label": "detail",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast"
     },
     {
@@ -10856,7 +11039,7 @@
       "label": "response()",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L26",
+      "source_location": "L27",
       "_callable": true,
       "_origin": "ast"
     },
@@ -10865,7 +11048,7 @@
       "label": "Harness()",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L31",
+      "source_location": "L32",
       "_callable": true,
       "_origin": "ast"
     },
@@ -10874,7 +11057,16 @@
       "label": "mount()",
       "file_type": "code",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L50",
+      "source_location": "L51",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_journeys_journeys_test_mountoverlay",
+      "label": "mountOverlay()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L170",
       "_callable": true,
       "_origin": "ast"
     },
@@ -11413,6 +11605,26 @@
     }
   ],
   "links": [
+    {
+      "source": "changelog",
+      "target": "changelog_changelog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "changelog_changelog",
+      "target": "changelog_whole_ui_modernization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CHANGELOG.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
     {
       "source": "backend_app_init_rationale_1",
       "target": "backend_app_init",
@@ -31063,6 +31275,309 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_fixtures",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_fixtures_test",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_helpers",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_helpers_navigateprimary",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_helpers_responsefor",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_helpers_selectpersona",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_modern_journey_spec_verifypairs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_journey_spec",
+      "target": "frontend_e2e_modern_journey_spec_verifypairs",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-journey.spec.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_fixtures",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_fixtures_test",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_helpers",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_helpers_responsefor",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_helpers_selectpersona",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_modern_metrics_spec_decimal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_modern_metrics_spec_expectevidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec_expectevidence",
+      "target": "frontend_e2e_modern_metrics_spec_decimal",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_metrics_spec",
+      "target": "frontend_e2e_modern_metrics_spec_expectevidence",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-metrics.spec.js",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_fixtures",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_fixtures_test",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_helpers",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_helpers_navigateprimary",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_helpers_responsefor",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_helpers_selectpersona",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_helpers_display",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_modern_shell_spec_expectnooverflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_modern_shell_spec_expectdashboard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_modern_shell_spec_expectnooverflow",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_modern_shell_spec",
+      "target": "frontend_e2e_modern_shell_spec_expectdashboard",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_e2e_observability_spec",
       "target": "frontend_e2e_fixtures",
       "relation": "imports_from",
@@ -32009,11 +32524,21 @@
     },
     {
       "source": "frontend_e2e_transformation_spec",
+      "target": "frontend_e2e_transformation_spec_verifycomparison",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/transformation.spec.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_transformation_spec",
       "target": "frontend_e2e_transformation_spec_followdestinations",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/e2e/transformation.spec.js",
-      "source_location": "L15",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -32024,7 +32549,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/e2e/transformation.spec.js",
-      "source_location": "L20",
+      "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -32035,7 +32560,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/e2e/transformation.spec.js",
-      "source_location": "L43",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_transformation_spec",
+      "target": "frontend_e2e_transformation_spec_verifycomparison",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/transformation.spec.js",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -32046,7 +32582,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/e2e/transformation.spec.js",
-      "source_location": "L73",
+      "source_location": "L143",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -32764,6 +33300,93 @@
       "confidence": "EXTRACTED",
       "source_file": "frontend/playwright.config.js",
       "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_modern_spec",
+      "target": "frontend_e2e_fixtures",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_modern_spec",
+      "target": "frontend_e2e_fixtures_test",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_modern_spec",
+      "target": "frontend_e2e_helpers",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_modern_spec",
+      "target": "frontend_e2e_helpers_navigateprimary",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_modern_spec",
+      "target": "frontend_e2e_helpers_selectpersona",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_modern_spec",
+      "target": "frontend_preflight_modern_spec_capture",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_modern_spec",
+      "target": "frontend_preflight_modern_spec_capture",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight-modern.spec.js",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_preflight_config",
+      "target": "frontend_playwright_config",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/preflight.config.js",
+      "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33898,12 +34521,34 @@
     },
     {
       "source": "frontend_src_components_shell_discovery_test",
-      "target": "frontend_src_components_shell_globalsearch",
+      "target": "frontend_src_components_shell_appshell",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
       "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test",
+      "target": "frontend_src_components_shell_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test",
+      "target": "frontend_src_components_shell_globalsearch",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33914,7 +34559,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33925,7 +34570,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33936,7 +34581,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33947,7 +34592,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33958,7 +34603,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33969,7 +34614,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33980,7 +34625,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -33991,7 +34636,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34002,7 +34647,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34012,7 +34657,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34022,7 +34667,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34032,7 +34677,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34042,7 +34687,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34052,7 +34697,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34062,7 +34707,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34072,7 +34717,27 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L71",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test",
+      "target": "frontend_src_components_shell_discovery_test_shelldestination",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L228",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test",
+      "target": "frontend_src_components_shell_discovery_test_mountshell",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L240",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34083,7 +34748,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L64",
+      "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34094,7 +34759,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L77",
+      "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -34105,7 +34770,29 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L88",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test_mountshell",
+      "target": "frontend_src_components_shell_discovery_test_shelldestination",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L246",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test",
+      "target": "frontend_src_components_shell_discovery_test_mountshell",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L261",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35848,7 +36535,7 @@
     },
     {
       "source": "frontend_src_pages_dashboard_kpiboard",
-      "target": "ref_react_router_dom",
+      "target": "ref_react",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -35859,12 +36546,23 @@
     },
     {
       "source": "frontend_src_pages_dashboard_kpiboard",
-      "target": "frontend_src_hooks_useapi",
+      "target": "ref_react_router_dom",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
       "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_kpiboard",
+      "target": "frontend_src_hooks_useapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35875,7 +36573,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35886,7 +36584,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35897,7 +36595,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35908,7 +36606,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35919,7 +36617,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35929,7 +36627,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35939,7 +36637,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L36",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_kpiboard",
+      "target": "frontend_src_pages_dashboard_kpiboard_percentagevisualization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35949,7 +36657,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L43",
+      "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35959,7 +36667,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L56",
+      "source_location": "L116",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35970,7 +36678,40 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L38",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_kpiboard_percentagevisualization",
+      "target": "frontend_src_pages_dashboard_kpiboard_formatpercent",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_kpiboard_metriccard",
+      "target": "frontend_src_pages_dashboard_kpiboard_percentagevisualization",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_kpiboard_metriccard",
+      "target": "frontend_src_pages_dashboard_kpiboard_formatpercent",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
+      "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35981,7 +36722,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L47",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -35992,7 +36733,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L96",
+      "source_location": "L156",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -36160,7 +36901,7 @@
     },
     {
       "source": "frontend_src_pages_dashboard_metricformatting_test",
-      "target": "frontend_src_pages_dashboard_kpiboard",
+      "target": "ref_testing_library_react",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -36171,12 +36912,34 @@
     },
     {
       "source": "frontend_src_pages_dashboard_metricformatting_test",
+      "target": "frontend_src_pages_dashboard_kpiboard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/metricFormatting.test.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_metricformatting_test",
       "target": "frontend_src_pages_dashboard_kpiboard_formatmetric",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/metricFormatting.test.jsx",
-      "source_location": "L3",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_metricformatting_test",
+      "target": "frontend_src_pages_dashboard_kpiboard_metriccard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/metricFormatting.test.jsx",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -36186,7 +36949,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/metricFormatting.test.jsx",
-      "source_location": "L5",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_dashboard_metricformatting_test",
+      "target": "frontend_src_pages_dashboard_metricformatting_test_qualified",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/dashboard/metricFormatting.test.jsx",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -36562,7 +37335,7 @@
     },
     {
       "source": "frontend_src_pages_insights_transformationtrends",
-      "target": "frontend_src_pages_dashboard_kpiboard",
+      "target": "ref_react",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -36573,12 +37346,23 @@
     },
     {
       "source": "frontend_src_pages_insights_transformationtrends",
+      "target": "frontend_src_pages_dashboard_kpiboard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_insights_transformationtrends",
       "target": "frontend_src_pages_dashboard_kpiboard_formatmetric",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -36588,7 +37372,27 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
-      "source_location": "L6",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_insights_transformationtrends",
+      "target": "frontend_src_pages_insights_transformationtrends_cancompare",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_insights_transformationtrends",
+      "target": "frontend_src_pages_insights_transformationtrends_comparisonchart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -36598,7 +37402,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
-      "source_location": "L14",
+      "source_location": "L100",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -36609,7 +37413,29 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
-      "source_location": "L21",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_insights_transformationtrends_transformationtrends",
+      "target": "frontend_src_pages_insights_transformationtrends_cancompare",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_insights_transformationtrends_transformationtrends",
+      "target": "frontend_src_pages_insights_transformationtrends_comparisonchart",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
+      "source_location": "L112",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37342,7 +38168,7 @@
     },
     {
       "source": "frontend_src_pages_journeys_journeys_test",
-      "target": "frontend_src_pages_portfolio_portfolioexplorer",
+      "target": "frontend_src_pages_journeys_relationshipoverlay",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -37353,7 +38179,7 @@
     },
     {
       "source": "frontend_src_pages_journeys_journeys_test",
-      "target": "frontend_src_pages_portfolio_applicationprofile",
+      "target": "frontend_src_pages_portfolio_portfolioexplorer",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -37364,7 +38190,7 @@
     },
     {
       "source": "frontend_src_pages_journeys_journeys_test",
-      "target": "frontend_src_components_shell_globalsearch",
+      "target": "frontend_src_pages_portfolio_applicationprofile",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -37375,12 +38201,23 @@
     },
     {
       "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_components_shell_globalsearch",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
       "target": "frontend_src_components_shell_globalsearch_globalsearch",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37390,7 +38227,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37400,7 +38237,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37410,7 +38247,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37420,7 +38257,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37430,7 +38267,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L21",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37440,7 +38277,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37450,7 +38287,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L31",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37460,7 +38297,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L50",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_mountoverlay",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L170",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37471,7 +38318,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L54",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37482,7 +38329,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L62",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -37493,7 +38340,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L77",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_journeys_journeys_test_mountoverlay",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L182",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39892,7 +40750,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39903,7 +40761,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -40140,7 +40998,7 @@
     },
     {
       "source": "frontend_src_pages_journeys_journeys_test",
-      "target": "frontend_src_pages_portfolio_portfolioexplorer_portfolioexplorer",
+      "target": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -40151,12 +41009,23 @@
     },
     {
       "source": "frontend_src_pages_journeys_journeys_test",
-      "target": "frontend_src_pages_portfolio_applicationprofile_applicationprofile",
+      "target": "frontend_src_pages_portfolio_portfolioexplorer_portfolioexplorer",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
       "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test",
+      "target": "frontend_src_pages_portfolio_applicationprofile_applicationprofile",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -43087,6 +43956,17 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_e2e_modern_shell_spec_expectdashboard",
+      "target": "frontend_e2e_helpers_display",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/modern-shell.spec.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_e2e_uploads_spec_enteruploads",
       "target": "frontend_e2e_helpers_navigateprimary",
       "relation": "calls",
@@ -43258,7 +44138,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L42",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test_shelldestination",
+      "target": "frontend_src_context_sharedcontextprovider_usesharedcontext",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L229",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -43456,7 +44347,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L57",
+      "source_location": "L117",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -43467,7 +44358,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L63",
+      "source_location": "L123",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -43577,7 +44468,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/insights/TransformationTrends.jsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -43676,7 +44567,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/RelationshipOverlay.jsx",
-      "source_location": "L28",
+      "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -43687,7 +44578,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51715,7 +52606,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L26",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51727,7 +52618,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L27",
+      "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51739,7 +52630,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L28",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51751,7 +52642,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L57",
+      "source_location": "L61",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51763,7 +52654,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L58",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51775,7 +52666,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/AppShell.jsx",
-      "source_location": "L59",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51847,7 +52738,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51859,7 +52750,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L49",
+      "source_location": "L50",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51871,7 +52762,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51883,7 +52774,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51895,7 +52786,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -51907,7 +52798,31 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/shell/discovery.test.jsx",
-      "source_location": "L63",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test_mountshell",
+      "target": "frontend_src_context_sharedcontextprovider_sharedcontextprovider",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L243",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_shell_discovery_test_mountshell",
+      "target": "frontend_src_components_shell_appshell_appshell",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/components/shell/discovery.test.jsx",
+      "source_location": "L245",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -52267,7 +53182,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/dashboard/KpiBoard.jsx",
-      "source_location": "L94",
+      "source_location": "L154",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -52495,7 +53410,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L38",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -52507,7 +53422,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L40",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -52519,7 +53434,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -52531,7 +53446,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -52543,7 +53458,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -52555,7 +53470,31 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
-      "source_location": "L53",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_mountoverlay",
+      "target": "frontend_src_context_sharedcontextprovider_sharedcontextprovider",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L173",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_journeys_journeys_test_mountoverlay",
+      "target": "frontend_src_pages_journeys_relationshipoverlay_relationshipoverlay",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/journeys/journeys.test.jsx",
+      "source_location": "L174",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -54790,8 +55729,8 @@
       "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_kpi",
-      "_tgt": "backend_app_api_admin_get_config_service"
+      "_src": "backend_app_api_admin_get_config_service",
+      "_tgt": "backend_app_api_admin_kpi"
     },
     {
       "source": "backend_app_api_admin_get_config_service",
@@ -54803,8 +55742,8 @@
       "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_mapping",
-      "_tgt": "backend_app_api_admin_get_config_service"
+      "_src": "backend_app_api_admin_get_config_service",
+      "_tgt": "backend_app_api_admin_mapping"
     },
     {
       "source": "backend_app_api_admin_get_config_service",
@@ -54816,8 +55755,8 @@
       "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_scenario",
-      "_tgt": "backend_app_api_admin_get_config_service"
+      "_src": "backend_app_api_admin_get_config_service",
+      "_tgt": "backend_app_api_admin_scenario"
     },
     {
       "source": "backend_app_api_admin_get_config_service",
@@ -54829,8 +55768,8 @@
       "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_widget",
-      "_tgt": "backend_app_api_admin_get_config_service"
+      "_src": "backend_app_api_admin_get_config_service",
+      "_tgt": "backend_app_api_admin_widget"
     },
     {
       "source": "backend_app_api_admin_py_request",
@@ -54920,8 +55859,8 @@
       "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_scenario",
-      "_tgt": "backend_app_api_admin_py_jsonresponse"
+      "_src": "backend_app_api_admin_py_jsonresponse",
+      "_tgt": "backend_app_api_admin_scenario"
     },
     {
       "source": "backend_app_api_admin_py_jsonresponse",
@@ -54933,8 +55872,8 @@
       "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_widget",
-      "_tgt": "backend_app_api_admin_py_jsonresponse"
+      "_src": "backend_app_api_admin_py_jsonresponse",
+      "_tgt": "backend_app_api_admin_widget"
     },
     {
       "source": "backend_app_api_admin_py_get",
@@ -55024,8 +55963,8 @@
       "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_scenario",
-      "_tgt": "backend_app_api_admin_py_depends"
+      "_src": "backend_app_api_admin_py_depends",
+      "_tgt": "backend_app_api_admin_scenario"
     },
     {
       "source": "backend_app_api_admin_py_depends",
@@ -55037,8 +55976,8 @@
       "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "backend_app_api_admin_widget",
-      "_tgt": "backend_app_api_admin_py_depends"
+      "_src": "backend_app_api_admin_py_depends",
+      "_tgt": "backend_app_api_admin_widget"
     },
     {
       "source": "backend_app_api_admin_py_post",
@@ -55089,8 +56028,8 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_app_api_admin_scenario",
-      "_tgt": "backend_app_api_admin_py_post"
+      "_src": "backend_app_api_admin_py_post",
+      "_tgt": "backend_app_api_admin_scenario"
     },
     {
       "source": "backend_app_api_admin_mapping",
@@ -55103,8 +56042,8 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
-      "_src": "docs_upload_contract_explicit_workflow_and_multipart_api",
-      "_tgt": "backend_app_api_admin_mapping"
+      "_src": "backend_app_api_admin_mapping",
+      "_tgt": "docs_upload_contract_explicit_workflow_and_multipart_api"
     },
     {
       "source": "put",
@@ -56396,8 +57335,8 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_app_api_uploads_upload",
-      "_tgt": "backend_app_api_uploads_py_post"
+      "_src": "backend_app_api_uploads_py_post",
+      "_tgt": "backend_app_api_uploads_upload"
     },
     {
       "source": "backend_app_core_config_settings",
@@ -56661,6 +57600,19 @@
     },
     {
       "source": "backend_tests_test_admin_api_py_parametrize",
+      "target": "backend_tests_test_admin_api_test_config_catalog_storage_failure_keeps_real_fixtures",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_admin_api.py",
+      "source_location": "L225",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_admin_api_py_parametrize",
+      "_tgt": "backend_tests_test_admin_api_test_config_catalog_storage_failure_keeps_real_fixtures"
+    },
+    {
+      "source": "backend_tests_test_admin_api_py_parametrize",
       "target": "backend_tests_test_admin_api_test_each_write_known_storage_failure_and_commit_ambiguity",
       "relation": "references",
       "confidence": "EXTRACTED",
@@ -56669,8 +57621,21 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_tests_test_admin_api_test_each_write_known_storage_failure_and_commit_ambiguity",
-      "_tgt": "backend_tests_test_admin_api_py_parametrize"
+      "_src": "backend_tests_test_admin_api_py_parametrize",
+      "_tgt": "backend_tests_test_admin_api_test_each_write_known_storage_failure_and_commit_ambiguity"
+    },
+    {
+      "source": "backend_tests_test_admin_api_py_parametrize",
+      "target": "backend_tests_test_admin_api_test_every_required_field_rejected_without_state_changes",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_admin_api.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_admin_api_py_parametrize",
+      "_tgt": "backend_tests_test_admin_api_test_every_required_field_rejected_without_state_changes"
     },
     {
       "source": "backend_tests_test_admin_api_py_parametrize",
@@ -56682,8 +57647,8 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_tests_test_admin_api_test_every_write_confirmed_requery_and_audit",
-      "_tgt": "backend_tests_test_admin_api_py_parametrize"
+      "_src": "backend_tests_test_admin_api_py_parametrize",
+      "_tgt": "backend_tests_test_admin_api_test_every_write_confirmed_requery_and_audit"
     },
     {
       "source": "backend_tests_test_admin_api_py_parametrize",
@@ -56695,8 +57660,8 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_tests_test_admin_api_test_scenario_redirect_injection_rejected",
-      "_tgt": "backend_tests_test_admin_api_py_parametrize"
+      "_src": "backend_tests_test_admin_api_py_parametrize",
+      "_tgt": "backend_tests_test_admin_api_test_scenario_redirect_injection_rejected"
     },
     {
       "source": "backend_tests_test_admin_api_py_parametrize",
@@ -56708,8 +57673,8 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_tests_test_admin_api_test_unknown_ids_and_sql_injection",
-      "_tgt": "backend_tests_test_admin_api_py_parametrize"
+      "_src": "backend_tests_test_admin_api_py_parametrize",
+      "_tgt": "backend_tests_test_admin_api_test_unknown_ids_and_sql_injection"
     },
     {
       "source": "backend_tests_test_application_service_py_parametrize",
@@ -56838,8 +57803,8 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_tests_test_config_service_test_invalid_reference_rolls_back_everything",
-      "_tgt": "backend_tests_test_config_service_py_parametrize"
+      "_src": "backend_tests_test_config_service_py_parametrize",
+      "_tgt": "backend_tests_test_config_service_test_invalid_reference_rolls_back_everything"
     },
     {
       "source": "backend_tests_test_config_service_py_parametrize",
@@ -56851,8 +57816,8 @@
       "weight": 1.0,
       "context": "decorator",
       "_origin": "ast",
-      "_src": "backend_tests_test_config_service_test_unknown_commit_never_retries_or_claims_rollback",
-      "_tgt": "backend_tests_test_config_service_py_parametrize"
+      "_src": "backend_tests_test_config_service_py_parametrize",
+      "_tgt": "backend_tests_test_config_service_test_unknown_commit_never_retries_or_claims_rollback"
     },
     {
       "source": "backend_tests_test_dashboard_api_py_asyncclient",
@@ -57012,6 +57977,19 @@
     },
     {
       "source": "backend_tests_test_dashboard_api_py_parametrize",
+      "target": "backend_tests_test_dashboard_api_test_persona_catalog_read_failure_preserves_real_database",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_dashboard_api.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_dashboard_api_py_parametrize",
+      "_tgt": "backend_tests_test_dashboard_api_test_persona_catalog_read_failure_preserves_real_database"
+    },
+    {
+      "source": "backend_tests_test_dashboard_api_py_parametrize",
       "target": "backend_tests_test_dashboard_api_test_unknown_persona_is_not_found_without_sql_or_path_expansion",
       "relation": "references",
       "confidence": "EXTRACTED",
@@ -57022,6 +58000,19 @@
       "_origin": "ast",
       "_src": "backend_tests_test_dashboard_api_py_parametrize",
       "_tgt": "backend_tests_test_dashboard_api_test_unknown_persona_is_not_found_without_sql_or_path_expansion"
+    },
+    {
+      "source": "backend_tests_test_domains_api_py_parametrize",
+      "target": "backend_tests_test_domains_api_test_filter_options_read_failure_preserves_real_database",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_domains_api.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_domains_api_py_parametrize",
+      "_tgt": "backend_tests_test_domains_api_test_filter_options_read_failure_preserves_real_database"
     },
     {
       "source": "backend_tests_test_domains_api_py_parametrize",
@@ -57142,6 +58133,45 @@
       "_tgt": "backend_tests_test_insights_service_test_shared_scope_unknown_filters_bounded_cursor_and_security_ids"
     },
     {
+      "source": "backend_tests_test_integration_py_parametrize",
+      "target": "backend_tests_test_integration_test_uploaded_associated_evidence_reaches_domain_and_profile",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_integration.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_integration_py_parametrize",
+      "_tgt": "backend_tests_test_integration_test_uploaded_associated_evidence_reaches_domain_and_profile"
+    },
+    {
+      "source": "backend_tests_test_integration_py_parametrize",
+      "target": "backend_tests_test_integration_test_uploaded_insight_and_context_relationship_reach_insight_reader",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_integration.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_integration_py_parametrize",
+      "_tgt": "backend_tests_test_integration_test_uploaded_insight_and_context_relationship_reach_insight_reader"
+    },
+    {
+      "source": "backend_tests_test_integration_py_parametrize",
+      "target": "backend_tests_test_integration_test_uploaded_metric_reflection_preserves_exact_value_period_and_source",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_integration.py",
+      "source_location": "L134",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_integration_py_parametrize",
+      "_tgt": "backend_tests_test_integration_test_uploaded_metric_reflection_preserves_exact_value_period_and_source"
+    },
+    {
       "source": "backend_tests_test_journeys_api_py_parametrize",
       "target": "backend_tests_test_journeys_api_test_invalid_page_contract",
       "relation": "references",
@@ -57168,6 +58198,45 @@
       "_tgt": "backend_tests_test_journeys_api_test_unknown_or_wrong_type_is_404"
     },
     {
+      "source": "backend_tests_test_kpi_scope_py_parametrize",
+      "target": "backend_tests_test_kpi_scope_test_missing_period_never_borrows_other_app_or_period",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_scope.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_scope_py_parametrize",
+      "_tgt": "backend_tests_test_kpi_scope_test_missing_period_never_borrows_other_app_or_period"
+    },
+    {
+      "source": "backend_tests_test_kpi_scope_py_parametrize",
+      "target": "backend_tests_test_kpi_scope_test_no_scoped_evidence_retains_named_descriptor_without_source_values",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_scope.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_scope_py_parametrize",
+      "_tgt": "backend_tests_test_kpi_scope_test_no_scoped_evidence_retains_named_descriptor_without_source_values"
+    },
+    {
+      "source": "backend_tests_test_kpi_scope_py_parametrize",
+      "target": "backend_tests_test_kpi_scope_test_same_name_scoped_before_selection",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_scope.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_scope_py_parametrize",
+      "_tgt": "backend_tests_test_kpi_scope_test_same_name_scoped_before_selection"
+    },
+    {
       "source": "backend_tests_test_kpi_service_py_parametrize",
       "target": "backend_tests_test_kpi_service_test_absent_period_never_falls_back",
       "relation": "references",
@@ -57179,6 +58248,19 @@
       "_origin": "ast",
       "_src": "backend_tests_test_kpi_service_py_parametrize",
       "_tgt": "backend_tests_test_kpi_service_test_absent_period_never_falls_back"
+    },
+    {
+      "source": "backend_tests_test_kpi_service_py_parametrize",
+      "target": "backend_tests_test_kpi_service_test_corrupted_migration_history_rejected_without_drops",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_kpi_service.py",
+      "source_location": "L181",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_kpi_service_py_parametrize",
+      "_tgt": "backend_tests_test_kpi_service_test_corrupted_migration_history_rejected_without_drops"
     },
     {
       "source": "backend_tests_test_kpi_service_py_parametrize",
@@ -57299,6 +58381,32 @@
     },
     {
       "source": "backend_tests_test_operations_api_py_asyncio",
+      "target": "backend_tests_test_operations_api_test_scoped_uploaded_metric_has_no_competing_family_placeholder",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_operations_api.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_operations_api_py_asyncio",
+      "_tgt": "backend_tests_test_operations_api_test_scoped_uploaded_metric_has_no_competing_family_placeholder"
+    },
+    {
+      "source": "backend_tests_test_operations_api_py_asyncio",
+      "target": "backend_tests_test_operations_api_test_twoapps_exact_sources_scope_hierarchy_and_period",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_operations_api.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_operations_api_py_asyncio",
+      "_tgt": "backend_tests_test_operations_api_test_twoapps_exact_sources_scope_hierarchy_and_period"
+    },
+    {
+      "source": "backend_tests_test_operations_api_py_asyncio",
       "target": "backend_tests_test_operations_api_test_unknown_wrong_type_and_security_ids",
       "relation": "references",
       "confidence": "EXTRACTED",
@@ -57338,6 +58446,32 @@
     },
     {
       "source": "backend_tests_test_operations_api_py_parametrize",
+      "target": "backend_tests_test_operations_api_test_scoped_uploaded_metric_has_no_competing_family_placeholder",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_operations_api.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_operations_api_py_parametrize",
+      "_tgt": "backend_tests_test_operations_api_test_scoped_uploaded_metric_has_no_competing_family_placeholder"
+    },
+    {
+      "source": "backend_tests_test_operations_api_py_parametrize",
+      "target": "backend_tests_test_operations_api_test_twoapps_exact_sources_scope_hierarchy_and_period",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_operations_api.py",
+      "source_location": "L148",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_operations_api_py_parametrize",
+      "_tgt": "backend_tests_test_operations_api_test_twoapps_exact_sources_scope_hierarchy_and_period"
+    },
+    {
+      "source": "backend_tests_test_operations_api_py_parametrize",
       "target": "backend_tests_test_operations_api_test_unknown_wrong_type_and_security_ids",
       "relation": "references",
       "confidence": "EXTRACTED",
@@ -57374,6 +58508,19 @@
       "_origin": "ast",
       "_src": "backend_tests_test_operations_service_py_fixture",
       "_tgt": "backend_tests_test_operations_service_service"
+    },
+    {
+      "source": "backend_tests_test_operations_service_py_parametrize",
+      "target": "backend_tests_test_operations_service_test_same_label_distinct_supported_operations",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_operations_service.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_operations_service_py_parametrize",
+      "_tgt": "backend_tests_test_operations_service_test_same_label_distinct_supported_operations"
     },
     {
       "source": "backend_tests_test_operations_service_py_parametrize",
@@ -57452,6 +58599,58 @@
       "_origin": "ast",
       "_src": "backend_tests_test_readiness_service_py_parametrize",
       "_tgt": "backend_tests_test_readiness_service_test_named_metrics_exact_period_missing_definition_and_other_app"
+    },
+    {
+      "source": "backend_tests_test_storage_constraints_py_fixture",
+      "target": "backend_tests_test_storage_constraints_constraint_store",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_storage_constraints.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_storage_constraints_constraint_store",
+      "_tgt": "backend_tests_test_storage_constraints_py_fixture"
+    },
+    {
+      "source": "backend_tests_test_storage_constraints_py_parametrize",
+      "target": "backend_tests_test_storage_constraints_test_metric_dual_text_and_number_is_rejected",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_storage_constraints.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_storage_constraints_py_parametrize",
+      "_tgt": "backend_tests_test_storage_constraints_test_metric_dual_text_and_number_is_rejected"
+    },
+    {
+      "source": "backend_tests_test_storage_constraints_py_parametrize",
+      "target": "backend_tests_test_storage_constraints_test_metric_single_or_missing_value_is_preserved",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_storage_constraints.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_storage_constraints_py_parametrize",
+      "_tgt": "backend_tests_test_storage_constraints_test_metric_single_or_missing_value_is_preserved"
+    },
+    {
+      "source": "backend_tests_test_storage_constraints_py_parametrize",
+      "target": "backend_tests_test_storage_constraints_test_schema_notnull_and_check_rejections_are_atomic",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_storage_constraints.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_storage_constraints_py_parametrize",
+      "_tgt": "backend_tests_test_storage_constraints_test_schema_notnull_and_check_rejections_are_atomic"
     },
     {
       "source": "backend_tests_test_upload_service_py_parametrize",
@@ -57558,6 +58757,71 @@
       "_tgt": "backend_tests_test_upload_service_test_unsafe_zip_xml_and_path_rejected"
     },
     {
+      "source": "backend_tests_test_upload_service_py_parametrize",
+      "target": "backend_tests_test_upload_service_test_xlsx_container_branches_preserve_database",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_upload_service.py",
+      "source_location": "L344",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_upload_service_py_parametrize",
+      "_tgt": "backend_tests_test_upload_service_test_xlsx_container_branches_preserve_database"
+    },
+    {
+      "source": "backend_tests_test_upload_service_py_parametrize",
+      "target": "backend_tests_test_upload_service_test_xlsx_limit_branches_preserve_full_database",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_upload_service.py",
+      "source_location": "L317",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_upload_service_py_parametrize",
+      "_tgt": "backend_tests_test_upload_service_test_xlsx_limit_branches_preserve_full_database"
+    },
+    {
+      "source": "backend_tests_test_upload_service_py_parametrize",
+      "target": "backend_tests_test_upload_service_test_xlsx_literal_cell_branches_commit_exact_source",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_upload_service.py",
+      "source_location": "L296",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_upload_service_py_parametrize",
+      "_tgt": "backend_tests_test_upload_service_test_xlsx_literal_cell_branches_commit_exact_source"
+    },
+    {
+      "source": "backend_tests_test_upload_service_py_parametrize",
+      "target": "backend_tests_test_upload_service_test_xlsx_rejection_branch_preserves_full_database",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_upload_service.py",
+      "source_location": "L282",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_upload_service_py_parametrize",
+      "_tgt": "backend_tests_test_upload_service_test_xlsx_rejection_branch_preserves_full_database"
+    },
+    {
+      "source": "backend_tests_test_upload_service_py_parametrize",
+      "target": "backend_tests_test_upload_service_test_xlsx_unsafe_archive_branches_preserve_database",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/test_upload_service.py",
+      "source_location": "L330",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast",
+      "_src": "backend_tests_test_upload_service_py_parametrize",
+      "_tgt": "backend_tests_test_upload_service_test_xlsx_unsafe_archive_branches_preserve_database"
+    },
+    {
       "source": "backend_tests_test_uploads_api_py_parametrize",
       "target": "backend_tests_test_uploads_api_test_invalid_envelope_status_400",
       "relation": "references",
@@ -57585,10 +58849,10 @@
     }
   ],
   "metadata": {
-    "built_at": "2026-11-19T05:46:22.082727+00:00",
+    "built_at": "2026-11-19T09:20:39.535854+00:00",
     "version": "graph_update-v1",
-    "codebase_root": "/var/lib/sel-nexus/artifacts-v2/T09digiai0000586618112607401034/developer",
+    "codebase_root": "/var/lib/sel-nexus/artifacts-v2/T56digiai0000862819112608090005/developer",
     "force": true,
-    "files_scanned": 150
+    "files_scanned": 155
   }
 }
