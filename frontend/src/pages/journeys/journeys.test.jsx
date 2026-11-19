@@ -6,6 +6,7 @@ import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { SharedContextProvider, useSharedContext } from '../../context/SharedContextProvider';
 import JourneyList from './JourneyList';
 import JourneyMap from './JourneyMap';
+import RelationshipOverlay from './RelationshipOverlay';
 import PortfolioExplorer from '../portfolio/PortfolioExplorer';
 import ApplicationProfile from '../portfolio/ApplicationProfile';
 import { GlobalSearch } from '../../components/shell/GlobalSearch';
@@ -163,4 +164,68 @@ it('pages the list through links and retains selected hierarchy', async () => {
   await user.click(await screen.findByRole('link', { name: 'First journeys' }));
   expect(screen.getByLabelText('URL')).not.toHaveTextContent('journeyCursor');
   expect(screen.getByLabelText('URL')).toHaveTextContent('hierarchyNodeId=s1');
+});
+
+/** Render supplied overlay rows without changing routing or context contracts. */
+function mountOverlay(overlay, kind = 'depends_on') {
+  return render(
+    <MemoryRouter initialEntries={['/journeys/journey-1?domain=d1&overlay=depends_on']}>
+      <SharedContextProvider>
+        <RelationshipOverlay overlay={overlay} kind={kind} />
+      </SharedContextProvider>
+    </MemoryRouter>,
+  );
+}
+
+it('connects only supplied edge identities with accessible source-to-target direction and provenance', () => {
+  const second = { ...api, type: 'depends_on', sourceEntityId: app.id, sourceLabel: app.label };
+  mountOverlay({ availability: 'available', value: [dependency, second, api] });
+  const edges = within(screen.getByRole('list', { name: 'Dependency directed relationships' })).getAllByRole('listitem');
+  expect(edges).toHaveLength(2);
+  for (const [index, row] of [dependency, second].entries()) {
+    expect(edges[index]).toHaveAttribute('data-relationship-id', row.id);
+    const pair = within(edges[index]).getByRole('group', {
+      name: `${row.sourceLabel} (${row.sourceEntityId}) → ${row.target.label} (${row.target.entityId}): ${row.type}`,
+    });
+    expect(pair.querySelectorAll('[data-entity-id]')).toHaveLength(2);
+    expect(pair.querySelectorAll('[data-entity-id]')[0]).toHaveAttribute('data-entity-id', row.sourceEntityId);
+    expect(pair.querySelectorAll('[data-entity-id]')[1]).toHaveAttribute('data-entity-id', row.target.entityId);
+    expect(within(pair).getByText(row.type, { exact: true })).toBeInTheDocument();
+    expect(within(pair).getByText(row.id, { exact: true })).toBeInTheDocument();
+    expect(within(edges[index]).getByText(`Relationship source: ${row.source} · ${row.sourceRef}`)).toBeInTheDocument();
+  }
+  expect(screen.getByText(/repeated nodes do not add links/)).toBeInTheDocument();
+  expect(screen.queryByRole('group', { name: /: impact$/ })).not.toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'Open application · Member Portal' })).toHaveAttribute('href',
+    expect.stringContaining('/applications/app-1?'));
+});
+
+it.each([
+  ['absent', undefined],
+  ['unavailable despite supplied rows', { availability: 'unavailable', value: [dependency] }],
+  ['empty', { availability: 'available', value: [] }],
+  ['wrong overlay only', { availability: 'available', value: [api] }],
+])('discloses %s relationships without drawing nodes or offering drilldown', (_, overlay) => {
+  mountOverlay(overlay);
+  expect(screen.getByRole('status')).toHaveTextContent('Dependency relationships unavailable. No associated evidence supplied in this scope.');
+  expect(screen.queryByRole('list')).not.toBeInTheDocument();
+  expect(screen.queryByRole('group')).not.toBeInTheDocument();
+  expect(screen.queryByRole('link')).not.toBeInTheDocument();
+});
+
+it('keeps API inspection native and exposes missing relationship and asset references', async () => {
+  const user = userEvent.setup();
+  mountOverlay({ availability: 'available', value: [{ ...api, sourceRef: undefined,
+    target: { ...api.target, sourceRef: undefined } }] }, 'impact');
+  expect(screen.getByRole('list', { name: 'Impact directed relationships' })).toBeInTheDocument();
+  expect(screen.getByText('Relationship source: uploaded · Reference unavailable')).toBeInTheDocument();
+  expect(screen.getAllByText('Asset source: local · Reference unavailable')).toHaveLength(2);
+  const summary = screen.getByText('Inspect API asset · Enrollment API');
+  expect(summary.tagName).toBe('SUMMARY');
+  expect(summary.closest('details')).not.toHaveAttribute('open');
+  // JSDOM does not implement native summary keyboard activation; Playwright covers Enter.
+  await user.click(summary);
+  expect(summary.closest('details')).toHaveAttribute('open');
+  expect(screen.getByText(/Represented API asset: api-1/)).toBeVisible();
+  expect(screen.queryByRole('link')).not.toBeInTheDocument();
 });

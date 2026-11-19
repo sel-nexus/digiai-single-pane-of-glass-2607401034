@@ -245,3 +245,131 @@ it('omits unsafe destinations and unproven associations rather than inventing a 
   expect(card.getByText('Related destinations unavailable.')).toBeInTheDocument();
   expect(card.queryByRole('link')).not.toBeInTheDocument();
 });
+
+
+it('adds an accessible comparison while retaining exact values, units, provenance and source order', () => {
+  const supplied = [
+    { ...point('later', 'later category', '1200.2500'), unit: 'USD' },
+    { ...point('earlier', 'earlier category', '-400.5000'), unit: 'USD' },
+  ];
+  const { rerender } = render(<TransformationTrends series={[{ label: 'Value', availability: 'available', points: supplied }]} />);
+  const chart = screen.getByRole('img', { name: 'Value: source-ordered comparison (USD)' });
+  expect(chart).toHaveAccessibleDescription('1. later category: 1200.2500 (unit: USD); Source: uploaded · source-later | 2. earlier category: -400.5000 (unit: USD); Source: uploaded · source-earlier');
+  expect(screen.getByText(/Exact supplied values:/)).toHaveTextContent('1200.2500 (unit: USD)');
+  const list = within(screen.getByRole('list', { name: 'Value source order' })).getAllByRole('listitem');
+  expect(list[0]).toHaveTextContent('later category · 1200.2500 USD');
+  expect(list[1]).toHaveTextContent('earlier category · -400.5000 USD');
+  expect(chart.querySelectorAll('rect')).toHaveLength(2);
+  expect(chart.querySelector('polyline, path')).toBeNull();
+  rerender(<TransformationTrends series={[{ label: 'Value', availability: 'available', points: [...supplied].reverse() }]} />);
+  expect(screen.getByRole('img')).toHaveAccessibleDescription(/^1\. earlier category:/);
+  expect(supplied[0].value).toBe('1200.2500');
+});
+
+it.each([
+  { availability: 'unavailable' }, { availability: undefined },
+  { source: null }, { source: '' }, { source: ' ' }, { source: 42 },
+  { sourceRef: null }, { sourceRef: ' ' }, { sourceRef: 42 },
+  { period: null }, { period: ' ' },
+  { unit: null }, { unit: '' }, { unit: ' ' }, { unit: 'hours' },
+  { value: null }, { value: undefined }, { value: true }, { value: false },
+  { value: {} }, { value: [] }, { value: '' }, { value: ' ' },
+  { value: 'Developing' }, { value: '1 hour' }, { value: '0x10' },
+  { value: '1,000' }, { value: '12%' }, { value: 'Infinity' },
+  { value: '1e309' }, { value: Infinity }, { value: -Infinity }, { value: NaN },
+])('leaves the entire comparison unplotted for invalid point %j', (override) => {
+  const supplied = [
+    { ...point('one', 'later', 12), unit: 'USD' },
+    { ...point('two', 'earlier', 8), unit: 'USD', ...override },
+  ];
+  render(<TransformationTrends series={[{ label: 'Value', availability: 'available', points: supplied }]} />);
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText(/Comparison unplotted/)).toBeInTheDocument();
+  expect(within(screen.getByRole('list', { name: 'Value source order' })).getAllByRole('listitem')).toHaveLength(2);
+  expect(screen.getByText('later · 12 USD')).toBeInTheDocument();
+});
+
+it.each([
+  { availability: 'unavailable', points: [point('1', 'p1', 1), point('2', 'p2', 2)] },
+  { points: [point('1', 'p1', 1)] },
+  { points: [] }, { points: {} },
+])('withholds charts for missing or unavailable whole series %j', (override) => {
+  render(<TransformationTrends series={[{ label: 'Adoption', availability: 'available', ...override }]} />);
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText(/Comparison unplotted/)).toBeInTheDocument();
+});
+
+it.each([
+  [-10, 0, 20], [-10, -5, -0], [0, -0, 0], [7, 7, 7], [-7, -7, -7],
+  [-Number.MAX_VALUE, 0, Number.MAX_VALUE], [Number.MIN_VALUE, 0, -Number.MIN_VALUE],
+])('keeps signed bars and zero markers bounded for %j', (...values) => {
+  const supplied = values.map((value, index) => ({ ...point(String(index), `category-${index}`, value), unit: 'hours' }));
+  render(<TransformationTrends series={[{ label: 'Effort', availability: 'available', points: supplied }]} />);
+  const chart = screen.getByRole('img', { name: 'Effort: source-ordered comparison (hours)' });
+  const baseline = Number(chart.querySelector('line').getAttribute('x1'));
+  const bars = [...chart.querySelectorAll('rect')];
+  for (const [index, bar] of bars.entries()) {
+    const x = Number(bar.getAttribute('x'));
+    const width = Number(bar.getAttribute('width'));
+    expect(Number.isFinite(x)).toBe(true);
+    expect(Number.isFinite(width)).toBe(true);
+    expect(x).toBeGreaterThanOrEqual(80);
+    expect(width).toBeGreaterThanOrEqual(0);
+    expect(x + width).toBeLessThanOrEqual(560);
+    if (values[index] < 0) { expect(x).toBeLessThan(baseline); expect(x + width).toBeCloseTo(baseline); }
+    else { expect(x).toBe(baseline); }
+    if (values[index] === 0) expect(width).toBe(0);
+    else expect(width).toBeGreaterThan(0);
+  }
+  expect(chart.querySelectorAll('circle')).toHaveLength(values.filter((value) => value === 0).length);
+  expect(chart.outerHTML).not.toMatch(/NaN|Infinity/);
+  if (values.every((value) => value === values[0])) {
+    expect(new Set(bars.map((bar) => bar.getAttribute('width'))).size).toBe(1);
+  }
+});
+
+it.each(['1e-400', '+1e-400', '-1e-400'])('withholds qualified underflow %s without representing it as exact zero', (value) => {
+  const supplied = [point('tiny', 'tiny category', value), point('other', 'other category', '1')];
+  render(<TransformationTrends series={[{ label: 'Adoption', availability: 'available', points: supplied }]} />);
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText(/Comparison unplotted/)).toHaveTextContent(/magnitudes.*numeric conversion or chart scaling/i);
+  expect(screen.getByText(/Exact supplied values:/)).toHaveTextContent(`${value} (unit: %)`);
+  expect(document.querySelector('circle')).toBeNull();
+  expect(supplied[0].value).toBe(value);
+});
+
+it.each([
+  [Number.MAX_VALUE, Number.MIN_VALUE, -Number.MIN_VALUE, 0],
+  [-Number.MAX_VALUE, Number.MIN_VALUE, -Number.MIN_VALUE, 0],
+  [-Number.MAX_VALUE, Number.MAX_VALUE, Number.MIN_VALUE, -Number.MIN_VALUE],
+  [-1, 1, Number.MIN_VALUE, -Number.MIN_VALUE],
+])('withholds mixed signed magnitudes %j when nonzero bars would collapse', (...values) => {
+  const supplied = values.map((value, index) => ({ ...point(String(index), `category-${index}`, value), unit: 'hours' }));
+  render(<TransformationTrends series={[{ label: 'Effort', availability: 'available', points: supplied }]} />);
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText(/Comparison unplotted/)).toHaveTextContent(/magnitudes.*numeric conversion or chart scaling/i);
+  const exact = screen.getByText(/Exact supplied values:/);
+  values.forEach((value, index) => expect(exact).toHaveTextContent(`${index + 1}. category-${index}: ${String(value)} (unit: hours)`));
+  expect(document.querySelector('circle')).toBeNull();
+  expect(within(screen.getByRole('list', { name: 'Effort source order' })).getAllByRole('listitem')).toHaveLength(values.length);
+});
+
+it.each(['0', '-0', '+0.000e-400'])('retains true numeric-text zero markers for %s', (value) => {
+  render(<TransformationTrends series={[{ label: 'Effort', availability: 'available', points: [
+    { ...point('zero', 'zero category', value), unit: 'hours' },
+    { ...point('other', 'other category', 1), unit: 'hours' },
+  ] }]} />);
+  const chart = screen.getByRole('img');
+  expect(chart.querySelectorAll('circle')).toHaveLength(1);
+  expect(chart.querySelector('rect')).toHaveAttribute('width', '0');
+  expect(chart).toHaveAccessibleDescription(new RegExp(`${value.replace(/[+.*]/g, '\\$&')} \\(unit: hours\\)`));
+});
+
+it('charts numeric-text percentages with unchanged two-decimal presentation and exact alternatives', () => {
+  render(<TransformationTrends series={[{ label: 'Adoption', availability: 'available', points: [
+    point('one', 'later', '-1.005'), point('two', 'earlier', '+6.54321e1'),
+  ] }]} />);
+  expect(screen.getByText('later · -1.01%')).toBeInTheDocument();
+  expect(screen.getByText('earlier · 65.43%')).toBeInTheDocument();
+  expect(screen.getByRole('img')).toHaveAccessibleDescription(/-1\.005 \(unit: %\).*\+6\.54321e1 \(unit: %\)/);
+});
