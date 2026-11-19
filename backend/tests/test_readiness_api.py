@@ -16,6 +16,7 @@ async def test_evidence_contract_provenance_and_exact_scope(client):
         failed = await client.get('/api/v1/readiness/evidence', params=params)
         assert failed.status_code == 404 and failed.json()['error']['code'] == 'RESOURCE_NOT_FOUND'
     empty = await client.get('/api/v1/readiness/evidence', params={'applicationId': 'app-0002'})
+    assert empty.status_code == 200
     assert empty.json()['data'] == [] and empty.json()['page']['total'] == 0
 
 
@@ -29,12 +30,18 @@ async def test_metrics_family_period_and_page(client, family, count):
     assert all(item['family'] == family and item['period'] == 'month' for item in body['data'])
     if family == 'release':
         assert next(item for item in body['data'] if item['id'] == 'pipeline')['value'] == 97.1234
-    week = (await client.get('/api/v1/readiness/metrics', params={'family': family, 'period': 'week'})).json()
+    week_response = await client.get('/api/v1/readiness/metrics', params={'family': family, 'period': 'week'})
+    assert week_response.status_code == 200
+    week = week_response.json()
     assert len(week['data']) == count
     assert all(item['value'] is None and item['sourceRef'] is None and item['period'] == 'week' for item in week['data'])
-    first = (await client.get('/api/v1/readiness/metrics', params={'family': family, 'limit': 2})).json()
+    first_response = await client.get('/api/v1/readiness/metrics', params={'family': family, 'limit': 2})
+    assert first_response.status_code == 200
+    first = first_response.json()
     assert first['page']['nextCursor'] == '2'
-    second = (await client.get('/api/v1/readiness/metrics', params={'family': family, 'limit': 2, 'cursor': '2'})).json()
+    second_response = await client.get('/api/v1/readiness/metrics', params={'family': family, 'limit': 2, 'cursor': '2'})
+    assert second_response.status_code == 200
+    second = second_response.json()
     assert not {item['id'] for item in first['data']} & {item['id'] for item in second['data']}
 
 
@@ -52,7 +59,9 @@ async def test_shared_filters_unsupported_and_injection_empty(client, path, extr
     for params in ({'domain': "' OR 1=1--"}, {'application': 'app-0002'}):
         response = await client.get('/api/v1/readiness' + path, params=extra | params)
         assert response.status_code == 200 and response.json()['data'] == []
-    unsupported = (await client.get('/api/v1/readiness' + path, params=extra | {'undefinedDimension': 'x'})).json()
+    unsupported_response = await client.get('/api/v1/readiness' + path, params=extra | {'undefinedDimension': 'x'})
+    assert unsupported_response.status_code == 200
+    unsupported = unsupported_response.json()
     assert unsupported['data'] == [] and unsupported['unavailableDimensions'] == ['undefinedDimension']
     scoped = await client.get('/api/v1/readiness' + path, params=list(extra.items()) + [('application', 'app-0002'), ('application', 'app-0001'), ('domain', 'domain-member'), ('hierarchyNodeId', 'service-enrollment')])
     assert scoped.status_code == 200 and scoped.json()['data']

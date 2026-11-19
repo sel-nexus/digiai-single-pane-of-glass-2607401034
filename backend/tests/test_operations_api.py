@@ -115,6 +115,21 @@ async def test_observability_summary_context_and_no_association(client):
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize('params,location,message', [
+    ({'limit': 0}, 'limit', 'Input should be greater than or equal to 1'),
+    ({'limit': 101}, 'limit', 'Input should be less than or equal to 100'),
+    ({'cursor': '01'}, 'cursor', "String should match pattern '^(0|[1-9][0-9]{0,6})$'"),
+])
+async def test_observability_rejects_invalid_pagination(client, params, location, message):
+    """Validate observability pagination at its real HTTP boundary."""
+    response = await client.get('/api/v1/operations/observability', params=params)
+    assert response.status_code == 422
+    assert response.json() == {'error': {'code': 'INVALID_REQUEST',
+                                       'message': 'Check the supplied query parameters.',
+                                       'details': {'issues': [{'location': ['query', location], 'message': message}]}}}
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize('endpoint', ['incidents', 'correlations?incidentId=ticket-1', 'metrics', 'observability'])
 async def test_unsupported_filters_are_unavailable(client, endpoint):
     """Never ignore an unsupported selected dimension."""

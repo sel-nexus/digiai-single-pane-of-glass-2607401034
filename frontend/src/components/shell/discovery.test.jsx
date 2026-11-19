@@ -1,5 +1,5 @@
 /** Verify discovery controls, safe rendering and context-preserving navigation. */
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, afterEach, expect, it, vi } from 'vitest';
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
@@ -274,6 +274,28 @@ it.each([
   expect(screen.getByLabelText('Shell URL')).toHaveTextContent(`${path}?domain=domain-1&hierarchyNodeId=service-1`);
   await user.click(toggle);
   expect(toggle).toHaveAttribute('aria-expanded', 'true');
+});
+
+it.each([
+  ['Meta', { metaKey: true }], ['Control', { ctrlKey: true }],
+  ['Shift', { shiftKey: true }], ['Alt', { altKey: true }],
+  ['middle button', { button: 1 }], ['right button', { button: 2 }],
+])('keeps navigation open and focus unchanged for a %s click', async (_name, click) => {
+  const user = userEvent.setup();
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  const toggle = screen.getByRole('button', { name: 'Navigation', exact: true });
+  await user.click(toggle);
+  const navigation = screen.getByRole('navigation', { name: 'Primary', exact: true });
+  const link = within(navigation).getByRole('link', { name: 'Dashboard', exact: true });
+  link.focus();
+  // Suppress jsdom's native navigation while retaining the click seen by the shell.
+  link.addEventListener('click', (event) => event.preventDefault(), { once: true });
+  fireEvent.click(link, click);
+  expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  expect(navigation).toHaveClass('expanded');
+  expect(link).toHaveFocus();
+  expect(screen.getByLabelText('Shell URL')).toHaveTextContent('/portfolio?domain=domain-1&hierarchyNodeId=service-1');
 });
 
 it('keeps anonymous selection free of navigation and preserves brand and provenance', () => {

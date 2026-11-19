@@ -40,8 +40,38 @@ test('retains scoped evidence, theme and accessible navigation across routes', a
     await expect(toggle).toBeFocused();
   } else {
     await expect(navigation).toBeVisible();
-    await expect(page.locator('.app-header')).toHaveCSS('min-height', '80px');
-    await expect(page.locator('.nav-bar')).toHaveCSS('width', '256px');
+    const header = page.locator('.app-header');
+    const sidebar = page.locator('.nav-bar');
+    await expect(header).toHaveCSS('position', 'fixed');
+    await expect(sidebar).toHaveCSS('position', 'fixed');
+    const before = await page.evaluate(() => {
+      const rect = (selector) => {
+        const { x, y, width, height, right, bottom } = document.querySelector(selector).getBoundingClientRect();
+        return { x, y, width, height, right, bottom };
+      };
+      return { header: rect('.app-header'), sidebar: rect('.nav-bar'), main: rect('main') };
+    });
+    expect(before.header.y).toBe(0);
+    expect(before.header.height).toBe(80);
+    expect(before.sidebar.x).toBe(0);
+    expect(before.sidebar.y).toBe(80);
+    expect(before.sidebar.width).toBe(256);
+    expect(before.main.x).toBeGreaterThanOrEqual(before.sidebar.right);
+    expect(before.main.y).toBeGreaterThanOrEqual(before.header.bottom);
+    await page.evaluate(() => window.scrollTo(0, 600));
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
+    const after = await page.evaluate(() => {
+      const rect = (selector) => {
+        const { x, y, width, height, right, bottom } = document.querySelector(selector).getBoundingClientRect();
+        return { x, y, width, height, right, bottom };
+      };
+      return { header: rect('.app-header'), sidebar: rect('.nav-bar'), main: rect('main'), viewportHeight: innerHeight };
+    });
+    expect(after.header).toEqual(before.header);
+    expect(after.sidebar).toEqual(before.sidebar);
+    expect(after.sidebar.bottom).toBeLessThanOrEqual(after.viewportHeight);
+    expect(after.main.y).toBeLessThan(before.main.y - 100);
+    await expect(navigation.getByRole('link', { name: 'Portfolio', exact: true })).toBeVisible();
   }
   const hierarchyResponse = responseFor(page, '/hierarchy');
   await navigatePrimary(page, 'Portfolio');
