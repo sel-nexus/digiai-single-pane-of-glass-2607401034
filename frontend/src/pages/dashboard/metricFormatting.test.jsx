@@ -1,8 +1,69 @@
 /** Verify CSV/XLSX-equivalent decimal text presentation without mutating evidence. */
-import { expect, it } from 'vitest';
-import { formatMetric } from './KpiBoard';
+import { afterEach, expect, it } from 'vitest';
+import { cleanup, render, screen } from '@testing-library/react';
+import { formatMetric, MetricCard } from './KpiBoard';
+
+afterEach(cleanup);
 
 const metric = { availability: 'available', unit: '%' };
+
+const qualified = { ...metric, label: 'Availability', period: 'month', source: 'uploaded', sourceRef: 'csv-source-a' };
+
+it.each([0, 100, 42.125, '0', '-0', '100', '+12.345', '.125', '9.999e1', '99.2345600000000000001']) (
+  'plots qualified supplied percentage %s on the fixed scale with exact evidence', (value) => {
+    const supplied = Object.freeze({ ...qualified, value });
+    render(<MetricCard metric={supplied} />);
+    const gauge = screen.getByRole('img');
+    expect(gauge).toHaveAccessibleName(`Availability: supplied ${value}% on a 0–100% scale`);
+    expect(gauge).toHaveAccessibleDescription('Fixed percentage scale only; not a score, target, trend or inferred health.');
+    expect(gauge.querySelector('.metric-gauge-value')).toHaveAttribute('stroke-dasharray', `${Number(value)} 100`);
+    expect(gauge.querySelector('.metric-gauge-value')).toHaveAttribute('pathLength', '100');
+    expect(screen.getByText(formatMetric(supplied))).toBeVisible();
+    expect(screen.getByText(`Supplied value: ${value}%`)).toBeVisible();
+    expect(screen.getByText('month · uploaded')).toBeVisible();
+    expect(screen.getByText('Source: csv-source-a')).toBeVisible();
+    expect(supplied.value).toBe(value);
+  },
+);
+
+it.each([-1, 100.01, '-.001', '-1e-1000', '100.0000000000000000001', '101', '1e3']) (
+  'withholds the gauge for raw out-of-range percentage %s even when display rounds into range', (value) => {
+    render(<MetricCard metric={{ ...qualified, value }} />);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.getByText('Visualization unavailable: supplied percentage is outside 0–100%.')).toBeVisible();
+    expect(screen.getByText(`Supplied value: ${value}%`)).toBeVisible();
+    expect(screen.getByText(formatMetric({ ...qualified, value }))).toBeVisible();
+  },
+);
+
+it.each(['', ' 12 ', '12%', '0x10', 'NaN', 'Infinity', '1e1001', '9'.repeat(1025), true, {}, [], NaN, Infinity]) (
+  'does not plot malformed or unsupported percentage %s', (value) => {
+    render(<MetricCard metric={{ ...qualified, value }} />);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.getByText('Unavailable', { exact: true })).toBeVisible();
+    expect(screen.getByText('Visualization unavailable: unsupported finite percentage value.')).toBeVisible();
+  },
+);
+
+it.each([
+  { value: null }, { value: undefined }, { value: 50, availability: 'unavailable' },
+  { value: 50, period: null }, { value: 50, source: '' }, { value: 50, sourceRef: null },
+  { value: 50, period: ' ' }, { value: 50, source: ' ' }, { value: 50, sourceRef: ' ' },
+])('withholds unqualified or missing percentage evidence %s', (override) => {
+  render(<MetricCard metric={{ ...qualified, ...override }} />);
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText(/Visualization unavailable:/)).toBeVisible();
+});
+
+it('keeps non-percentage measures textual and preserves an alternate title and provenance', () => {
+  render(<MetricCard title="Release duration" metric={{ ...qualified, value: '12.3450000000000000001', unit: 'hours' }} />);
+  expect(screen.getByRole('article', { name: 'Release duration' })).toBeVisible();
+  expect(screen.getByText('12.3450000000000000001 hours')).toBeVisible();
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText('Textual measure: no percentage visualization.')).toBeVisible();
+  expect(screen.getByText('month · uploaded')).toBeVisible();
+  expect(screen.getByText('Source: csv-source-a')).toBeVisible();
+});
 
 it.each([
   ['0', '0.00%'], ['+0', '0.00%'], ['-0', '0.00%'], [0, '0.00%'],

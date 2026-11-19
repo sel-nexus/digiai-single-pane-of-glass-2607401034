@@ -88,6 +88,15 @@ main > * { min-width: 0; }
 .metric-value { font: 400 clamp(1.8rem, 3vw, 2.25rem)/1.3 'Geist Mono', monospace; font-variant-numeric: tabular-nums; margin: 20px 0 14px; overflow-wrap: anywhere; }
 .metric-card .muted,.source-ref { font-size: .75rem; }
 .source-ref { margin-top: 8px; overflow-wrap: anywhere; }
+/* A single brand hue encodes supplied magnitude, never a health threshold. */
+.metric-visualization { margin: 0 0 20px; display: grid; justify-items: start; gap: 8px; }
+.metric-visualization svg { width: 120px; max-width: 100%; height: auto; display: block; }
+.metric-gauge-track { stroke: var(--border); }
+.metric-gauge-value { stroke: var(--primary); stroke-linecap: butt; }
+.metric-visualization text { fill: var(--foreground-muted); font: 12px 'Geist Mono', monospace; }
+.metric-visualization figcaption,.metric-visualization-context,.metric-source-value { color: var(--foreground-muted); font-size: .75rem; overflow-wrap: anywhere; }
+.metric-visualization-context { margin-bottom: 20px; }
+.metric-source-value { margin-bottom: 12px; font-variant-numeric: tabular-nums; }
 .section-stack { margin-top: 64px; }
 .section-stack > p { margin: 12px 0 24px; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
