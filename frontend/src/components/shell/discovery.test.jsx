@@ -1,5 +1,5 @@
 /** Verify discovery controls, safe rendering and context-preserving navigation. */
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, afterEach, expect, it, vi } from 'vitest';
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
@@ -276,6 +276,28 @@ it.each([
   expect(toggle).toHaveAttribute('aria-expanded', 'true');
 });
 
+it.each([
+  ['Meta', { metaKey: true }], ['Control', { ctrlKey: true }],
+  ['Shift', { shiftKey: true }], ['Alt', { altKey: true }],
+  ['middle button', { button: 1 }], ['right button', { button: 2 }],
+])('keeps navigation open and focus unchanged for a %s click', async (_name, click) => {
+  const user = userEvent.setup();
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  const toggle = screen.getByRole('button', { name: 'Navigation', exact: true });
+  await user.click(toggle);
+  const navigation = screen.getByRole('navigation', { name: 'Primary', exact: true });
+  const link = within(navigation).getByRole('link', { name: 'Dashboard', exact: true });
+  link.focus();
+  // Suppress jsdom's native navigation while retaining the click seen by the shell.
+  link.addEventListener('click', (event) => event.preventDefault(), { once: true });
+  fireEvent.click(link, click);
+  expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  expect(navigation).toHaveClass('expanded');
+  expect(link).toHaveFocus();
+  expect(screen.getByLabelText('Shell URL')).toHaveTextContent('/portfolio?domain=domain-1&hierarchyNodeId=service-1');
+});
+
 it('keeps anonymous selection free of navigation and preserves brand and provenance', () => {
   mountShell('/');
   expect(screen.queryByRole('navigation', { name: 'Primary' })).not.toBeInTheDocument();
@@ -284,6 +306,32 @@ it('keeps anonymous selection free of navigation and preserves brand and provena
   expect(document.querySelector('.brand-mark')).toHaveAttribute('aria-hidden', 'true');
   expect(screen.getByText(/Read-only synthetic evidence/)).toBeInTheDocument();
   expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveAttribute('href', '#main-content');
+});
+
+it('closes navigation with Escape and returns focus to its trigger', async () => {
+  const user = userEvent.setup();
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  const toggle = screen.getByRole('button', { name: 'Navigation', exact: true });
+  await user.click(toggle);
+  const dashboard = screen.getByRole('link', { name: 'Dashboard', exact: true });
+  dashboard.focus();
+  await user.keyboard('{Escape}');
+  expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(toggle).toHaveFocus();
+});
+
+it('changes theme without changing the current scope', async () => {
+  const user = userEvent.setup();
+  document.documentElement.dataset.theme = 'light';
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  await user.click(screen.getByRole('button', { name: 'Use dark theme' }));
+  expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+  expect(screen.getByLabelText('Shell URL')).toHaveTextContent('/portfolio?domain=domain-1&hierarchyNodeId=service-1');
+  await user.click(screen.getByRole('button', { name: 'Use light theme' }));
+  expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+  localStorage.removeItem('digiai-theme');
 });
 
 it('supports keyboard Dashboard selection and closes navigation without losing context', async () => {
@@ -297,5 +345,6 @@ it('supports keyboard Dashboard selection and closes navigation without losing c
   expect(screen.getByRole('link', { name: 'Dashboard', exact: true })).toHaveFocus();
   await user.keyboard('{Enter}');
   expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByRole('main')).toHaveFocus();
   expect(screen.getByLabelText('Shell URL')).toHaveTextContent('/dashboard?domain=domain-1&hierarchyNodeId=service-1');
 });

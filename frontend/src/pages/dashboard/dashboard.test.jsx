@@ -133,3 +133,57 @@ it('renders distinct same-name text evidence with separate source references', a
   expect(board.getByText('Source: xlsx-source-b')).toBeInTheDocument();
   expect(board.getAllByRole('article', { name: 'Availability %' })).toHaveLength(2);
 });
+
+it('keeps supplied widget provenance and qualified gauge in the persona overview', async () => {
+  render(<App />);
+  await userEvent.setup().click(await screen.findByRole('button', { name: /Executive/ }));
+  const overview = within(await screen.findByRole('region', { name: 'Persona widgets' }));
+  const card = within(overview.getByRole('article', { name: 'Availability %' }));
+  expect(card.getByText('99.23%')).toBeInTheDocument();
+  expect(card.getByText('Supplied value: 99.23456%')).toBeInTheDocument();
+  expect(card.getByText('month · sample')).toBeInTheDocument();
+  expect(card.getByText('Source: test-source')).toBeInTheDocument();
+  expect(card.getByRole('img', { name: /supplied 99.23456% on a 0–100% scale/ })).toHaveAccessibleDescription(/not a score, target, trend or inferred health/);
+});
+
+it('shows an empty overview and unavailable scope without inventing widgets or scenarios', async () => {
+  vi.stubGlobal('fetch', vi.fn((url) => {
+    if (new URL(url, 'http://test').pathname.endsWith('/dashboard')) {
+      return Promise.resolve(new Response(JSON.stringify({
+        data: { persona: personas[0], widgets: [], scenarios: [] },
+        availability: 'available', unavailableDimensions: ['domain'],
+      })));
+    }
+    return respond(url);
+  }));
+  render(<App />);
+  await userEvent.setup().click(await screen.findByRole('button', { name: /Executive/ }));
+  const overview = within(await screen.findByRole('region', { name: 'Persona widgets' }));
+  expect(overview.getByText('Selected scope unavailable for supplied KPIs: domain')).toBeInTheDocument();
+  expect(overview.getByText('No visible widgets configured for this persona.')).toBeInTheDocument();
+  expect(overview.queryAllByRole('article')).toHaveLength(0);
+  expect(screen.getByText('No scenarios configured.')).toBeInTheDocument();
+});
+
+it('holds dashboard evidence while loading and recovers from a dashboard read failure', async () => {
+  let rejectDashboard;
+  let attempts = 0;
+  vi.stubGlobal('fetch', vi.fn((url) => {
+    if (new URL(url, 'http://test').pathname.endsWith('/dashboard') && attempts++ === 0) {
+      return new Promise((resolve, reject) => { rejectDashboard = reject; });
+    }
+    return respond(url);
+  }));
+  const user = userEvent.setup();
+  render(<App />);
+  await user.click(await screen.findByRole('button', { name: /Executive/ }));
+  expect(screen.getByText('Loading prototype evidence…')).toBeInTheDocument();
+  expect(screen.queryByRole('region', { name: 'Persona widgets' })).not.toBeInTheDocument();
+  rejectDashboard(new TypeError('offline'));
+  expect(await screen.findByRole('alert')).toHaveTextContent('Cannot reach prototype service');
+  expect(screen.queryByRole('region', { name: 'Persona widgets' })).not.toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: 'Try again' }));
+  const overview = within(await screen.findByRole('region', { name: 'Persona widgets' }));
+  expect(overview.getByText('99.23%')).toBeInTheDocument();
+  expect(overview.getByText('Source: test-source')).toBeInTheDocument();
+});

@@ -6,6 +6,7 @@ from app.core.config import Settings
 from app.main import create_app
 from app.domain.upload_service import UploadService
 from app.schemas.uploads import UploadFailure
+from app.storage.sqlite_repository import SqliteRepository
 from test_upload_service import ENTITY_MAP, entity_data, workbook_bytes
 
 
@@ -23,14 +24,18 @@ async def test_confirmed_csv_reflects_profile_and_persists_restart(tmp_path):
             assert response.status_code == 201
             body = response.json()['data']
             assert body['outcome'] == 'success' and body['reflection']['status'] == 'confirmed'
-            profile = (await client.get('/api/v1/applications/new-app')).json()['data']
+            profile_response = await client.get('/api/v1/applications/new-app')
+            assert profile_response.status_code == 200
+            profile = profile_response.json()['data']
             assert profile['source'] == 'uploaded' and profile['sourceRef'] == body['datasetVersion']
             assert profile['categories']['health']['value'][0]['value'] == 'uploaded health'
             assert app.state.repository.read('SELECT source_filename FROM dataset_version WHERE id=?', (body['uploadId'],))[0]['source_filename'] == 'unsafe.csv'
     restarted = create_app(config)
     async with restarted.router.lifespan_context(restarted):
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=restarted), base_url='http://test') as client:
-            assert (await client.get('/api/v1/applications/new-app')).json()['data']['source'] == 'uploaded'
+            profile_response = await client.get('/api/v1/applications/new-app')
+            assert profile_response.status_code == 200
+            assert profile_response.json()['data']['source'] == 'uploaded'
 
 
 @pytest.mark.parametrize('changes', [{'datasetClass': 'not-real'}, {'mapping': '{'}, {'mapping': '[]'}, {'mapping': '{"recordKind":"entity","columns":{"K":"id"}}'}, {'mapping': '{"recordKind":"entity","columns":{"K":"id","N":"label","T":"type"},"extra":1}'}, {'actor': '{"personaId":"administrator","admin":true}'}, {'actor': '{}'}])
@@ -45,6 +50,24 @@ async def test_missing_file_and_json_not_multipart(client):
     assert (await client.post('/api/v1/admin/uploads', data=fields(), files={'other': ('a.csv', b'x', 'text/csv')})).status_code == 400
 
 
+@pytest.mark.parametrize('missing', ['datasetClass', 'mapping', 'actor'])
+async def test_missing_required_text_part_rejects_without_persisted_writes(client, tmp_path, missing):
+    """Reject each missing multipart part without changing upload-related tables."""
+    store = SqliteRepository(str(tmp_path / 'api.db'))
+    assert store.path.is_file()
+    tables = ('dataset_version', 'entity', 'relationship', 'metric', 'audit_event')
+    before = {table: store.read(f'SELECT * FROM {table} ORDER BY id') for table in tables}
+    data = fields()
+    del data[missing]
+    response = await client.post('/api/v1/admin/uploads', data=data, files={'file': ('a.csv', entity_data(), 'text/csv')})
+    assert response.status_code == 400
+    assert response.json() == {'error': {'code': 'INVALID_ENVELOPE',
+                                       'message': 'Supply exactly file, datasetClass, mapping and actor once each.',
+                                       'details': {'issues': []}}}
+    assert {table: store.read(f'SELECT * FROM {table} ORDER BY id') for table in tables} == before
+    assert store.read('SELECT id FROM entity WHERE id=?', ('new-app',)) == []
+
+
 @pytest.mark.parametrize('name,data', [('a.xls', b'anything'), ('a.xlsx', b'not zip'), ('a.csv', b'PKbinary'), ('script.exe', b'Key')])
 async def test_unsupported_type_415(client, name, data):
     response = await client.post('/api/v1/admin/uploads', data=fields(), files={'file': (name, data, 'text/csv')})
@@ -57,14 +80,18 @@ async def test_rejected_duplicate_and_reference_422_leave_state(client):
         response = await client.post('/api/v1/admin/uploads', data=fields(), files={'file': ('a.csv', data, 'text/csv')})
         assert response.status_code == 422
         assert response.json()['error']['details']['issues'][0]['row'] == 2
-    assert (await client.get('/api/v1/entities', params={'q': 'new-app'})).json()['data'] == []
+    response = await client.get('/api/v1/entities', params={'q': 'new-app'})
+    assert response.status_code == 200
+    assert response.json()['data'] == []
 
 
 async def test_actual_xlsx_and_formula_status(client):
     rows = [list(ENTITY_MAP.columns), ['xlsx-app', 'application', 'XLSX app', '{}', '']]
     response = await client.post('/api/v1/admin/uploads', data=fields(), files={'file': ('a.xlsx', workbook_bytes(rows), 'application/octet-stream')})
     assert response.status_code == 201
-    assert (await client.get('/api/v1/applications/xlsx-app')).json()['data']['label'] == 'XLSX app'
+    profile_response = await client.get('/api/v1/applications/xlsx-app')
+    assert profile_response.status_code == 200
+    assert profile_response.json()['data']['label'] == 'XLSX app'
     response = await client.post('/api/v1/admin/uploads', data=fields(), files={'file': ('a.xlsx', workbook_bytes(rows, True), 'application/octet-stream')})
     assert response.status_code == 422
     assert response.json()['error']['details']['issues'][0]['code'] == 'FORMULA_CELL'
@@ -83,7 +110,9 @@ async def test_mock_actor_not_auth_and_injection_is_bound_literal(client):
     key = "safe'; DROP TABLE entity;--"
     response = await client.post('/api/v1/admin/uploads', data=fields(actor='{"personaId":"executive"}'), files={'file': ('C:\\evil\\data.csv', entity_data(key), 'text/csv')})
     assert response.status_code == 201  # Mock display context deliberately grants no authorization.
-    found = (await client.get('/api/v1/entities', params={'q': key})).json()['data']
+    found_response = await client.get('/api/v1/entities', params={'q': key})
+    assert found_response.status_code == 200
+    found = found_response.json()['data']
     assert found[0]['id'] == key and found[0]['source'] == 'uploaded'
     assert (await client.get('/api/v1/applications/app-0001')).status_code == 200
 
@@ -142,6 +171,8 @@ async def test_release_environment_source_evidence_is_not_imposed_id(client):
     data = csv_bytes([list(ENTITY_MAP.columns), ['uploaded-release', 'release', 'Uploaded release', json.dumps(attrs), '']])
     response = await client.post('/api/v1/admin/uploads', data=fields(datasetClass='release_metrics'), files={'file': ('release.csv', data, 'text/csv')})
     assert response.status_code == 201
-    stored = (await client.get('/api/v1/applications/app-0001')).json()['data']['categories']['releaseHistory']['value']
+    profile_response = await client.get('/api/v1/applications/app-0001')
+    assert profile_response.status_code == 200
+    stored = profile_response.json()['data']['categories']['releaseHistory']['value']
     uploaded = next(row for row in stored if row['id'] == 'uploaded-release')
     assert uploaded['value']['environment'] == {'status': 'Source ready'}

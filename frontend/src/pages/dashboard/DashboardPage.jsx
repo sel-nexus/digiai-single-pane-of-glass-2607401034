@@ -13,9 +13,11 @@ export default function DashboardPage() {
   if (!context.personaId) return <PersonaSelector />;
   return (
     <div className="dashboard">
-      <p className="eyebrow">Command center / {context.personaId}</p>
-      <h1>{dashboard.data?.persona.label || 'Selected persona'} perspective</h1>
-      <p className="intro">An evidence-led view. Supplied, not inferred.</p>
+      <header className="dashboard-heading">
+        <p className="eyebrow">Command center / {context.personaId}</p>
+        <h1>{dashboard.data?.persona.label || 'Selected persona'} perspective</h1>
+        <p className="intro">An evidence-led view. Supplied, not inferred.</p>
+      </header>
       <DataState loading={dashboard.loading} error={dashboard.error} onRetry={dashboard.refetch}>
         <section aria-label="Persona widgets">
           <h2 className="section-title">Your configured overview</h2>

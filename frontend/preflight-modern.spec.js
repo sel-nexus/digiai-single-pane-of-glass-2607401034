@@ -22,9 +22,9 @@ test('capture modern interface evidence', async ({ page }) => {
     captures.push(`${name}\nSTYLES ${JSON.stringify(styles)}\nACCESSIBILITY\n${accessibility}\nHTML\n${html}\n`);
     await page.screenshot({ path: `preflight-modern-evidence/${name}.png`, fullPage: true });
   }
+  await page.goto('/');
   for (const width of [1440, 360]) {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto('/');
     await expect(page.getByRole('button', { name: /Administrator/ })).toBeVisible();
     await capture(`${width}-selection`);
     await selectPersona(page, 'Administrator', 'administrator');
@@ -33,13 +33,17 @@ test('capture modern interface evidence', async ({ page }) => {
         await page.getByRole('button', { name: `Use ${theme} theme` }).click();
       }
       await capture(`${width}-${theme}-dashboard`);
-      for (const [label, heading] of [['Portfolio', 'Portfolio explorer'], ['Journeys', 'Journey maps'], ['Operations', 'Incidents and problem records'], ['Reliability', 'Reliability evidence'], ['Readiness', 'Release evidence'], ['Insights', 'Mock recommendations'], ['Administration', 'Local data stewardship'], ['Uploads', 'Upload prototype evidence']]) {
+      for (const [label, heading] of [['Portfolio', 'Portfolio explorer'], ['Journeys', 'Business journeys'], ['Operations', 'Incident command center'], ['Reliability', 'Reliability evidence'], ['Readiness', 'Release readiness evidence'], ['Insights', 'Mock recommendations'], ['Administration', 'Administration'], ['Uploads', 'Upload & mapping']]) {
         await navigatePrimary(page, label);
-        await page.locator('h1').waitFor();
+        await expect(page.getByRole('heading', { name: heading, level: 1, exact: true })).toBeVisible();
         await expect(page.getByText('Loading prototype evidence…')).toHaveCount(0);
         await capture(`${width}-${theme}-${label.toLowerCase()}`);
       }
       await navigatePrimary(page, 'Dashboard');
+    }
+    if (width !== 360) {
+      await page.getByRole('link', { name: /DigiAI \/ Single pane of glass/ }).click();
+      await expect(page.getByRole('heading', { name: 'A clearer view of enterprise evidence.', level: 1, exact: true })).toBeVisible();
     }
   }
   await fs.writeFile('preflight-modern-evidence/ui-evidence.txt', captures.join('\n\n'), 'utf8');
