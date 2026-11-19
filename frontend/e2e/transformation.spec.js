@@ -11,6 +11,51 @@ function responseFor(page, path, params = {}) {
   });
 }
 
+/** Verify comparison geometry and exact alternatives against observed backend points.
+ * Args:
+ *   card: The rendered transformation evidence article.
+ *   series: An actual backend response series, never a mock or replacement dataset.
+ */
+async function verifyComparison(card, series) {
+  const points = Array.isArray(series.points) ? series.points : [];
+  const qualified = series.availability === 'available' && points.length >= 2
+    && points.every((point) => point.availability === 'available'
+      && [point.source, point.sourceRef, point.period, point.unit]
+        .every((field) => typeof field === 'string' && field.trim())
+      && point.unit === points[0].unit
+      && (typeof point.value === 'number' || (typeof point.value === 'string'
+        && /^[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/.test(point.value)))
+      && Number.isFinite(Number(point.value)));
+  const region = card.getByRole('region', { name: `${series.label} series`, exact: true });
+  const chart = region.getByRole('img');
+  if (!qualified) {
+    await expect(chart).toHaveCount(0);
+    await expect(region.getByText(/Comparison unplotted/)).toBeVisible();
+    return;
+  }
+  await expect(chart).toBeVisible();
+  await expect(chart).toHaveAccessibleName(`${series.label}: source-ordered comparison (${points[0].unit})`);
+  const exact = points.map((point, index) =>
+    `${index + 1}. ${point.period}: ${String(point.value)} (unit: ${point.unit}); Source: ${point.source} · ${point.sourceRef}`).join(' | ');
+  await expect(chart).toHaveAccessibleDescription(exact);
+  await expect(region.getByText(`Exact supplied values: ${exact}`, { exact: true })).toBeVisible();
+  const bars = chart.locator('rect');
+  await expect(bars).toHaveCount(points.length);
+  const values = points.map((point) => Number(point.value));
+  const magnitude = values.reduce((largest, value) => Math.max(largest, Math.abs(value)), 0) || 1;
+  const lower = Math.min(0, ...values.map((value) => value / magnitude));
+  const upper = Math.max(0, ...values.map((value) => value / magnitude));
+  const span = upper - lower || 1;
+  const zero = 80 + (-lower / span) * 480;
+  expect(Number(await chart.locator('line').getAttribute('x1'))).toBeCloseTo(zero);
+  for (const [index, point] of points.entries()) {
+    const end = 80 + ((Number(point.value) / magnitude - lower) / span) * 480;
+    expect(Number(await bars.nth(index).getAttribute('x'))).toBeCloseTo(Math.min(zero, end));
+    expect(Number(await bars.nth(index).getAttribute('width'))).toBeCloseTo(Math.abs(end - zero));
+    expect(Number(await bars.nth(index).getAttribute('y'))).toBe(16 + index * 40);
+  }
+}
+
 /** Follow all three explicit target kinds and return to the exact saved insight scope. */
 async function followDestinations(page, item, sourcePath) {
   const origin = new URL(page.url()).pathname + new URL(page.url()).search;
@@ -65,6 +110,11 @@ test('transformation measures and source-ordered trends follow explicit destinat
     for (let index = 0; index < series.points.length; index += 1) {
       await expect(points.nth(index)).toContainText(series.points[index].period);
       await expect(points.nth(index)).toContainText(series.points[index].sourceRef);
+    }
+  }
+  for (const record of items) {
+    for (const series of record.series) {
+      await verifyComparison(page.getByRole('article', { name: record.label, exact: true }), series);
     }
   }
   const single = items.find((record) => record.series.some((series) => series.points.length === 1));
@@ -155,5 +205,6 @@ test('real transformation upload retains numeric text and rounds only percent br
     await expect(points.nth(index)).toContainText(`${series.points[index].period} · ${rendered}`);
     await expect(points.nth(index)).toContainText(series.points[index].sourceRef);
   }
+  await verifyComparison(card, series);
   await expect(card.getByText(/12\.3456 %|98\.7654 %/)).toHaveCount(0);
 });

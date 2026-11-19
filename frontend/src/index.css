@@ -222,3 +222,12 @@ pre { max-width: 100%; overflow: auto; }
   *,*::before,*::after { transition-duration: 0ms !important; animation-duration: 0ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
   button { transform: none !important; }
 }
+
+/* Compare source magnitudes with the existing brand hue, not inferred health or chronology. */
+.transformation-comparison { margin: 20px 0; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-small); background: var(--surface); }
+.transformation-comparison figcaption { font-weight: 600; overflow-wrap: anywhere; }
+.transformation-comparison-scroll { overflow-x: auto; margin-top: 16px; }
+.transformation-comparison svg { display: block; width: 100%; min-width: 320px; height: auto; }
+.transformation-comparison text { fill: var(--foreground-muted); font: 12px 'Geist Mono', monospace; }
+.transformation-bar { fill: var(--primary); }
+.transformation-zero { stroke: var(--foreground-muted); stroke-width: 1; }
