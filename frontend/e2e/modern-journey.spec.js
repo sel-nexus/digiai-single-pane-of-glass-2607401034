@@ -89,7 +89,7 @@ test('supplied connected relationships switch exactly, inspect API and return fr
   expect(profile.id).toBe(app.entityId);
   expect(new URL(page.url()).pathname).toBe(destination.pathname);
   await expect(page.getByRole('heading', { name: profile.label, level: 1, exact: true })).toBeVisible();
-  await expect(page.getByText(`Source: ${profile.source} · ${profile.sourceRef}`, { exact: true })).toBeVisible();
+  await expect(page.locator('.application-heading').getByText(`Source: ${profile.source} · ${profile.sourceRef}`, { exact: true })).toBeVisible();
   const returning = responseFor(page, `/journeys/${journey.id}`, { domain: 'domain-member' });
   await page.getByRole('link', { name: 'Return to previous view', exact: true }).click();
   const returned = (await (await returning).json()).data;

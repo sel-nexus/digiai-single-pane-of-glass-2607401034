@@ -68,7 +68,11 @@ function percentageVisualization(metric) {
   if ((match[1] === '-' && coefficient !== 0n) || numerator > 100n * denominator) {
     return { reason: 'Visualization unavailable: supplied percentage is outside 0–100%.' };
   }
-  return { value: Number(metric.value) };
+  const value = Number(metric.value);
+  if (coefficient !== 0n && value === 0) {
+    return { reason: 'Visualization unavailable: supplied nonzero percentage underflows numeric precision.' };
+  }
+  return { value };
 }
 
 /** Render one supplied metric, a qualified fixed-scale gauge, and unchanged provenance. */

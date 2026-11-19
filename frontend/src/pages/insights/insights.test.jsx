@@ -328,6 +328,43 @@ it.each([
   }
 });
 
+it.each(['1e-400', '+1e-400', '-1e-400'])('withholds qualified underflow %s without representing it as exact zero', (value) => {
+  const supplied = [point('tiny', 'tiny category', value), point('other', 'other category', '1')];
+  render(<TransformationTrends series={[{ label: 'Adoption', availability: 'available', points: supplied }]} />);
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText(/Comparison unplotted/)).toHaveTextContent(/magnitudes.*numeric conversion or chart scaling/i);
+  expect(screen.getByText(/Exact supplied values:/)).toHaveTextContent(`${value} (unit: %)`);
+  expect(document.querySelector('circle')).toBeNull();
+  expect(supplied[0].value).toBe(value);
+});
+
+it.each([
+  [Number.MAX_VALUE, Number.MIN_VALUE, -Number.MIN_VALUE, 0],
+  [-Number.MAX_VALUE, Number.MIN_VALUE, -Number.MIN_VALUE, 0],
+  [-Number.MAX_VALUE, Number.MAX_VALUE, Number.MIN_VALUE, -Number.MIN_VALUE],
+  [-1, 1, Number.MIN_VALUE, -Number.MIN_VALUE],
+])('withholds mixed signed magnitudes %j when nonzero bars would collapse', (...values) => {
+  const supplied = values.map((value, index) => ({ ...point(String(index), `category-${index}`, value), unit: 'hours' }));
+  render(<TransformationTrends series={[{ label: 'Effort', availability: 'available', points: supplied }]} />);
+  expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  expect(screen.getByText(/Comparison unplotted/)).toHaveTextContent(/magnitudes.*numeric conversion or chart scaling/i);
+  const exact = screen.getByText(/Exact supplied values:/);
+  values.forEach((value, index) => expect(exact).toHaveTextContent(`${index + 1}. category-${index}: ${String(value)} (unit: hours)`));
+  expect(document.querySelector('circle')).toBeNull();
+  expect(within(screen.getByRole('list', { name: 'Effort source order' })).getAllByRole('listitem')).toHaveLength(values.length);
+});
+
+it.each(['0', '-0', '+0.000e-400'])('retains true numeric-text zero markers for %s', (value) => {
+  render(<TransformationTrends series={[{ label: 'Effort', availability: 'available', points: [
+    { ...point('zero', 'zero category', value), unit: 'hours' },
+    { ...point('other', 'other category', 1), unit: 'hours' },
+  ] }]} />);
+  const chart = screen.getByRole('img');
+  expect(chart.querySelectorAll('circle')).toHaveLength(1);
+  expect(chart.querySelector('rect')).toHaveAttribute('width', '0');
+  expect(chart).toHaveAccessibleDescription(new RegExp(`${value.replace(/[+.*]/g, '\\$&')} \\(unit: hours\\)`));
+});
+
 it('charts numeric-text percentages with unchanged two-decimal presentation and exact alternatives', () => {
   render(<TransformationTrends series={[{ label: 'Adoption', availability: 'available', points: [
     point('one', 'later', '-1.005'), point('two', 'earlier', '+6.54321e1'),

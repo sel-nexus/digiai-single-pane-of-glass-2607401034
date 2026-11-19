@@ -33,20 +33,40 @@ async function verifyComparison(card, series) {
     await expect(region.getByText(/Comparison unplotted/)).toBeVisible();
     return;
   }
-  await expect(chart).toBeVisible();
-  await expect(chart).toHaveAccessibleName(`${series.label}: source-ordered comparison (${points[0].unit})`);
   const exact = points.map((point, index) =>
     `${index + 1}. ${point.period}: ${String(point.value)} (unit: ${point.unit}); Source: ${point.source} · ${point.sourceRef}`).join(' | ');
-  await expect(chart).toHaveAccessibleDescription(exact);
-  await expect(region.getByText(`Exact supplied values: ${exact}`, { exact: true })).toBeVisible();
-  const bars = chart.locator('rect');
-  await expect(bars).toHaveCount(points.length);
   const values = points.map((point) => Number(point.value));
   const magnitude = values.reduce((largest, value) => Math.max(largest, Math.abs(value)), 0) || 1;
   const lower = Math.min(0, ...values.map((value) => value / magnitude));
   const upper = Math.max(0, ...values.map((value) => value / magnitude));
   const span = upper - lower || 1;
   const zero = 80 + (-lower / span) * 480;
+  // Judge actual supplied evidence, not the component's qualification or rendered state.
+  // A nonzero decimal significand must survive conversion, normalization and positioning.
+  const representable = points.every((point, index) => {
+    const suppliedNonzero = typeof point.value === 'number' ? point.value !== 0
+      : /[1-9]/.test(point.value.split(/[eE]/)[0]);
+    if (!suppliedNonzero) return values[index] === 0;
+    const scaled = values[index] / magnitude;
+    const end = 80 + ((scaled - lower) / span) * 480;
+    return values[index] !== 0 && scaled !== 0 && Number.isFinite(end)
+      && Math.abs(end - zero) > 0 && Math.sign(end - zero) === Math.sign(values[index]);
+  });
+  if (!representable) {
+    await expect(chart).toHaveCount(0);
+    await expect(region.getByText(
+      'Comparison unplotted. Supplied magnitudes cannot be faithfully represented after numeric conversion or chart scaling. Textual evidence retained.',
+      { exact: true },
+    )).toBeVisible();
+    await expect(region.getByText(`Exact supplied values: ${exact}`, { exact: true })).toBeVisible();
+    return;
+  }
+  await expect(chart).toBeVisible();
+  await expect(chart).toHaveAccessibleName(`${series.label}: source-ordered comparison (${points[0].unit})`);
+  await expect(chart).toHaveAccessibleDescription(exact);
+  await expect(region.getByText(`Exact supplied values: ${exact}`, { exact: true })).toBeVisible();
+  const bars = chart.locator('rect');
+  await expect(bars).toHaveCount(points.length);
   expect(Number(await chart.locator('line').getAttribute('x1'))).toBeCloseTo(zero);
   for (const [index, point] of points.entries()) {
     const end = 80 + ((Number(point.value) / magnitude - lower) / span) * 480;

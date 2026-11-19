@@ -9,6 +9,32 @@ const metric = { availability: 'available', unit: '%' };
 
 const qualified = { ...metric, label: 'Availability', period: 'month', source: 'uploaded', sourceRef: 'csv-source-a' };
 
+it.each(['1e-400', '+1e-1000', '.0001e-400', '2e-324']) (
+  'withholds positive nonzero percentage %s when numeric conversion underflows while retaining exact evidence', (value) => {
+    const supplied = Object.freeze({ ...qualified, value });
+    render(<MetricCard metric={supplied} />);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.getByText('Visualization unavailable: supplied nonzero percentage underflows numeric precision.')).toBeVisible();
+    expect(screen.getByText('0.00%')).toBeVisible();
+    expect(screen.getByText(`Supplied value: ${value}%`)).toBeVisible();
+    expect(screen.getByText('month · uploaded')).toBeVisible();
+    expect(screen.getByText('Source: csv-source-a')).toBeVisible();
+    expect(supplied.value).toBe(value);
+  },
+);
+
+it.each(['0e-400', '+0.000e-1000', '-0e-400']) (
+  'keeps a gauge for true numeric-text zero %s despite a tiny exponent', (value) => {
+    render(<MetricCard metric={{ ...qualified, value }} />);
+    const gauge = screen.getByRole('img');
+    expect(gauge).toHaveAccessibleName(`Availability: supplied ${value}% on a 0–100% scale`);
+    expect(gauge.querySelector('.metric-gauge-value')).toHaveAttribute('stroke-dasharray', '0 100');
+    expect(screen.queryByText(/Visualization unavailable:/)).not.toBeInTheDocument();
+    expect(screen.getByText('0.00%')).toBeVisible();
+    expect(screen.getByText(`Supplied value: ${value}%`)).toBeVisible();
+  },
+);
+
 it.each([0, 100, 42.125, '0', '-0', '100', '+12.345', '.125', '9.999e1', '99.2345600000000000001']) (
   'plots qualified supplied percentage %s on the fixed scale with exact evidence', (value) => {
     const supplied = Object.freeze({ ...qualified, value });

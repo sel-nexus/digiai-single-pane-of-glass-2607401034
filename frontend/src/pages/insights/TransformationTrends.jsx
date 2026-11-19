@@ -34,6 +34,7 @@ function canCompare(item) {
  *   item: An already qualified same-unit numeric series.
  * Notes:
  *   Normalize before subtracting to avoid overflow at finite numeric extremes.
+ *   Withhold the comparison if conversion or positioning collapses nonzero evidence.
  */
 function ComparisonChart({ item }) {
   const id = useId();
@@ -48,6 +49,25 @@ function ComparisonChart({ item }) {
   const height = item.points.length * 40 + 40;
   const exact = item.points.map((point, index) =>
     `${index + 1}. ${point.period}: ${String(point.value)} (unit: ${point.unit}); Source: ${point.source} · ${point.sourceRef}`).join(' | ');
+  const faithful = values.every((value, index) => {
+    const raw = item.points[index].value;
+    if (value === 0) {
+      return typeof raw === 'number' || !/[1-9]/.test(raw.split(/[eE]/)[0]);
+    }
+    return normalized[index] !== 0
+      && (value < 0 ? position(normalized[index]) < baseline : position(normalized[index]) > baseline);
+  });
+  if (!faithful) {
+    return (
+      <>
+        <p className="source-ref">
+          Comparison unplotted. Supplied magnitudes cannot be faithfully represented after numeric conversion or chart scaling.
+          Textual evidence retained.
+        </p>
+        <p className="source-ref">Exact supplied values: {exact}</p>
+      </>
+    );
+  }
   return (
     <figure className="transformation-comparison">
       <figcaption>{item.label} · source-ordered comparison · Unit: {item.points[0].unit}</figcaption>
@@ -65,7 +85,7 @@ function ComparisonChart({ item }) {
                 className="transformation-bar" x={Math.min(baseline, position(value))}
                 y={index * 40 + 16} width={Math.abs(position(value) - baseline)} height="24"
               />
-              {value === 0 && <circle className="transformation-bar" cx={baseline} cy={index * 40 + 28} r="3" />}
+              {values[index] === 0 && <circle className="transformation-bar" cx={baseline} cy={index * 40 + 28} r="3" />}
             </g>
           ))}
         </svg>

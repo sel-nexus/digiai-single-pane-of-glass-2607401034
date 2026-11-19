@@ -21,6 +21,7 @@ function decimal(value) {
   if (cents > 900719925474099100n) return null;
   const digits = cents.toString().padStart(3, '0');
   return {
+    coefficient,
     inRange: !(match[1] === '-' && coefficient !== 0n) && numerator <= 100n * denominator,
     display: `${match[1] === '-' && cents !== 0n ? '-' : ''}${digits.slice(0, -2)}.${digits.slice(-2)}%`,
   };
@@ -46,13 +47,15 @@ async function expectEvidence(board, metrics) {
     await expect(card.locator('.muted')).toHaveText(`${metric.period || 'Period unavailable'} · ${metric.source || 'Source unavailable'}`);
     await expect(card.locator('.source-ref')).toHaveText(`Source: ${metric.sourceRef || 'Association unavailable'}`);
     const qualified = [metric.period, metric.source, metric.sourceRef].every((value) => typeof value === 'string' && value.trim());
-    const eligible = available && metric.unit === '%' && qualified && parsed?.inRange && Number.isFinite(Number(metric.value));
+    const numeric = Number(metric.value);
+    const eligible = available && metric.unit === '%' && qualified && parsed?.inRange
+      && Number.isFinite(numeric) && (numeric !== 0 || parsed.coefficient === 0n);
     await expect(card.getByRole('img')).toHaveCount(eligible ? 1 : 0);
     if (eligible) {
       plotted += 1;
       await expect(card.getByRole('img')).toHaveAccessibleName(`${metric.label}: supplied ${metric.value}% on a 0–100% scale`);
       await expect(card.getByRole('img')).toHaveAccessibleDescription('Fixed percentage scale only; not a score, target, trend or inferred health.');
-      await expect(card.locator('.metric-gauge-value')).toHaveAttribute('stroke-dasharray', `${Number(metric.value)} 100`);
+      await expect(card.locator('.metric-gauge-value')).toHaveAttribute('stroke-dasharray', `${numeric} 100`);
       await expect(card.locator('.metric-gauge-value')).toHaveAttribute('pathLength', '100');
     } else {
       withheld += 1;
