@@ -1,4 +1,7 @@
 .env
+.env.local
+.env.prod
+prod-env.json
 __pycache__
 .pytest_cache
 data
