@@ -231,3 +231,26 @@ pre { max-width: 100%; overflow: auto; }
 .transformation-comparison text { fill: var(--foreground-muted); font: 12px 'Geist Mono', monospace; }
 .transformation-bar { fill: var(--primary); }
 .transformation-zero { stroke: var(--foreground-muted); stroke-width: 1; }
+
+/* Connect only each supplied directed pair; never imply a link between rows. */
+.relationship-diagram { margin: 24px 0 0; min-width: 0; }
+.relationship-diagram figcaption { color: var(--foreground-muted); font-size: .8rem; max-width: 75ch; }
+.relationship-edges { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 24px; }
+.relationship-edges > li { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); min-width: 0; overflow-wrap: anywhere; }
+.relationship-pair { display: grid; grid-template-columns: minmax(0,1fr) minmax(100px,.65fr) minmax(0,1fr); align-items: center; margin-bottom: 20px; }
+.relationship-node { padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-small); background: var(--surface-raised); min-width: 0; }
+.relationship-node .eyebrow { margin-bottom: 8px; }
+.relationship-node-label { display: block; font-weight: 600; }
+.relationship-identity { font: .75rem/1.6 'Geist Mono', monospace; color: var(--foreground-muted); overflow-wrap: anywhere; }
+.relationship-connector { display: grid; gap: 8px; text-align: center; min-width: 0; color: var(--primary); }
+.relationship-edge-label { font-size: .8rem; font-weight: 600; padding: 0 8px; }
+.relationship-arrow { display: block; position: relative; height: 2px; width: 100%; background: currentColor; }
+.relationship-arrow::after { content: ''; position: absolute; right: 1px; top: -4px; width: 10px; height: 10px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); }
+.relationship-edges a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 760px) {
+  .relationship-edges > li { padding: 20px; }
+  .relationship-pair { grid-template-columns: minmax(0,1fr); }
+  .relationship-connector { position: relative; min-height: 88px; padding: 12px 0 12px 32px; justify-items: start; text-align: left; }
+  .relationship-arrow { position: absolute; left: 16px; top: 0; height: 100%; width: 2px; }
+  .relationship-arrow::after { right: -4px; top: auto; bottom: 1px; transform: rotate(135deg); }
+}
