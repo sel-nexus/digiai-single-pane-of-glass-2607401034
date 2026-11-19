@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, afterEach, expect, it, vi } from 'vitest';
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { SharedContextProvider, useSharedContext } from '../../context/SharedContextProvider';
+import { AppShell } from './AppShell';
 import { GlobalSearch } from './GlobalSearch';
 import { GlobalFilters, filterLabels } from './GlobalFilters';
 import { HierarchyExplorer } from './HierarchyExplorer';
@@ -221,4 +222,80 @@ it('discards late search responses when cleared', async () => {
   await user.click(screen.getByRole('button', { name: 'Clear search' }));
   resolve(response([entity]));
   await waitFor(() => expect(screen.queryByRole('link', { name: entity.label })).not.toBeInTheDocument());
+});
+
+/** Expose shared route context while exercising the actual shell navigation. */
+function ShellDestination() {
+  const { setPersona } = useSharedContext();
+  const location = useLocation();
+  return (
+    <div>
+      <button onClick={() => setPersona('executive')}>Select shell persona</button>
+      <output aria-label="Shell URL">{location.pathname}{location.search}</output>
+    </div>
+  );
+}
+
+/** Mount shell destinations without replacing the router or shared context behavior. */
+function mountShell(entry = '/portfolio?domain=domain-1&hierarchyNodeId=service-1') {
+  return render(
+    <MemoryRouter initialEntries={[entry]}>
+      <SharedContextProvider>
+        <Routes>
+          <Route element={<AppShell />}>
+            <Route path="*" element={<ShellDestination />} />
+          </Route>
+        </Routes>
+      </SharedContextProvider>
+    </MemoryRouter>,
+  );
+}
+
+it.each([
+  ['Dashboard', '/dashboard'], ['Portfolio', '/portfolio'], ['Journeys', '/journeys'],
+  ['Operations', '/operations'], ['Reliability', '/operations/reliability'],
+  ['Readiness', '/readiness'], ['Insights', '/insights'],
+  ['Administration', '/admin'], ['Uploads', '/admin/uploads'],
+])('closes expanded navigation on %s, retaining filters and active destination', async (name, path) => {
+  const user = userEvent.setup();
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  const toggle = screen.getByRole('button', { name: 'Navigation', exact: true });
+  const navigation = screen.getByRole('navigation', { name: 'Primary', exact: true });
+  expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await user.click(toggle);
+  expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  expect(navigation).toHaveClass('expanded');
+  const link = within(navigation).getByRole('link', { name, exact: true });
+  await user.click(link);
+  expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(navigation).not.toHaveClass('expanded');
+  expect(link).toHaveAttribute('aria-current', 'page');
+  expect(screen.getByLabelText('Shell URL')).toHaveTextContent(`${path}?domain=domain-1&hierarchyNodeId=service-1`);
+  await user.click(toggle);
+  expect(toggle).toHaveAttribute('aria-expanded', 'true');
+});
+
+it('keeps anonymous selection free of navigation and preserves brand and provenance', () => {
+  mountShell('/');
+  expect(screen.queryByRole('navigation', { name: 'Primary' })).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'Navigation', exact: true })).not.toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'DigiAI / Single pane of glass' })).toHaveAttribute('href', '/');
+  expect(document.querySelector('.brand-mark')).toHaveAttribute('aria-hidden', 'true');
+  expect(screen.getByText(/Read-only synthetic evidence/)).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveAttribute('href', '#main-content');
+});
+
+it('supports keyboard Dashboard selection and closes navigation without losing context', async () => {
+  const user = userEvent.setup();
+  mountShell();
+  await user.click(screen.getByRole('button', { name: 'Select shell persona' }));
+  const toggle = screen.getByRole('button', { name: 'Navigation', exact: true });
+  toggle.focus();
+  await user.keyboard('{Enter}');
+  await user.tab();
+  expect(screen.getByRole('link', { name: 'Dashboard', exact: true })).toHaveFocus();
+  await user.keyboard('{Enter}');
+  expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByLabelText('Shell URL')).toHaveTextContent('/dashboard?domain=domain-1&hierarchyNodeId=service-1');
 });

@@ -1,4 +1,4 @@
-/** Compose a restrained responsive command-center shell. */
+/** Compose a branded responsive shell while preserving shared evidence context. */
 import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useSharedContext } from '../../context/SharedContextProvider';
@@ -9,7 +9,7 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { GlobalSearch } from './GlobalSearch';
 import { GlobalFilters } from './GlobalFilters';
 
-/** Expose only implemented dashboard navigation plus labeled future destinations. */
+/** Expose implemented destinations with context-preserving navigation. */
 export function AppShell() {
   const { context } = useSharedContext();
   const location = useLocation();
@@ -19,8 +19,11 @@ export function AppShell() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="app-header">
         <Link className="brand" to={`/${location.search}`}>
-          <span>DigiAI</span>
-          <span className="muted"> / Single pane of glass</span>
+          <span className="brand-mark" aria-hidden="true" />
+          <span className="brand-copy">
+            <span>DigiAI</span>
+            <span className="muted"> / Single pane of glass</span>
+          </span>
         </Link>
         <div className="header-actions">
           <StatusBadge>Sample prototype</StatusBadge>
@@ -33,7 +36,8 @@ export function AppShell() {
           <button className="nav-toggle" aria-expanded={expanded} aria-controls="primary-navigation"
             onClick={() => setExpanded(!expanded)}>Navigation</button>
           <nav id="primary-navigation" aria-label="Primary" className={expanded ? 'expanded' : ''}>
-            <Link to={`/dashboard${location.search}`} aria-current={location.pathname === '/dashboard' ? 'page' : undefined}>Dashboard</Link>
+            <Link to={`/dashboard${location.search}`} onClick={() => setExpanded(false)}
+              aria-current={location.pathname === '/dashboard' ? 'page' : undefined}>Dashboard</Link>
             <Link to={`/portfolio${location.search}`} onClick={() => setExpanded(false)}
               aria-current={location.pathname === '/portfolio' ? 'page' : undefined}>Portfolio</Link>
             <Link to={`/journeys${location.search}`} onClick={() => setExpanded(false)}
